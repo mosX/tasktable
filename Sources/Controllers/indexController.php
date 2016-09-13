@@ -10,16 +10,16 @@
         }
 
         public function indexAction(){
-            //$this->m->addJS('countdown');
-            $this->m->setTitle('OnePbx');
-            
             xload('class.tasks');
             $tasks = new Tasks($this->m);
             $this->m->data = $tasks->getFilledDates();
         }
         
-        public function testAction(){
+        /*public function testAction(){
             
-        }
+            xload('class.tasks');
+            $tasks = new Tasks($this->m);
+            $this->m->data = $tasks->getFilledDates();
+        }*/
     }
 ?>

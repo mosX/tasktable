@@ -1,109 +1,291 @@
- <style>
-            #calendar{
-                display: inline-block;
-                margin:auto;
-            }
-        </style>
-        <script>
-            $('document').ready(function(){
-                /*$('#calendar .day').click(function(){
-                    console.log('click');
-                    
-                });*/
-                                
-                $('#date_btn').click(function(){              
-                    var d = $$("calendar1").getSelectedDate();
-                    console.log(d);
-                    
-                    
-                    var year = d.getYear()+1900;
-                    var month = d.getMonth()+1;
-                    var day = d.getDate();
-                    console.log(year + ' - '+ month + ' - '+ day);
-                    
-                    
-                    
-                    //console.log($$("calendar1").getVisibleDate());
-                    
-                    location.href = '/tasks/add/?year='+year+'&month='+month+'&day='+day;
-                });
-            });
-        </script>
+<script>
+    function Calendar(obj){        
+        this.parent = obj.parent;
+        this.width = obj.width?obj.width:'500px';
+        this.height = obj.height?obj.height:'500px';
+        this.reservedDates = obj.reservedDates;
         
-        <div class="container text-center" style="height:500px;">
-            <div id="calendar" style=""></div>
-            <div>
-                <div id="date_btn" class="btn btn-primary">Выбрать</div>
+        
+        $('#calendar .c_box').css({'width':this.width,'height':this.height});
+                
+        this.month_array = new Array('January','February','March','April','May','June',"July",'August','September','October','November','December');
+        this.short_tags_array = new Array('Mon','Tue','Wed','Thu','Fri','Sat',"Sun");
+        
+        if(obj.startDate){
+            var d = new Date(obj.startDate);
+        }else{
+            var d = new Date();
+        }
+        this.month = d.getMonth();
+        this.year = d.getYear()+1900;
+        
+        this.render();        
+        
+        this.actions();
+    }
+    
+    Calendar.prototype = {
+        prev:{},
+        current:{},
+        next:{},
+        width:0,height:0,
+        clear:function(){
+            $('.c_box .c_dates',this.parent).empty();
+        },
+        
+        render:function(){
+            this.clear();
+            //получаем количество дней
+            this.current.total_days = new Date(this.year,this.month+1,0).getDate();
+
+            this.current.first_day_of_week = new Date(this.year,this.month,1).getDay();
+            this.current.first_day_of_week = this.current.first_day_of_week == 0?7:this.current.first_day_of_week;
+
+            this.prev.total_days = new Date(this.year,this.month,0).getDate();
+
+            this.setCurrentDate();
+
+            this.addDateTags();
+            this.addDays();
+        },
+        
+        nextMonth:function(){
+            var d = new Date(this.year,this.month+1);
+            this.month = d.getMonth();
+            this.year = d.getYear()+1900;
+            
+            this.render();
+        },
+        
+        prevMonth:function(){
+            var d = new Date(this.year,this.month-1);
+            this.month = d.getMonth();
+            this.year = d.getYear()+1900;
+            
+            this.render();
+        },
+        
+        actions:function(){
+            var self = this;
+            
+            $(this.parent).on('click','.prev_button,.c_day.prev',function(){
+                self.prevMonth();
+            });
+            
+            $(this.parent).on('click','.next_button,.c_day.next',function(){
+                self.nextMonth();
+            });
+            
+            $(this.parent).on('click','.c_day.current',function(){
+                var day = $(this).text();
+                
+                location.href = '/tasks/add/?year='+self.year+'&month='+(self.month+1)+'&day='+day;
+                //console.log('34234');
+            });
+        },
+        
+        setCurrentDate:function(){
+            $('.c_box .current_date').text(this.month_array[this.month]+' '+this.year);
+        },
+        addDateTags:function(){
+            var html = "<div class='c_row date_tags'>";
+            
+            for(var key in this.short_tags_array){
+                html += "<div class='c_day_name'>"+this.short_tags_array[key]+"</div>";
+            }
+            html += '</div>';
+            $('.c_box .c_dates',this.parent).append(html);
+        },
+        checkHoliday:function(year,month,day){
+            var d = new Date(year,month,day);
+            var dayOfWeek = d.getDay();
+            
+            if(dayOfWeek == 6 || dayOfWeek == 0){
+                return 'holiday';
+            }
+            
+            return '';
+        },
+        checkReservatedDays:function(year, month, day){
+            var d;
+            
+            for(var key in this.reservedDates){
+                d = new Date(this.reservedDates[key]*1000);
+                
+                if(day == d.getDate() && month == d.getMonth() && year == d.getYear()+1900){
+                    return 'reserved';    
+                }
+            }
+            /*if(day == 23){
+                return 'reserved';
+            }*/
+            return '';
+        },
+        addDays:function(){
+            var k=0;
+            var grey = false;
+            
+            for(var i=0;i<6; i++ ){
+                if(i==0){   //первая неделя с частью предыдущего месяца
+                    
+                    var html = "<div class='c_row'>";
+                    if(this.current.first_day_of_week == 1){    //если первый день это понедельник то первоя строка это все прошлый месяц
+                        for(var j=this.prev.total_days-6;j<=this.prev.total_days;j++){
+                            html += "<div class='c_day prev'>"+j+"</div>";
+                        }
+                    }else{
+                        console.log(this.current.first_day_of_week);
+                        var dayOfWeek = this.current.first_day_of_week;
+                        
+                        for(var j=this.prev.total_days-dayOfWeek+2;j<=this.prev.total_days;j++){                            
+                            html += "<div class='c_day prev'>"+j+"</div>";
+                        }
+                        console.log(dayOfWeek);
+                        for(var j=dayOfWeek ; j <= 7;j++){
+                            html += "<div class='c_day current "+this.checkHoliday(this.year,this.month,k+1)+"'>"+(++k)+"</div>";
+                        }
+                    }
+                    
+                    html +="</div>";
+                    $('.c_box .c_dates',this.parent).append(html);
+                    continue;
+                }else{
+                    var html = "<div class='c_row'>"                    
+                    
+                    for(var j=0;j<7;j++){                   
+                        html += "<div class='c_day "+(grey?'next':"current "+this.checkHoliday(this.year,this.month,k+1) +' '+this.checkReservatedDays(this.year,this.month,k+1))+"'>"+(++k)+"</div>";
+
+                        if(k == this.current.total_days){   //определяем следующий месяц
+                            grey = true;
+                            k = 0;
+                        }
+                    }
+
+                    html +="</div>";
+                    $('.c_box .c_dates',this.parent).append(html);
+                }
+            }
+        }
+    }
+</script>
+
+<script>
+    var reservedDates = new Array();
+    <?php foreach($this->m->data as $item){ ?>
+        reservedDates.push(<?=$item->timestamp?>);
+    <?php } ?>
+    $('document').ready(function(){
+        var cal = new Calendar({
+            parent:'#calendar',
+            //startDate:<?=strtotime(date("2016-05-01"))*1000?>,
+            startDate:<?=strtotime(date())*1000?>,
+            height:'500px',
+            width:'500px',
+            reservedDates:reservedDates
+        });
+    });
+</script>
+
+<style>
+    #calendar{        
+        text-align: center;
+    }
+    
+    .c_box{
+        padding:10px;
+        margin:auto;
+        border: 1px solid #c6c6c6;
+        /*width:500px;
+        height:500px;*/
+        
+    }
+     .header{
+         padding:0px 15px;
+        position:relative;
+        text-align: center;
+        height:6%;
+    }
+    .c_box .prev_button{
+        cursor:pointer;
+        margin-top:5px;
+        display:inline-block;
+        vertical-align: middle;
+        width:20px;
+        height:20px;
+        float:left;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAALCAYAAACzkJeoAAAASUlEQVR42p2QMQoAQQgD79EZ0Mqn5xCu2cPdYgUbJ0rMMxXgLeiuKq8gsJAz8weQ0QiwJEfECnr4wdlEnwJ68+yyhReC+c85oRecj0Um+pmo9wAAAABJRU5ErkJggg==");
+        background-repeat: no-repeat;
+    }
+    .c_box .next_button{
+        cursor:pointer;
+        margin-top:5px;
+        display:inline-block;
+        vertical-align: middle;
+        width:20px;
+        height:20px;
+        float:right;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAALCAYAAACzkJeoAAAARElEQVR42qXPsQoAIAhF0T76PdDJT7cUmtQhcmk4N8QVQ9JXN2bmgWOgqp+BiCRG2AYAMoi3/LxYdyagAnhA6G93TrABZaJFJjrFY8IAAAAASUVORK5CYII=");
+        background-repeat: no-repeat;
+    }
+    .c_box .header .current_date{
+        display:inline-block;
+        vertical-align: middle;
+        width:50%;
+        margin:auto;
+    }
+    .c_dates{
+            width: 100%;        
+            height:94%;
+            display:table;
+    }
+    .c_row{
+        width:100%;        
+        display:table-row;
+        clear:both;
+    }
+    .c_row .c_day_name{
+        vertical-align: middle;        
+        display:table-cell;
+        text-align: center;
+    }
+    .c_row .c_day{
+        cursor:pointer;
+        vertical-align: middle;        
+        display:table-cell;
+        text-align: center;
+    }
+    
+    .c_row .c_day.holiday.reserved,.c_row .c_day.reserved{
+        font-weight:bolder;
+        color: red;
+    }
+    .c_row .c_day.holiday{
+        font-weight:bolder;
+        color: #3498db;
+    }
+    .c_row .c_day.prev,.c_row .c_day.next{
+        
+        color: #a6a6a6;
+    }
+   
+    
+    .date_tags{
+        height:30px;
+    }
+    .date_tags .c_day_name{
+        font-size:10px;
+        border-bottom: 1px solid #c6c6c6;
+    }
+</style>
+<div class="container">
+    <div id="calendar">        
+        <div class="c_box">
+            <div class='header'>
+                <div class="prev_button"></div><div class="current_date">April 2016</div><div class="next_button"></div>
+            </div>
+            <div class='c_dates'>
+               
             </div>
         </div>
-        <script>
-            var arr = new Array();
-            <?php foreach($this->m->data as $item){ ?>
-                arr.push(<?=$item->timestamp?>);
-            <?php } ?>
-            
-        </script>
-        
-        <script>
-            webix.Date.isHoliday = function(day){
-                day = day.getDay();
-                if (day === 0 || day == 6) return "webix_cal_event"; 
-            };
-            webix.Date.startOnMonday = true;
-            
-            
-            
-            webix.ui({
-                    container:"calendar",
-                    weekHeader:true,
-                    date:new Date(2016,3,16),
-                    view:"calendar",
-                    id:"calendar1",
-                    $init: function(){
-                        console.log('dfsdfsdf');
-                    },
-                    
-                    events:webix.Date.isHoliday,
-                    on:{
-                        onItemClick: function(){
-                            alert("you have clicked an item");
-                        }
-                        
-                    },
-                    
-                    dayTemplate: function(date){
-                        var d,year,month,day;
-                        for(var key in arr){
-                            d = new Date(arr[key]*1000);
-                            
-                            year = d.getYear();
-                            month = d.getMonth();
-                            day = d.getDate();
-                            
-                            if(date.getDate() == day && date.getMonth() == month && date.getYear() == year){
-                                var html = "<div class='day' style='color: red;font-weight:bolder;'>"+date.getDate()+"</div>";    
-                                return html;
-                            }
-                        }
-                                
-                        var html = "<div class='day'>"+date.getDate()+"</div>";    
-                        return html;
-                    },
-                    //timepicker:true,
-                    width:500,
-                    height:500
-            });
-            
-            
-            /*$$("calendar1").attachEvent("onItemClick", function(){
-                console.log('1111');
-                //$$("dtree").closeAll();
-            });
-
-            $$("calendar1").attachEvent("onItemClick", function(id, e, node){
-                //var item = this.getItem(id);
-                console.log('1111');
-            });*/
-        </script>
-        
-            
+    </div>
+</div>
