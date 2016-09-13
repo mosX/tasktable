@@ -1,0 +1,1205 @@
+# Automatically generated <>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: phpMyAdmin 4.1-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-20 15:38+0200\n"
+"PO-Revision-Date: 2013-11-20 16:37+0200\n"
+"Last-Translator: none <none@mail.du>\n"
+"Language-Team: Russian <http://l10n.cihar.com/projects/phpmyadmin/master/ru/>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: Z:\\home\\option\\www\\Sources\n"
+"X-Poedit-SearchPath-1: Z:\\home\\option\\www\\html\\binary\n"
+
+#: Z:\home\option\www\Sources/mainframe.php:37
+msgid "My favorite sports club?"
+msgstr ""
+
+#: Z:\home\option\www\Sources/mainframe.php:38
+msgid "My favorite hobby?"
+msgstr ""
+
+#: Z:\home\option\www\Sources/mainframe.php:39
+msgid "Pet's name?"
+msgstr ""
+
+#: Z:\home\option\www\Sources/mainframe.php:40
+msgid "First car Brand?"
+msgstr ""
+
+#: Z:\home\option\www\Sources/mainframe.php:41
+msgid "My secret code?"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/users.php:16
+#: Z:\home\option\www\Sources/class/lib/account.php:571
+#: Z:\home\option\www\Sources/class/lib/account.php:596
+#: Z:\home\option\www\Sources/class/lib/account.php:626
+msgid "Incorrectly filled fields!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/users.php:30
+#: Z:\home\option\www\Sources/class/lib/account.php:585
+msgid "Password changed!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/users.php:33
+#: Z:\home\option\www\Sources/class/lib/account.php:587
+#: Z:\home\option\www\Sources/class/lib/account.php:610
+#: Z:\home\option\www\Sources/class/lib/account.php:643
+msgid "An unexpected error occurred. Please try again later."
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/users.php:50
+msgid "You need to enter your new password!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/users.php:53
+#, php-format
+msgid "Your new password has to be less then %s symbols!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/users.php:59
+msgid "Confirm entered password!"
+msgstr "Подтвердите введённый пароль"
+
+#: Z:\home\option\www\Sources/class/users.php:62
+#: Z:\home\option\www\Sources/class/lib/account.php:172
+msgid "Passwords do not match!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:16
+#: Z:\home\option\www\Sources/class/lib/account.php:167
+#: Z:\home\option\www\Sources/class/lib/account.php:240
+#: Z:\home\option\www\Sources/class/lib/account.php:527
+msgid "You must enter your password!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:17
+#: Z:\home\option\www\Sources/class/lib/account.php:168
+#: Z:\home\option\www\Sources/class/lib/account.php:241
+#: Z:\home\option\www\Sources/class/lib/account.php:528
+msgid "You entered the wrong password!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:18
+#: Z:\home\option\www\Sources/class/lib/account.php:169
+#: Z:\home\option\www\Sources/class/lib/account.php:242
+#: Z:\home\option\www\Sources/class/lib/account.php:529
+msgid "You must enter the answer to the question!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:19
+msgid "You have entered an incorrect answer to the question   !"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:20
+msgid "You must enter your address!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:21
+msgid "You entered the wrong address!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:22
+msgid "You must enter your zip code!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:23
+msgid "You entered the wrong zip code!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:24
+msgid "You must enter the name of your city!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:25
+msgid "You have entered an incorrect name of your city!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:26
+msgid "You did not choose the country!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:27
+#: Z:\home\option\www\Sources/class/lib/account.php:252
+msgid "Please enter a valid phone number!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:28
+msgid "E-mail address is incorrect!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:29
+msgid "E-mail address already exists!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:30
+msgid "You entered the wrong security code!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:170
+#: Z:\home\option\www\Sources/class/lib/account.php:243
+#: Z:\home\option\www\Sources/class/lib/account.php:530
+msgid "You have entered an incorrect answer to the question!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:171
+msgid "You must enter your new password!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:173
+msgid "You must select a secret question!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:174
+msgid "You must provide an answer to the question!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:175
+msgid "Length of the response should not exceed 30 characters!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:244
+msgid "You have not closed a bonus. After the closing you can request a withdrawal."
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:245
+#: Z:\home\option\www\Sources/class/lib/account.php:246
+msgid "Do you have an application in standby mode. Wait for processing."
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:247
+#: Z:\home\option\www\Sources/class/lib/account.php:248
+msgid "The minimum amount of withdrawal USD 20.00!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:249
+msgid "The maximum amount of withdrawals USD 15000.00!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:250
+msgid "It is not enough money in the account!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:251
+msgid "Please enter a valid card number!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:253
+msgid "Invalid number of purse. Your WebMoney purse should contain the letter Z of the 12 digits!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:254
+#: Z:\home\option\www\Sources/class/lib/account.php:255
+msgid "Please enter a valid account number!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:256
+msgid "You can not withdraw funds to the account. On account of this deposit is not implemented."
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:531
+msgid "IP-address is not valid!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:607
+msgid "Your secret question successfully updated."
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:640
+msgid "IP-limit saved!"
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:762
+#: Z:\home\option\www\Sources/class/lib/account.php:768
+msgid "Balance credited to USD "
+msgstr ""
+
+#: Z:\home\option\www\Sources/class/lib/account.php:827
+msgid "Page "
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:32
+msgid "Classic Binary Options"
+msgstr "Классические бинарные опционы"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:33
+msgid "Options Builder"
+msgstr "Конструктор Опционов"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:34
+msgid "One Touch"
+msgstr "В Одно касание"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:35
+msgid "60 Seconds"
+msgstr "60 Секунд"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:41
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:53
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:65
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:75
+msgid "Step 1."
+msgstr "Шаг 1."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:42
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:54
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:66
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:76
+msgid "Select the asset you want to trade"
+msgstr "Выберите актив для торговли"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:43
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:55
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:67
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:77
+msgid "Step 2."
+msgstr "Шаг 2."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:44
+msgid "Choose your preferred expiry time and risk level"
+msgstr "Выберите предпочитаемое время завершения опциона и степень риска"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:45
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:57
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:69
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:79
+msgid "Step 3."
+msgstr "Шаг 3."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:46
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:80
+msgid "Live Graph shows current price dynamics. Use it on your desicion making process."
+msgstr ""
+"Активный график, который показует текущую динамику изменения цены. \n"
+"Используйте его для принятия решения. "
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:47
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:59
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:71
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:81
+msgid "Step 4."
+msgstr "Шаг4."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:48
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:60
+msgid "Click \"CALL\" if you think the price will rise above the current rate at the expiry."
+msgstr " Нажмите \"CALL\", если вы полагаете, что его цена будет выше по истечению опциона."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:48
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:60
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:82
+msgid "Click \"PUT\" if you think the price will fall below the current rate at the expiry."
+msgstr " Нажмите \"PUT\", если вы ожидаете, что цена будет ниже текущего уровня."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:49
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:61
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:83
+msgid "Step 5."
+msgstr "Шаг 5."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:50
+msgid "Enter Investment Amount."
+msgstr "Укажите сумму инвестиций"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:56
+msgid "Choose an expiry time that suits your market expectations"
+msgstr "Выберите время завершения опциона, согласно собственных предпочтений"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:58
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:68
+msgid "Live Graph shows current price dynamics."
+msgstr "Активный график, который показует текущую динамику изменения цены."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:58
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:68
+msgid "Use it on your desicion making process."
+msgstr "Используйте его для принятия решения."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:62
+msgid "Enter the amount of money you want to invest, and click \"Apply\"."
+msgstr "Введите сумму, которую вы хотите инвестировать, и нажмите \"Применить\"."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:70
+msgid "Enter investment amount."
+msgstr "Укажите сумму инвестиций"
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:72
+msgid "Click \"Apply\""
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:78
+msgid "Enter the amount of money you want to invest."
+msgstr "Введите сумму, которую вы хотите инвестировать."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:82
+msgid "Click \"CALL\" if you think the price will rise above the current rate at the expiry.."
+msgstr " Нажмите \"CALL\", если вы полагаете, что его цена будет выше по истечению опциона."
+
+#: Z:\home\option\www\html\binary/modules/howToTrade.php:84
+msgid "Open multiple positions."
+msgstr "Делайте множественные ставки"
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:2
+#, php-format
+msgid "You have requested information about your password in %s!"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:4
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:19
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:2
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:4
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:20
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:4
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:14
+msgid "Dear player!"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:5
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:20
+msgid "At the e-mail address information was requested for a password to access the"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:6
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:21
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:6
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:16
+msgid "Username: "
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:7
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:22
+msgid "If you were served this request, then you should go to the following link to password recovery:"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:8
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:23
+msgid "During the procedure, use the following code:"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:9
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:24
+msgid "The above link is valid for 30 minutes, starting from the moment the request was sent."
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:10
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:25
+msgid "Message received from IP address:"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:11
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:26
+msgid "If you do not have any relation to it, we recommend that you avoid getting access to your account by a third party: Message received from IP address:"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:12
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:27
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:28
+msgid "- Not to produce the actions described above;"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:13
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:29
+msgid "- Change the password;"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:14
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:30
+msgid "- Report this case to the administration;"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:16
+#: Z:\home\option\www\html\binary/modules/bak/email/emailforgot.php:31
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:17
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:30
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:11
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:20
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:15
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:26
+#, php-format
+msgid "Sincerely, Administration %s."
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:5
+msgid "We welcome you at the online casino Betwinn, where you can win real money!"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:7
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:22
+msgid "In order to carry out their casino entrance, use the following credentials."
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:9
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:23
+msgid "Login: "
+msgstr "Логин"
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:10
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:24
+msgid "Site address:"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:11
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:25
+msgid "To start the game, you need to make deposits, opening on \"Cashier\" and selecting \"Make a Deposit\"."
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:12
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:26
+msgid "If you are not ready to start playing for real money, we are pleased to offer you a test mode, in which games are made using virtual money. To enter it, press the \"Play for free.\""
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:13
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:27
+msgid "If you want to make an offer or ask a question, please write to us at: "
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:15
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:28
+msgid "We will be glad to see you in our online casino!"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailreg.php:21
+#, php-format
+msgid "We welcome you at the online casino %s, where you can win real money!"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:2
+#, php-format
+msgid "You have requested information about your authorisation data in %s"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:5
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:15
+msgid "At the e-mail address was made a request reminders of registration data in"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:7
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:17
+msgid "Password: "
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:8
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:18
+msgid "To address additional questions, please contact our support team by writing an e-mail: "
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:9
+#: Z:\home\option\www\html\binary/modules/bak/email/emailsmallforgot.php:19
+msgid "To log on to the casino, click on the link."
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:4
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:17
+msgid "Dear player"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:5
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:18
+msgid "You have requested to change your e-mail address"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:6
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:19
+msgid "If you were served this request, to change this information, should perform a series of actions is presented below using the activation code."
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:7
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:20
+msgid "Activation code "
+msgstr "Код активации"
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:8
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:21
+msgid "Three easy steps:"
+msgstr "Три простых шага:"
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:10
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:22
+msgid "Log on to the "
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:11
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:23
+msgid "Go to \"CASHIER\" then \"Private Data\""
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:12
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:24
+msgid "Type "
+msgstr "Тип"
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:12
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:24
+msgid "in the activation code and confirm the information"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:14
+msgid "If you have not filed the request, notify the notification letter to the e-mail:"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/modules/bak/email/newemailvalidationcode.php:25
+msgid "If you have not filed the request, notify the notification letter to the e-mail: "
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/deposit.php:48
+msgid "Continue"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/deposit.php:91
+msgid "Deposit amount"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/deposit.php:93
+msgid "Minimum amount for"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/deposit.php:94
+msgid "The maximum amount for"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/deposit.php:95
+msgid "For what amount deposit (currency"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/deposit.php:99
+msgid "Deposit Funds"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/deposit.php:103
+msgid "To be able to make a deposit, you should enter all your details in the section: "
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/deposit.php:103
+msgid "Personal Info"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/password.php:8
+msgid "Ballance"
+msgstr "Баланс"
+
+#: Z:\home\option\www\html\binary/views/account/password.php:11
+msgid "Change your password"
+msgstr "Измените свой пароль"
+
+#: Z:\home\option\www\html\binary/views/account/password.php:12
+msgid "Fill out the form below to change your password. When you create your new password, please be sure: It is 5-20 characters long."
+msgstr "Заполните формы ниже для изменения вашего пароля. Когда вы создаете новый пароль, будьте уверены, что он соответствует длине в 5-20 символов."
+
+#: Z:\home\option\www\html\binary/views/account/password.php:15
+#: Z:\home\option\www\html\binary/views/account/password.php:17
+msgid "Old password"
+msgstr "Старый пароль"
+
+#: Z:\home\option\www\html\binary/views/account/password.php:20
+#: Z:\home\option\www\html\binary/views/account/password.php:22
+msgid "New password"
+msgstr "Новый пароль"
+
+#: Z:\home\option\www\html\binary/views/account/password.php:25
+#: Z:\home\option\www\html\binary/views/account/password.php:27
+msgid "Repeat new password"
+msgstr "Повторите новый пароль"
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:32
+msgid "Withdrawal due to Credit / Debit Card"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:33
+msgid "Withdrawal due to WebMoney"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:34
+msgid "Withdrawals on the account LiqPay"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:35
+msgid "Withdrawal due to Perfect Money"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:43
+msgid "Card number"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:48
+msgid "Phone number"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:52
+msgid "In the international format"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:55
+msgid "Number of Z-purse"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:60
+msgid "Number of Perfect Money U account"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:66
+msgid "Amount"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:70
+msgid "The minimum amount of USD 20.00"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:70
+msgid "The maximum amount of withdrawals USD 15000.00"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:75
+msgid "Exchange commission"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:81
+msgid "You will receive the sum of:"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:86
+msgid "Secret Question"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:90
+msgid "Answer"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:94
+msgid "You have made deposits with different payment systems (invoices). You must enter the answer to the question. Do you have 5 attempts, then your account will be blocked."
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/account/withdrawal.php:99
+msgid "Request Withdrawal"
+msgstr ""
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:16
+msgid "Our company has a truly great experience in the financial markets and provide our traders with high-tech tools and the most profitable options. The primary objective - the success of traders and growing list of our assets - proof."
+msgstr "Наша компания обладает по истине великим опытом работы на финансовых рынках и обеспечивает наших трейдеров высокотехнологичными инструментами и самыми выгодными опционами. Первостепенная задача – успех трейдеров, и постоянно растущий список наших активов – тому подтверждение."
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:17
+#, php-format
+msgid "We offer a progressive trading platform for binary options and other innovative financial derivatives, enabling our customers to make a positive and negative fluctuations of the financial markets. Trading with %s fast and easy to master. No experience is needed, our products are equally suited to professionals and beginners."
+msgstr "Мы предлагаем прогрессивную трейдинговую платформу как для бинарных опционов ,так и для других инновационных производных финансовых инструментов, позволяя нашим клиентам зарабатывать на отрицательных и положительных колебаниях финансовых рынков. Трейдинг с %s быстро и легко освоить. Опыт не нужен, наши продукты одинаково подходят профессионалам и новичкам."
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:18
+#, php-format
+msgid "Get financial freedom trading platform %s. Binary options can be the key to financial freedom , and %s happy to provide this key. We did pay out the greatest profits , so if you invest the maximum and you get the maximum. Providing the opportunity to trade various kinds of options and a variety of assets , we provide our traders the tools that will help you gain financial independence . Each tool on our platform is created in order to increase your chances of success."
+msgstr "Получите финансовую свободу, торгуя на платформе %s. Бинарные опционы могут стать ключом к финансовой свободе, и %s с радостью предоставит вам этот ключ. Мы действительно выплачиваем самую большую прибыль, так что если вы вкладываете максимум, вы и получаете максимум. Предоставляя возможность торговать различными видами опционов и самыми разными активами, мы обеспечиваем наших трейдеров инструментами, которые помогут вам обрести финансовую независимость. Каждый инструмент на нашей платформе создаётся для того, чтобы увеличить ваши шансы на успех."
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:19
+msgid "For further information on trade binary options and other innovative financial derivatives, visit our section of questions and answers (FAQ)"
+msgstr "Для получения дальнейшей информации по торговле бинарных опционов и других инновационных производных финансовых инструментов, посетите наш раздел вопросов и ответов (FAQ)."
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:23
+msgid "You can contact us at phone, which you can see below"
+msgstr "Вы можете связаться с нами по телефону, который вы видите ниже"
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:29
+msgid "Call Back"
+msgstr "Обратная связь"
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:31
+msgid "If you have any questions about binary options, we recommend to check educational materials on our site. If you won`t find an answer, refer to the Technical Support by placing a request. When you create an application, please try to tell you exactly describe the situation - usually it reduces response time."
+msgstr "В случае возникновения вопросов, связанных с бинарными опционами, рекомендуем в первую очередь ознакомиться с обучающими материалами на нашем сайте. Если ответ на интересующий вас вопрос найти не удалось, обратитесь к специалистам службы технической поддержки, создав заявку. При создании заявки, пожалуйста, постарайтесь максимально точно и подробно описать ситуацию — как правило, это позволяет сократить время получения ответа."
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:34
+msgid "Message"
+msgstr "Сообщение"
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:35
+msgid "Name"
+msgstr "Имя"
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:36
+msgid "E-mail"
+msgstr "E-mail"
+
+#: Z:\home\option\www\html\binary/views/faq/aboutus.php:37
+msgid "SEND"
+msgstr "ОТПРАВИТЬ"
+
+#: Z:\home\option\www\html\binary/views/faq/disclaimer.php:20
+msgid "Terms And Conditions"
+msgstr "Условия и положения"
+
+#: Z:\home\option\www\html\binary/views/faq/disclaimer.php:24
+msgid "Warning."
+msgstr "Предупреждение"
+
+#: Z:\home\option\www\html\binary/views/faq/disclaimer.php:25
+msgid "Binary options are the risks of total or partial loss of funds . This fact should be taken into consideration by any trader who is planning to profit from options trading . We advise our clients to read our terms and conditions before opening positions on our platform. Trading in binary options is based on the changes in the price of the selected assets in a given period of time. Traders can trade on various schemes for specific periods of time. It is recommended to do business with the following browsers : Chrome and Firefox."
+msgstr "Бинарные опционы несут в себе риски полной или частичной потери средств. Этот факт должен учитываться любым трейдером, который планирует получить прибыль от торговли опционами. Мы советуем своим клиентам прочитать наши условия, прежде чем открывать позиции на нашей платформе.Торговля на бинарных опционах основана на изменениях в цене на выбранные активы за определённый промежуток времени. Трейдеры могут торговать по различным схемам за конкретные промежутки времени. Рекомендуется  вести торговлю, используя браузеры Chrome и Firefox."
+
+#: Z:\home\option\www\html\binary/views/faq/disclaimer.php:27
+msgid "We strongly recommend our customers to check the terms and conditions of use of our website, as well as services before you start trading on the platform. Our company is neither explicitly nor implicitly not acting representative or a guarantee that your use of the Site and / or services the site is legitimate. You should carefully consider the suitability of trading binary options given your experience and knowledge of the financial markets, your objectives, financial resources and other relevant circumstances."
+msgstr "Мы настоятельно рекомендуем нашим клиентам ознакомиться с положениями и условиями пользования нашего сайта, а также услуг прежде, чем начинать торговлю на данной платформе. Наша компания ни явно, ни скрыто не выступает представителем или гарантом того, что Ваше использование сайта и/или услуг сайта является правомерным. Вам необходимо тщательно взвесить, подходит ли вам торговля бинарными опционами, учитывая ваш опыт и знания о финансовых рынках, ваши цели, финансовые возможности и другие важные обстоятельства."
+
+#: Z:\home\option\www\html\binary/views/faq/disclaimer.php:30
+msgid "Trading digital, binary , or any options has some risks of partial or complete loss of investment. The laws governing the financial contract , the services and products vary around the world, and it is exclusively your responsibility and duty to ensure that you are acting in compliance with whatever was law , regulation or directive , relevant to you and your use of the Site and / or Services as required by law , to which you submit , and make sure it does not break . You should be aware of all the risks that intersect with trade binary options (including , but not limited to, risks , changes in market conditions or rules of certain markets). All the above conditions must be taken into account trader who plans to earn money by trading binary options."
+msgstr "Торговля цифровыми, бинарными или любыми опционами несет в себе риски частичной или полной потери  инвестиций. Законы, регулирующие финансовые договора, услуги и продукты, варьируются по всему миру, и это исключительно Ваша ответственность и  обязанность удостовериться, что Вы действуете в полном соответствии с каким бы то ни было законом, нормой или директивой, относящимся к Вам и использованию Вами Сайта и/или Услуг, согласно требованиям законодательства, которому Вы подчиняетесь, и убедиться, что его не нарушаете. Вы должны быть осведомлены обо всех рисках, которые пересекаются с торговлей бинарными опционами (включая, и не ограничиваясь, рисками, изменения состояний рынков, либо правилами тех или иных рынков). Все вышеперечисленные условия должны учитываться трейдером, который планирует зарабатывать деньги торговлей бинарными опционами."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:24
+msgid "Glossary"
+msgstr "Словарь Терминов"
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:30
+msgid " Out-of-money - a financial term, meaning that the option is not profitable, it is losing. For example, a call option ends with no money, if the closing price of the underlying asset is lower than the price of the asset at the time of the purchase option."
+msgstr "«Без денег» (out-of-the-money) – финансовый термин, означающий, что опцион не приносит прибыли, то есть проигрывает. Например, колл-опцион заканчивается «без денег», если цена закрытия для базового актива ниже, чем цена данного актива на момент покупки опциона."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:35
+msgid "In-the-money - financial term meaning that the option is profitable for investor (such as a call option ends in the money if the price of the underlying asset is increased compared with the original price)."
+msgstr "\"In-the-money\" - финансовый термин, означающий, что опцион приносит прибыль инвестору (например, колл-опцион заканчивается «при деньгах», если цена базового актива повысилась по сравнению с исходной ценой)."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:41
+msgid "Binary Options, digital options - are options, where the prize is fixed and known in advance. It is paid if the trader has selected the correct price direction of the underlying asset (compared to advertised price at the time of purchase of the asset) upon the expiration of the option."
+msgstr "Бинарные опционы, цифровые опционы (binary options, digital options) – это опционы, выигрыш по которым фиксирован и известен заранее. Он выплачивается в случае, если трейдер правильно выбрал направление цены базового актива (по сравнению с объявленной ценой в момент покупки актива) по истечении срока действия опциона."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:47
+msgid "Call option brings the investor profits if the option's price at the close of the selected asset to them is higher than the original price. If at the end of the option price remained the same, the entire invested amount will be refunded to the account of the investor."
+msgstr "Колл-опцион (call option) приносит инвестору прибыль в том случае, если при закрытии опциона цена на выбранный им актив выше, чем исходная цена. Если же по окончании опциона цена осталась прежней, вся инвестированная сумма возвращается на счет инвестору."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:53
+msgid "The put option brings to investor profit if the option price at closing on his chosen asset is lower than the original price. If at the end of the option price remained the same, the entire invested amount will be refunded to the account of the investor."
+msgstr "Пут-опцион (put option) приносит инвестору прибыль в том случае, если при закрытии опциона цена на выбранный им актив ниже, чем исходная цена. Если же по окончании опциона цена осталась прежней, вся инвестированная сумма возвращается на счет инвестору."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:59
+msgid "At-the-money - a financial term that means that the current price of the underlying asset has not changed since the purchase of the option."
+msgstr "«При своих» (at-the-money) – финансовый термин, означающий, что текущая цена на базовый актив не изменилась с момента покупки опциона."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:65
+msgid "Most of the money you can earn on options One Touch . This is a new type of transactions in which the choice is simple , but requires some insight - while paying huge. Option One Touch is a unique kind of binary options . With this kind of deal you have to predict whether the price will reach the underlying asset to the strike price on the expiration of the option . If your prediction is correct, ie, the price of some underlying asset for a particular strike price at the closing of the option, you win and get the agreed advance payment . This type of option is great traders who believe that the price of the asset is likely to reach a certain level, but not sure about its sustainability. This type of option - it's the best way to win investment for the largest possible amount of money - but it is a higher risk than conventional binary options."
+msgstr "Больше всего денег можно заработать на опционах One Touch (\"В одно касание\"). Это новый тип сделок, выбор в котором достаточно прост, но требует определенной интуиции – при этом выплаты огромны. Опцион One Touch является уникальной разновидностью бинарных опционов. При сделке подобного рода вы должны спрогнозировать, дойдет ли цена базового актива до страйк-цены по истечении срока действия опциона. Если ваше предсказание оказывается правильным, то есть цена некоторого базового актива «касается» определенной страйк-цены при закрытии опциона, вы выигрываете и получаете заранее оговоренную выплату. Этот вид опционов отлично подходит трейдерам, которые уверены, что цена на актив наверняка дойдет до определенного уровня, но не уверены в ее устойчивости. Данный вид опционов – это лучший способ инвестиций для выигрыша наибольшей возможной суммы денег – однако это и более высокий риск по сравнению с обычными бинарными опционами."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:71
+msgid "Trade in 60 seconds like a digital commerce, with one exception - all options close after 60 seconds. This kind of trading is popular among traders who want to make money on short-term market trends."
+msgstr "Торговля за 60 секунд похожа на цифровую торговлю, с одним исключением – все опционы закрываются через 60 секунд. Такой вид торговли популярен среди трейдеров, которые хотят заработать на краткосрочных рыночных трендах."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:77
+msgid "Options builder - a convenient and flexible tool in which you yourself can specify parameters of the deal best suited to your style, including the time of the expiration of the option and the balance between profitability and risk."
+msgstr "Конструктор опционов (Options builder, builder) - удобный и гибкий инструмент, в котором Вы сами можете указать параметры сделки, наиболее подходящие Вашему стилю, включая время истечения опциона и соотношение доходности и риска."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:84
+msgid "Mid market - is the mean between the bid and ask price. It reflects the real market price."
+msgstr "Средняя цена (mid market) – это среднее между ценой предложения и ценой спроса. Оно отражает реальную рыночную цену."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:90
+msgid "Each asset has its own trading hours, trade and weekends. To learn trading hours assets, see their list. If you assume that the asset should be on the list of traded, but he is not there - just refresh the page."
+msgstr "У каждого актива есть свои торговые часы (trading hours), торговые дни и выходные. Чтобы узнать торговые часы активов, посмотрите их список. Если вы предполагаете, что актив должен быть в списке торгуемых, но он там отсутствует – просто обновите страницу."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:96
+msgid "Closing price (expiry rate) - this is the price / level of the underlying asset at the close of the option. It determines how the option ends At the money, No money, In the money."
+msgstr "Цена закрытия (expiry rate) – это цена/уровень базового актива при закрытии опциона. Она определяет, как заканчивается опцион: «при деньгах», «без денег», «при своих»."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:102
+msgid "The offer price for the asset in the financial market (ask price) - the price at which an investor can buy an asset. It is part of the formula, in which closing time is calculated asset."
+msgstr "Цена спроса для актива на финансовом рынке – это цена, по которой инвестор может продать актив. Она является частью формулы, по которой вычисляют срок закрытия актива."
+
+#: Z:\home\option\www\html\binary/views/faq/glossary.php:108
+msgid "The bid price for an asset in the financial market (bid price) - the price at which an investor can sell the asset. It is part of the formula, in which closing time is calculated asset."
+msgstr "Цена спроса для актива на финансовом рынке (bid price) – это цена, по которой инвестор может продать актив. Она является частью формулы, по которой вычисляют срок закрытия актива."
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:24
+msgid "Strategies in binary options"
+msgstr "Стратегии в бинарных опционах"
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:27
+msgid "For a regular profit on a binary options follow certain strategies. Some of them are simple enough for beginners, while others are more suitable for experienced traders. The emergence of trading strategies due to the multiple analysis of behavioral patterns of the market, as well as the main features of the binary options . With the right approach significantly reduces the risk and increase considerably the chances of attracting investors to profit. Here's a short list of popular strategies that are most commonly used on our platform :"
+msgstr "Для получения прибыли  бинарными опционами на регулярной основе необходимо придерживаться определённых стратегий для торговли опционами. Одни стратегии достаточно простые для новичков, другие же больше подходят для опытных трейдеров. Появление торговых стратегий обусловлено многократным анализом поведенческих моделей рынка, а также основных особенностей бинарных опционов. Благодаря правильному подходу значительно снижаются степени рисков и многократно увеличиваются шансы инвесторов на привлечение прибыли. Вот краткий список популярных стратегий, которые чаще всего применяются на нашей платформе:"
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:29
+msgid "Hedging"
+msgstr "Хеджирование"
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:31
+msgid "Hedging strategy , called Collard , perfectly suited to trade binary options. It is also sometimes called the averaging strategy for the losses and profits. This strategy is used when trading binary options such as one touch or one touch. Hedging strategy significantly reduces the risks that are possible when buying both options put / call. The essence of this strategy lies in the fact that , when trading is possible to cover the premium on a call option by selling another option . It is possible to reset the closing of transactions , making it possible to not get a loss when you select the wrong option . That is , the trader as a result did not receive any profits or losses. This result is called the free Kollar."
+msgstr "Стратегия хеджирования, которую назвали Коллар, прекрасно подходит для торговли бинарными опционами. Она также иногда называется усредняющей стратегией для убытков и прибыли. Эта стратегия применяется при торговле бинарными опционами типа one touch или одно касание. Стратегия хеджирования значительно снижает риски, которые возможны при покупке одновременно опционов put/call. Суть данной стратегии заключается в факте, при торговле появляется возможность покрывать премиальные на один опцион в результате продажи другого опциона. Существует возможность обнулить закрытие сделок, что дает возможность не получить убытки при неправильном выборе опциона. То есть, трейдер в результате не получает ни прибыли, ни убытков. Такой результат называется бесплатным Колларом."
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:33
+msgid "Strangle and straddle"
+msgstr "Стрэнгл и Стрэддл"
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:35
+msgid "When trading binary options, are often used strangle strategy. Thanks to this strategy, the trader may be able to use both options to one asset. At a certain scenario, the simultaneous acquisition of these options with different strike prices can bring considerable profit."
+msgstr "При торговле бинарными опционами часто используется стратегия Стрэнгл. Название звучит в переводе с английского языка, как давить, душить. Благодаря данной стратегии трейдер может получить возможность использовать одновременно опционы одному активу. При определенном развитии событий одновременное приобретение этих опционов с разными страйками может принести ощутимую прибыль."
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:38
+msgid "If the acquisition of options with strangle strategy is executed at different prices runtime, the straddle strategy provides for the acquisition of options on the same exercise price. This strategies differ by the price. So the price is equal to the price of one straddle several strangle. Naturally, the use strangle cost several times cheaper than using a straddle. Of course, the profit will also be more apparent from the use of a straddle, because the income from the sale of a strangle is more constricted corridor."
+msgstr "Если приобретение опционов при стратегии стрэнгл выполняется по различным ценам исполнения, то стратегия стрэддл предусматривает приобретение опционов по одинаковой цене исполнения. Отличаются стратегии стрэнгл и стрэддл ценой. Так цена одного стрэддла равняется цене нескольких стрэнглов. Естественно, использование стрэнгла обойдется в несколько раз дешевле использования стрэддла. Конечно, прибыль также будет более ощутимой от использования стрэддла, ведь доход от продажи стрэнгла расположен в более суженном коридоре."
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:40
+msgid "Reversal strategies"
+msgstr "Реверсивные стратегии"
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:42
+msgid "Reversible or reversal strategies a bit more profitable and based on deviations of the underlying assets from their normal values and subsequent return to normal controls. Traders, in turn, buy call or put Options anticipating their return to a normal situation. This method requires some training and knowledge of the normal values of assets."
+msgstr "Реверсивные, или разворотные стратегии несут в себе несколько более прибыльный характер и основаны на отклонениях базовых активов от своих нормальных показателей и последующий возврат к нормальным показателям. Трейдеры же в свою очередь покупают «call» или «put» опционы предугадывая их возврат к нормальному положению. Данный метод требует некоторой подготовки и знаний нормальных показателей активов."
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:44
+msgid "Martingale method"
+msgstr "Метод Мартингейла"
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:46
+msgid "Another popular among beginners strategy - it's Martingale. It represents a doubling of betting options after a failed transaction. With each doubling of the rate of a chance at a lucrative option is doubled."
+msgstr "Еще одна популярная среди начинающих пользователей стратегия – это по «Мартингейлу». Она являет собой удвоение покупок опционов после неудачной сделки. С каждым следующим удвоением ставки шанс на прибыльный опцион увеличивается в два раза."
+
+#: Z:\home\option\www\html\binary/views/faq/strategies.php:50
+msgid "These are just a few basic techniques which work on a binary options, and because of the unaffected still have a lot of visual graphics, according to estimates, the seasonal as well as many other methods of making money options."
+msgstr "Это лишь несколько основных методик по которым работают с бинарными опционами, а ведь из незатронутых еще есть много визуальных графических, по подсчетам, сезонных а также многих других методов заработка денег опционами."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:31
+msgid "Terms and conditions"
+msgstr "Условия и положения"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:33
+msgid "1. General"
+msgstr "1. Общие положения"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:34
+#, php-format
+msgid "The following describes the terms and conditions upon which %s Ltd (Company, We, Our or Us) offers access to its Website to you (You) and the use of Our services (the Agreement). This Agreement, which constitutes a legally binding agreement between You and Us, describes the terms, conditions and risks applicable to Your use of Our services available under the domain of current site. You hereby acknowledge that the Services offered are non-delivery options trading services, and that when You trade with Us, You are not entitled to receive, and We are under no obligation to supply, any of the assets in relation to which You invest in binary options via the Site."
+msgstr "Нижеследующее описывает правила и условия, на которых %s (“Компания”, “Мы”, “Наш” или “Нас”) предлагает Вам (“Вы”) доступ к своему Веб-сайту и использованию его услуг (“Соглашение”). Это Соглашение, которое устанавливает юридически обязывающее соглашение между Вами и компанией, описывает правила, условия и риски, применимые к Вашему использованию наших услуг. Настоящим Вы признаёте, что предлагаемые услуги являются услугами беспоставочной опционной торговли и, это означает, что торгуя на нашей платформе, Вам не даётся право получать, а Мы не должны предоставлять, какие бы то ни было активы, взамен инвестируемых Вами средств в бинарные опционы через Сайт."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:37
+msgid "You must read, agree with and accept all of the terms and conditions contained in this Agreement without modifications, which include those terms and conditions expressly set forth below and those incorporated by reference, before You may become a customer of our company and use the Site and\\or the Services. By continuing to access or use the Site and\\or the Services, You agree to follow the terms and conditions of this Agreement as they apply to You. This Agreement is effective upon acceptance in registration for newly registering customers. If You do not agree to be bound by the terms and conditions of this Agreement, do not use or access the Site and\\or the Services, and inform Us in writing immediately. Your continued use of the Site and\\or the Services represents Your consent to be bound by this Agreement."
+msgstr "Вы должны ознакомиться, понять и согласиться на все правила и условия по использованию Сайта и/или Услуг, содержащиеся в данном Соглашении, без изменений, после чего, Вы можете стать нашим клиентом. Все условия и правила данного Соглашения вступают в юридическую силу с момента окончания регистрации Клиента. Если Вы не согласны с правилами и условиями этого Соглашения, не посещайте и не используйте данный Сайт и/или Услуги и незамедлительно сообщитенашей компании об этом в письменной форме. В случае если Вы не согласны, но продолжаете посещать и пользоваться Сайтом  и/или Услугами нашего сайта, Вы автоматически подпадаете под положения и условия данного соглашения."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:40
+msgid "2. Membership Eligibility"
+msgstr "2. Условия участия в торговле"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:42
+msgid "The Services are available to and may only be used by individuals or companies who can form legally binding contracts under the law applicable to them. Without limiting the foregoing, the Site and/or the Services are not available to persons under the age of 18 or otherwise under legal age - whichever is higher (Minors). If You are a Minor, You may not use the Site and\\or the Services; Your continued use of the Site and\\or the Services constitutes Your representation that You are not a Minor. We reserve the right (but are under no obligation) to request proof of age at any stage, to verify that You are not a Minor. We may suspend or cancel Your account and exclude You from using the Site and\\or the Services if proof of age is not provided or if We suspect that You are a Minor; in such case We are under no obligation to return any funds held in Your account with Us. Any such decision of Ours shall be final, binding and not subject to appeal. For avoidance of doubt, We shall not be responsible for any unauthorized use by Minors of the Site and\\or the Services in any way or manner. You understand that laws regarding financial contracts, services and products vary throughout the world, and it is Your obligation alone to ensure that You fully comply with (and do not violate) any law, regulation or directive, relevant to You and Your use of the Site and\\or the Services. By using the Site and\\or the Services You warrant and represent that You confirm that such use complies with any law, regulation or directive, relevant to You."
+msgstr "Услуги доступны и могут быть использованы только юридически дееспособными лицами или компаниями, согласно действующему для них законодательству. Включая вышеупомянутое условие, использование Сайта и/или его Услуг не доступно для лиц, не достигших 18 лет или иного юридически дееспособного возраста (далее “Несовершеннолетний”), согласно действующему законодательству Вашей страны проживания. Если Вы несовершеннолетний, Вы не можете пользоваться Сайтом и/или Услугами; в случае нарушения данного условия обманным путем, Наша компания сохраняет за собой право (но не обязанность) запросить подтверждение возраста в любой момент, чтобы проверить, что Вы не являетесь несовершеннолетним. наша компанияn может приостановить действие и/или аннулировать Ваш счёт и закрыть для Вас доступ к Сайту и/или Услугами, если доказательство Вашего возраста не предоставлено и/или у Нас есть подозрение, что Вы несовершеннолетний. В таком случае, Мы не обязаны возвращать какие бы то ни было средства, содержащиеся на Вашем торговом счете в Нашей Компании. Любое такое Наше решение является окончательным, обязательным и обжалованию не подлежит. Во избежание разночтений, Мы не несём ответственности за какое бы то ни было самовольное  использование несовершеннолетними Сайта и/или Услуг каким бы то ни было способом, в каком бы то ни было порядке. Законы, регулирующие финансовые договора, услуги и продукты, варьируются по всему миру, и это исключительно Ваша ответственность и обязанность удостовериться, что Вы действуете в полном соответствии с каким бы то ни было законом, нормой или директивой, относящимся к Вам и использованию Вами Сайта и/или Услуг, согласно требованиям законодательства, которому Вы подчиняетесь, и убедиться, что Вы его не нарушаете. Используя Сайт и/или Услуги, Вы подтверждаете и гарантируете, что такое использование является правомерным, в соответствии с каким бы то ни было законом, нормой или директивой, относящимся к Вам. "
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:45
+msgid "For avoidance of doubt, the ability to access the Site and\\or the Services does not necessarily mean that Your activities via the Site and\\or Your use of the Services are legal under the laws, regulations or directives relevant to You. For the avoidance of doubt, it is hereby clarified that We make no representations or warranties, expressed or implied, that Your use of the Site and\\or the Services is lawful. Without derogating from the above, the Site and Services are not available to US investors; if You are a US citizen and\\or resident, You may not use the Site and the Services. We reserve the right, at our sole discretion, to deny access to the Site and Services to citizens, residents and\\or people located at additional jurisdictions."
+msgstr "Во избежание разночтений, Мы не несём ответственности за какое бы то ни было самовольное  использование несовершеннолетними Сайта и/или Услуг каким бы то ни было способом, в каком бы то ни было порядке. Законы, регулирующие финансовые договора, услуги и продукты, варьируются по всему миру, и это исключительно Ваша ответственность и обязанность удостовериться, что Вы действуете в полном соответствии с каким бы то ни было законом, нормой или директивой, относящимся к Вам и использованию Вами Сайта и/или Услуг, согласно требованиям законодательства, которому Вы подчиняетесь, и убедиться, что Вы его не нарушаете. Используя Сайт и/или Услуги, Вы подтверждаете и гарантируете, что такое использование является правомерным, в соответствии с каким бы то ни было законом, нормой или директивой, относящимся к Вам. Во избежание разночтений, возможность доступа к Сайту и/или Услугам не означает, что Ваши действия на Сайте и/или Ваше использование Услуг являются правомерными с точки зрения законов, норм и директив, относящихся к Вам. Во избежание разночтений, настоящим уточняется, что Мы не предоставляем никаких заверений и не даём никаких гарантий, явно выраженных либо подразумеваемых, что использование Вами Сайта и/или Услуг является законным в стране Вашего проживания. Не исключая вышеупомянутого, Сайт и/или Услуги не являются доступными для инвесторов из США; если Вы являетесь гражданином и/или резидентом США, Вы не можете пользоваться Сайтом и Услугами Нашей компании. Мы сохраняем право, по нашему собственному усмотрению, отказать в доступе к Сайту и Услугам гражданам, резидентам и/или другим людям, по месту их проживания, согласно юрисдикции."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:47
+msgid "3. Registration Information and Requirements"
+msgstr "3. Регистрационная Информация и Требования"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:48
+msgid "In order to use the Site and the Services You must register with Us. When you register with Us, We will ask You to provide certain identifying information and documentation; You will not be able to complete registration with Us without the provision of such information and documentation. We reserve the right, at any point in time (whether prior to completion of the registration or afterwards), to require from You additional information and documentation or to confirm information and documentation You previously provided to Us; if You do not supply such information and documentation within the time period asked for, or if We believe that any information or documentation provided by You was false or inaccurate or is no longer current or accurate, or if you fail to otherwise comply with any term or condition of this Agreement and all rules and guidelines of the Service or if We believe, at our sole discretion, that you have abused in any way or acted in bad faith towards the Site and\\or the Services and\\or other users of the Site and Services, We reserve the right to refuse to open an account for You, suspend or cancel Your account with Us, and will be entitled to seize and confiscate any funds held in Your account. When providing Us with details of any means of payment, You represent and warrant that that means of payment is either owned by You or that the owner of that means of payment agreed to Your use of the means of payment in connection with the Site and the Services and that such use is within the confines of such agreement."
+msgstr "Для того, чтобы пользоваться Сайтом и/или Услугами, Вы должны зарегистрироваться на нашем сайте. Когда Вы регистрируетесь у Нас, Мы просим Вас предоставить определенную идентифицирующую информацию и документацию; Вы не сможете закончить регистрацию на нашем сайте без предоставления такой информации и/или документации. Мы сохраняем за собой право, в любое время (до завершения регистрации или после), потребовать от Вас предоставить и/или подтвердить дополнительную информацию и/или документацию которую Вы Нам ранее предоставили; если Вы не предоставите такую информацию и/или документацию в течение запрашиваемого времени или если наша компания предполагает, что какая-либо информация и/или документация, предоставленные Вами, была неправдивой или неточной или не является достоверной, или если Вы каким-либо другим образом не соответствует какому бы то ни было правилу или условию данного Соглашения и/или всем правилам и принципам по использованию нашего Сайта и/или Услуг, или Мы предполагаем, по собственному усмотрению, что Вы злоупотребили каким бы то ни было способом или недобросовестно действовали в отношении Сайта и/или Услуг и/или других пользователей Сайта и Услуг, Мысохраняем за собой право отказать Вам в открытии счёта, приостановить действие и/или аннулировать Ваш счёт на нашем сайте и оставляем за собой право, заморозить и/или изъять какие бы то ни было средства, содержащиеся на Вашем счёте, на основании вышеупомянутых причин. Предоставляя Нам детали, каких бы то ни было платёжных средств, Вы заявляете и гарантируете, что либо Вы являетесь владельцем этих платёжных средств, либо владелец этих платёжных средств согласился на использование Вами платёжных средств, в связи с Сайтом и/или Услугами, и что такое использование осуществляется в рамках данного соглашения."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:50
+msgid "You acknowledge that We are under no obligation whatsoever to verify whether and to what extent did the owner of the means of payment agreed to such a use, and (in addition to any other remedy or right We have) You will be held liable for any misuse of such means of payment. You are responsible for securing Your username and password for Your account with Us, and You shall not transfer them to any third party. We are under no obligation to maintain Your user name and password. You agree to provide true, accurate, current and complete information about Yourself during the registration process and thereafter, and You also agree not to impersonate any person or entity, misrepresent any affiliation with another person, entity or association, use false headers or otherwise conceal Your identity from Us for any purpose. You shall notify Us immediately upon any change in any of the details You provided to Us."
+msgstr "Вы подтверждаете, что Мы никоим образом не несём юридической ответственности за проверку наличия согласия, и в какой мере владелец платёжных средств дал разрешение на такое использование, и (в добавление к любым другим средствам правовой защиты и правам, принадлежащим Нам). Вы будете нести полную ответственность, за какое бы то ни было ненадлежащее использование таких платёжных средств. Вы полностью ответственны за обеспечение защиты логина и пароля Вашего счёта на Нашем сайте, и Вы не должны передавать данную информацию какой бы то ни было третьей стороне. Компания не обязана защищать Ваши имя пользователя и пароль (за исключением условий пункта №15 данного соглашения). Вы соглашаетесь предоставлять достоверную, точную, актуальную и полную информацию относительно Вас во время процесса регистрации и после него. Вы также соглашаетесь не выдавать себя за другое физическое или юридическое лицо, не предоставлять заведомо ложную информацию о принадлежности к физическому или юридическому лицу или объединению или другим способом скрывать Вашу личность от Нас, с какими бы то ни было целями. Вы должны немедленно сообщить Нам, о каком бы то ни было изменении какой любой информации,  предоставленной Вами нашей компании ранее."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:53
+msgid "4. Your use of the Site and\\or Services"
+msgstr "4. Использование Cайта и/или Услуг"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:54
+msgid "While using the Site and\\or Our Services, you hereby acknowledge that:"
+msgstr "Используя Сайт и/или Наши услуги, настоящим Вы признаёте, что:"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:56
+msgid " - Your account with Us is for your sole and personal use, and You must not allow the use of Your account by any third party. You hold full and sole responsibility for any loss or damage caused due to any act or omission by You or any third party as a result of inappropriate, irregular or unauthorized use of Your account. Without derogating from the above, You must inform us immediately of any unauthorized use of Your account;"
+msgstr "- Ваш счёт у Нас служит исключительно для Вашего персонального пользования, и Вы не должны допускать использования Вашего счёта, какой бы то ни было третьей стороной. Вы несёте полную и единоличную ответственность за любые утраты или повреждения, вызванные, каким бы то ни было действием или бездействием, с Вашей или третьей стороны, в результате ненадлежащего, ошибочного или неправомерного использования Вашего счёта. Не исключая упомянутого выше, Вы должны немедленно сообщать Нам о каком бы то ни было неправомерном использование Вашего счёта;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:57
+msgid " - You are solely responsible for recording, paying and accounting for any tax or other levy that may be payable due to Your use of the Site and\\or the Services (including, but not limited to, payment of earnings);"
+msgstr "- Вы единолично ответственны за учёт и уплату, каких бы то ни было налогов или других сборов, которые могут подлежать оплате ввиду пользования Вами Сайтом и/или Услугами (включая, но, не ограничиваясь, платежами с полученного дохода);"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:58
+msgid " - You will use the Site and\\or the Services in good faith towards the Company and others using the Services;"
+msgstr "- Вы будете пользоваться Сайтом и/или Услугами добросовестно в отношении 24boption и других пользователей Услуг;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:59
+msgid " - In case of Fraud account suspicion, we may, at our sole discretion, open, maintain and/or close Your Account, as well as seize and confiscate all or part of the funds held in Your account and recover and\\or retain any and all earnings paid to You or to which You are entitled, and any such decision or any other decision by the Company in connection with the Site and\\or the Services shall be final and not subject to dispute or appeal;"
+msgstr "- В случае мошенничества или подозрения в мошенничестве, Мы можем по собственному усмотрению, открывать, администрировать и/или закрывать Ваш счёт, а также заморозить и/или изъять все или часть средств, содержащихся на Вашем счету, чтобы возместить ущерб и/или осуществить возврат средств или дохода, полученного Вами от Нас, путем неправомерных действий, упомянутых выше, и любое такое решение, либо любое другое решение Компании по вышеупомянутым причинам в связи с Сайтом и/или Услугами является окончательным и обсуждению, либо обжалованию не подлежит;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:60
+msgid " - You hereby acknowledge and accept that the Site and\\or Our Services may be supplied, in part or in whole, by third parties; You waive any claim against Us in respect of the provision of the Site and\\or the Services by any such third party;"
+msgstr "- Настоящим Вы подтверждаете и принимаете, что Сайт и/или наши услуги могут быть предоставлены, частично или целиком, третьими сторонами; Вы отказываетесь от какого бы то ни было иска против Нас по причине обеспечения Сайта и/или Услуг какой бы то ни было третьей стороной;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:61
+msgid " - You will not copy or distribute any materials appearing on the Site for any other purpose than Your use of the Site and\\or the Services;"
+msgstr "- Вы не будете копировать или распространять какие бы то ни было материалы с Сайта для какой бы то ни было цели, отличной от пользования Вами Сайтом и/или Услугами;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:62
+msgid " - You will use the information appearing in the Site for the sole purpose of executing transactions inside and within the Site;"
+msgstr "- Вы не будете копировать или распространять какие бы то ни было материалы с Сайта для какой бы то ни было цели, отличной от пользования Вами Сайтом и/или Услугами;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:63
+msgid " - You will not use the Site and\\or the Services for any purpose that is unlawful, tortuous, abusive, intrusive on another`s privacy, harassing, libelous, defamatory, embarrassing, obscene, threatening or hateful."
+msgstr "-  Вы не будете использовать Сайт и/или Услуги для любых целей, которые являются незаконными, нечестными, оскорбительными, вторгающимися в личную жизнь других людей, доставляющими беспокойство кому-либо, клеветническими, оскорбляющими достоинство, обременяющими, непристойными, угрожающими или ненавистническими."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:67
+msgid "5. Risk Disclosure"
+msgstr "5. Предупреждение о рисках"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:69
+msgid "You agree to use the Site and the Services at Your own risk. Without limiting the foregoing, the Services are suitable only for customers who are able to bear the loss of all the money they invest, and who understand the risks and have experience in taking risks involved in financial markets. The possibility exists that You could sustain a loss of some or all of Your investment and therefore You should not invest money that You cannot afford to lose. You should be aware of all the risks associated with digital options trading (including, but not limited to, risks stemming from market conditions, the rules of certain markets), and seek advice from an independent financial advisor if You have any doubts. You hereby acknowledge that You will bear sole responsibility for any losses caused through the use of the Site and\\or the Services. Furthermore, the Site and\\or the Services are available only to, and may only be used by, individuals who have sufficient experience and knowledge in financial matters to be capable of evaluating the merits and risks of acquiring financial contracts via this Site and have done so without relying on any information contained in this Site or provided by Us;"
+msgstr "Вы соглашаетесь использовать Сайт и/или Услуги на свой собственный риск. Не ограничивая упомянутое выше, Услуги подходят только для клиентов, которые осознают, что есть вероятность частичной или полной потери Ваших инвестиций, которые понимают риски, связанные с торговлей на финансовых рынках и имеют опыт управления такими рисками. В связи с вышеупомянутым, Вы не должны инвестировать средства, которые Вы не можете позволить себе потерять. Вы должны быть осведомлены обо всех рисках, связанных с торговлей бинарными опционами (включая, но, не ограничиваясь, рисками, обусловленными состояниями рынков, правилами тех или иных рынков) и обратиться за консультацией к независимому финансовому консультанту, если Вам необходимо что-то уточнить. Настоящим Вы признаёте, что Вы будете нести единоличную ответственность, за какие бы то ни было потери, вызванные с использованием Сайта и/или Услуг."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:72
+msgid "You hereby represent and warrant that You have such sufficient experience and knowledge in financial matters to be capable of evaluating the merits and risks of acquiring financial contracts via the Site and have done so without relying on any information contained in this Site or provided by Us. You shall bear sole responsibility for any decision made and/or to be made by You relying on the content of the Site or information provided by Us."
+msgstr "Помимо всего, Сайт и/или Услуги доступны и могут использоваться только лицами, которые имеют достаточный опыт и знания в финансовых вопросах, чтобы быть способными оценивать выгоды и риски заключения финансовых сделок через этот Сайт, не завися при этом от какой бы то ни было информации, содержащейся на этом Сайте или предоставленной Нами;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:75
+msgid "Without derogating from the above, We shall not be responsible for verifying and/or checking whether You possess such sufficient knowledge and/or experience, nor shall We be responsible for any damage and/or loss incurred by You due to and/or related to the Site, transactions carried out by You and/or Your use of the Services. Employees, directors and officers of the Company, as well as any of their relatives or people associated with, are not entitled to use the Site and\\or the Services."
+msgstr "Настоящим Вы заверяете и гарантируете, что Вы владеете таким достаточным опытом и знаниями в финансовых вопросах, чтобы быть способными оценивать выгоды и риски совершения финансовых сделок через Сайт, не завися при этом от какой бы то ни было информации, содержащейся на этом Сайте или предоставленной Нами."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:77
+msgid "6. Financial Information"
+msgstr "6. Финансовая информация"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:79
+msgid "We may make available to You through the Services a broad range of financial information that is generated internally or obtained from agents, vendors or partners (Third Party Providers). This includes, but is not limited to, financial market data, quotes, news, analyst opinions and research reports, graphs or data (Financial Information)."
+msgstr "Мы несём ответственность только за всю информацию связанную с торгами на платформе, а именно с графиками, котировками, датами, сроками и датами истечения опционов.Компания может сделать доступным для Вас, посредством Наших Услуг, широкий выбор информации, которая генерируется внутри или получена от агентов, поставщиков или партнёров (“Сторонние поставщики”). Это включает, кроме прочего, данные финансовых рынков, новости, мнения аналитиков и отчёты исследований, котировки, графики и иные данные (“Информация”). "
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:80
+#, php-format
+msgid "Financial Information provided on the Site is not intended as investment advice. The Company does not endorse or approve the Financial Information, and We make it available to You only as a service for Your own convenience. %s and its Third Party Providers do not guarantee the accuracy, timeliness, completeness or correct sequencing of the Financial Information, or warrant any results from Your use or reliance on the Financial Information"
+msgstr "Информация, доступная на Сайте, не является советом для инвестиций. Компания не подтверждает и не устанавливает подлинность этой Информации, и Мы делаем её доступной для Вас, только как услугу для Вашего удобства. %s и её Сторонние поставщики не гарантируют точность, своевременность, полноту или правильную последовательность Информации и не гарантирует какие бы то ни было результаты использования Вами или доверия к Информации. "
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:83
+msgid "Financial Information may quickly become unreliable for various reasons including, but not limited to, changes in market conditions or economic circumstances. Neither the Company nor the Third Party Providers are obligated to update any information or opinions contained in any Financial Information, and We may discontinue offering Financial Information at any time without notice. It is Your duty to verify the reliability of the information and Financial Information on the Site and its suitability to Your needs. We exclude any liability for any claim, loss or damage of any kind allegedly caused by information presented on the Site or referred to by the Site."
+msgstr "Данная Информация может быстро терять свою актуальность по разным причинам, включающим, кроме прочего, изменения условий рынка или ситуации в экономике и т.д.. Ни Мы, ни Сторонние поставщики не обязаны обновлять какую бы то ни было информацию или мнения, содержащиеся в какой бы то ни было Информации, и Компания может прекратить предоставление Информации в любой момент без предупреждения. Это Ваша обязанность проверять достоверность информации на Сайте и её соответствие Вашим потребностям. Наша компания исключает, какую бы то ни было ответственность за какие бы то ни было претензии, потери или убытки, какого бы то ни было рода, предположительно вызванные информацией, представленной на Сайте, или информацией, на которую Сайт ссылается. "
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:87
+msgid "7. Links"
+msgstr "7. Ссылки"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:90
+#, php-format
+msgid "We may provide a link to other sites that are controlled or offered by third parties. Such link to a site or sites is not an endorsement, authorization, sponsorship or affiliation with respect to such site, its owners or its providers. %s cautions You to ensure that You understand the risks involved in using such sites before retrieving, using, relying upon or purchasing anything via the Internet. Links to these websites are provided solely for Your convenience, and You agree that under no circumstances will You hold %s liable for any loss or damage caused by use of or reliance on any content, goods or services available on other sites."
+msgstr "Мы можем предоставлять ссылки на другие сайты, которые контролируются и/или предлагаются третьими сторонами. Такая ссылка на сайт или сайты не является подтверждённой, авторизированной, спонсорской или аффилированной в отношении такого сайта, его владельцев или представителей. %s предупреждает Вас о необходимости удостовериться в Вашем понимании рисков, сопряжённых с использованием таких сайтов перед открытием, использованием, или покупкой чего бы то ни было через Интернет. Ссылки на эти веб-сайты предоставлены исключительно для Вашего удобства, и Вы соглашаетесь, что ни при каких обстоятельствах Вы не будете предъявлять %s обвинения в каких бы то ни было потерях или убытках, вызванных использованием какого-либо содержания, товаров или услуг, доступных на других сайтах. "
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:94
+msgid "8. Trading Cancellation"
+msgstr "8. Аннулирование сделок"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:96
+msgid "We reserve the right in our sole discretion to refuse and\\or cancel the Services (in whole or in part), and\\or refuse to distribute profits to anyone for any legitimate reason including, but not limited to:"
+msgstr "Мы сохраняем право, по нашему собственному усмотрению, отказать в предоставлении Услуг (полностью или частично), и/или отказать в выдаче прибыли кому бы то ни было на любом законном основании, включая, но не ограничивая:"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:97
+msgid "- any instance where We have cause to believe that Your activities on the Site may be illegal;"
+msgstr "- любой случай, когда 24boption имеет основания полагать, что Ваши действия на Сайте могут быть незаконными;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:98
+msgid "- any instance where We may suffer any fiscal, regulatory, or pecuniary disadvantage;"
+msgstr "- любой случай, когда 24boption может понести какие бы то ни было фискальные, регулятивные или материальные потери;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:99
+msgid "- any instance where one or more transactions on the Site are judged by Us to have been performed in violation of this Agreement."
+msgstr "- любой случай, когда 24boption имеет основания полагать, что Ваши действия на Сайте могут быть незаконными;"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:100
+#, php-format
+msgid "We reserve the right to cancel, terminate, modify or suspend the Services if for any reason, the Services cannot be conducted as planned, including infection by computer virus, bugs, tampering or unauthorized intervention, fraud, technical failures or any other causes beyond Our control. If any errors result in awarding funds to You or in an increase in funds owed or paid to You, You shall not be entitled to these funds. You shall immediately inform Us of the error and shall repay any funds credited to Your account in error to Us (as directed by Us) or We may, at our sole discretion, deduct an amount equal to such funds from Your account or set off such amount against any money owed to You by Us. %s provide clients the benefit of canceling a trade once placed. If we have reason to believe that a client is abusing or attempting to abuse this benefit, we reserve the right to cancel trades that were executed after more than 2 cancellations."
+msgstr "Наша компания сохраняет право аннулировать, приостановить, изменить или временно отключить Услуги, если, по какой бы то ни было причине, Услуги не могут осуществляться в запланированном порядке, включая инфицирование компьютерным вирусом, ошибки в программе, взлом или неправомочное вмешательство, обман, технические ошибки или любые другие причины неподвластные нашему контролю. Если Вы, по вышеупомянутым причинам, получили или увеличили Ваши денежные средства, Вы не имеете права претендовать на эти денежные средства. Вы должны немедленно сообщить Нам об ошибке и должны вернуть Нам денежные средства, которые были зачислены на Ваш счёт по ошибке или Мы можем, по Нашему собственному решению, вычесть с Вашего счёта ту сумму, которую Вы должны были вернуть 24boption по вышеупомянутым причинам. %s предоставляет клиентам возможность отмены сделки при ее открытии. Если у нашей Компании есть основания полагать, что Клиент злоупотребляет или пытается злоупотреблять данной услугой, Мы оставляем за собой право аннулировать сделки, которые были совершенны, после отмены предыдущих сделок более двух раз подряд."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:103
+msgid "9. Withdrawal Procedure"
+msgstr "9. Процедура вывода денег"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:105
+msgid "Various identification documents must be submitted by You in order to process a withdrawal, and We retain sole and exclusive discretion to request additional documents prior to performing such withdrawal. Once a withdrawal request is submitted it can take up to 2 business days to process the request. Once the request has been approved please allow additional 5-7 days for the funds to be received by You."
+msgstr "Различные идентифицирующие документы должны быть предоставлены Вами для получения возможности вывода денег, и Мы сохраняем за собой единственное и исключительное право запросить дополнительные документы перед предоставлением такой возможности вывода денег. Запрос на вывод денег может обрабатываться до трех рабочих дней с момента его получения, при условии, что документы уже были представлены и утверждены. Как только запрос на вывод был утвержден и произведен, Вам необходимо связаться с представителями службы, через которую был сделан вывод средств, чтобы получить более детальную информацию, когда денежные средства поступят на Ваш счёт."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:109
+msgid "10. Limited Liability"
+msgstr "10. Ограниченная ответственность"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:111
+msgid "We assume no responsibility for any error, omission, interruption, deletion, defect, delay in operation or transmission, bugs, viruses, communications line failure, theft or destruction or unauthorized access to, or alteration of, the Site or Services. We are not responsible for any problems or technical malfunction of any telephone or network lines, computer online systems, servers or providers, hardware, software, failure due to technical problems or traffic congestion on the Internet (or inaccessibility to the Internet). In no event shall the Company and/or anyone acting on its behalf be liable for any direct, indirect, incidental, special or consequential damages or damages for loss of profits, revenue, data or use incurred by You or any third party, whether in an action for contract or tort, arising from the access to, or use of, the Site and\\or the Services. We and/or anyone acting on Our behalf, make no representations about the suitability, reliability, availability, timeliness and accuracy of the Services. All Services are provided as is without warranty of any kind. The Company hereby disclaims all express or implied warranties with respect to the Site and Services, including but not limited to, warranties and conditions of merchantability, satisfactory quality, fitness for a particular purpose, completeness or accuracy, non infringement of third party rights or applicable laws, regulations and directives, or that the Site and Services will be uninterrupted, timely, secure or error free. To the maximum extent permitted by applicable law, under no circumstances shall We be responsible for any loss or damage resulting from use of the Site or Services, from any content posted on or through the Site or Services, or from the conduct of any users of the Site or Services, whether online or offline."
+msgstr "Наша компания не берет на себя ответственность за какие бы то ни было ошибки, бездействие, прерывание, удаление, дефекты, задержки в операциях или сделках, технические ошибки, вирусы, неисправности каналов связи, кражи, разрушения или неправомочный доступ или изменения Сайта или Услуг. Мы не несём ответственности за какие бы то ни было проблемы или техническую неисправность каких бы то ни было телефонных или сетевых линий, компьютерных онлайн-систем, серверов или провайдеров, компьютеров, программного обеспечения, сбоя по причине технических проблем или перегруженности траффика в Интернете (или невозможности доступа в Интернет).Ни при каких обстояельствах наша компания и/или кто бы то ни было, действующий от её имени, не несёт ответственности за какие бы то ни было прямые, непрямые, случайные, фактические или косвенные убытки или убытки по потери прибыли, дохода, данных или пользования, понесённых Вами или какой бы то ни было третьей стороной, в проведении контракта либо правонарушения, исходящие из доступа или использования Сайта и/или Услуг.Мы и/или кто бы то ни было, действующий от Нашего имени, не делаем никаких заявлений о пригодности, достоверности, доступности, своевременности и точности Услуг. Все Услуги предоставляются “как есть” без каких бы то ни было гарантий. Настоящим Компания отказывается от всех, явно выраженных либо подразумеваемых, гарантий в отношении Сайта и Услуг, включая, мимо прочего, гарантии и условия пригодности для торговли, удовлетворительного качества, соответствия определённой цели, полноты или точности, ненарушения прав интеллектуальной собственности третьих лиц или соответствующих законов, норм и директив, или что Сайт и Услуги будут непрерывными, своевременными, безопасными или безошибочными.В максимальной степени, допустимой соответствующим законом, ни при каких обстоятельствах, Мы не несём ответственности, за какую бы то ни было потерю или ущерб, происходящие из использования Сайта или Услуг, какого бы то ни было содержания, размещённого на или через Сайт или Услуги, или через деятельность каких бы то ни было пользователей Сайта или Услуг, онлайн или офлайн."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:115
+#, php-format
+msgid "IN NO EVENT SHALL %s OR ANY OF ITS OFFICERS, DIRECTORS, EMPLOYEES, SERVICE PROVIDERS OR AGENTS BE LIABLE TO YOU FOR ANY DAMAGES WHATSOEVER, INCLUDING WITHOUT LIMITATION INDIRECT, INCIDENTAL, SPECIAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF THE SITE OR SERVICES, INCLUDING BUT NOT LIMITED TO THE QUALITY, ACCURACY, OR UTILITY OF THE INFORMATION PROVIDED AS PART OF OR THROUGH THE SITE OR FOR ANY INVESTMENT DECISIONS MADE ON THE BASIS OF SUCH INFORMATION, WHETHER THE DAMAGES ARE FORESEEABLE AND WHETHER OR NOT %s HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE FOREGOING LIMITATION OF LIABILITY SHALL APPLY TO THE FULLEST EXTENT PERMITTED BY LAW AND IN NO EVENT SHALL %s CUMULATIVE LIABILITY TO YOU EXCEED THE AMOUNT OF MONEY YOU TRANSFERRED OR DEPOSITED IN YOUR ACCOUNT ON THE SITE IN RELATION TO THE TRANSACTION GIVING RISE TO SUCH LIABILITY."
+msgstr "НИ В КАКОМ СЛУЧАЕ %s ИЛИ КТО ЛИБО ИЗ ЕЁ СЛУЖАЩИХ, ДИРЕКТОРОВ, СОТРУДНИКОВ, ПОСТАВЩИКОВ УСЛУГ ИЛИ АГЕНТОВ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ПЕРЕД ВАМИ ЗА КАКИЕ БЫ ТО НИ БЫЛО УБЫТКИ, ВКЛЮЧАЯ, БЕЗ ОГРАНИЧЕНИЙ КОСВЕННЫЕ, СЛУЧАЙНЫЕ, ФАКТИЧЕСКИЕ, ШТРАФНЫЕ ИЛИ ПОСЛЕДУЮЩИЕ УБЫТКИ, ИСХОДЯЩИЕ ИЗ ИЛИ СВЯЗАННЫЕ С ВАШИМ ИСПОЛЬЗОВАНИЕМ САЙТА ИЛИ УСЛУГ, ВКЛЮЧАЯ, КРОМЕ ПРОЧЕГО, КАЧЕСТВО, ТОЧНОСТЬ ИЛИ ПРИГОДНОСТЬ ПРЕДОСТАВЛЕННОЙ ИНФОРМАЦИИ, НА САЙТЕ ИЛИ ПОСРЕДСТВОМ САЙТА ИЛИ ДЛЯ КАКИХ БЫ ТО НИ БЫЛО ИНВЕСТИЦИОННЫХ РЕШЕНИЙ, СДЕЛАННЫХ НА ОСНОВЕ ТАКОЙ ИНФОРМАЦИИ, ВНЕ ЗАВИСИМОСТИ, ЯВЛЯЮТСЯ ЛИ ПОТЕРИ ПРЕДВИДИМЫМИ И ПРЕДУПРЕЖДАЛА ЛИ %s О ВОЗМОЖНОСТИ ТАКИХ ПОТЕРЬ. УСТАНОВЛЕННОЕ ВЫШЕ ОГРАНИЧЕНИЕ ОТВЕТСТВЕННОСТИ ПРИМЕНЯЕТСЯ В НАИБОЛЬШЕЙ СТЕПЕНИ, ДОПУСТИМОЙ ЗАКОНОМ И НИ В КАКОМ СЛУЧАЕ СОВОКУПНАЯ ОТВЕТСТВЕННОСТЬ %s ПЕРЕД ВАМИ НЕ МОЖЕТ ПРЕВЫШАТЬ СУММУ ДЕНЕГ, КОТОРУЮ ВЫ ПЕРЕЧИСЛИЛИ ИЛИ ВНЕСЛИ НА ВАШ АККАУНТ НА САЙТЕ В ОТНОШЕНИИ СДЕЛКИ, КОТОРАЯ ПРИВЕЛА К ТАКОЙ ОТВЕТСТВЕННОСТИ."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:119
+msgid "11. AML Procedures"
+msgstr "11. Процедуры по борьбе с отмыванием денег, полученных преступным путём (AML)"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:122
+msgid "You hereby declare that the funds invested in Your account with Us do not originate from drug trafficking, abduction, any other criminal or illegal activity, or any political affiliation. You shall not abuse the Site and\\or the Services for the purpose of money laundering or for any other illegal, unlawful or improper activity. We reserve the right to refuse to allow You to use Your account, to suspend, cancel and terminate Your account and to seize and confiscate all funds in Your Account if You do not accept or conform to the following AML requirements and policies (or any other AML requirements, as required by Us from time to time):"
+msgstr "Настоящим Вы удостоверяете, что денежные средства, инвестированные на Ваш счёт на нашем сайте, не появились по причине незаконного оборота наркотиков, похищения людей, каких бы то ни было криминальных или незаконных действий или какой бы то ни было политической принадлежности. Вы не можете злоупотреблять Сайтом и/или Услугами с целью легализации преступных доходов или для какой бы то ни было другой нелегальной, незаконной или неправомерной деятельности. Мы сохраняем право отказать Вам в разрешении пользоваться Вашим счётом, и/или приостановить, и/или аннулировать, и/или закрыть Ваш счет, и/или изъять или конфисковать все денежные средства на Вашем счете, если Вы не придерживаетесь или не соответствуете следующим требованиям и принципам по борьбе с легализацией преступных доходов (AML) (или каким бы то ни было другим требованиям по борьбе с легализацией преступных доходов (AML), требуемым Нами время от времени):"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:126
+msgid "- You must provide all requested information and documentation upon registration."
+msgstr "- Вы обязаны предоставить всю запрашиваемую информацию и документацию после регистрации."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:129
+#, php-format
+msgid "- If You maintain an account by means of telegraphic deposits, funds will only be distributed to the holder of the originating bank account. When making deposits in this manner, it is Your responsibility to ensure that the trader`s account number and registered name of the account owner accompany all transfers to  %s."
+msgstr "- Если Вы осуществляете деятельность, на своем счёте используя телеграфные депозиты, денежные средства будут выданы только владельцу банковского счёта, с которого осуществляется перевод. Производя депозиты таким способом, Вы принимаете на себя ответственность по проверке того, что номер торгового счета Клиента и зарегистрированное имя владельца счета совпадают со всеми переводами в %s."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:132
+msgid "- Only one account is allowed per person. No funds will be distributed from accounts opened in false names or on multiple accounts opened by the same person."
+msgstr "- На одного человека разрешается открыть только по одному счету по каждой доступной валюте. Никакие денежные средства не могут быть выведены со счетов, открытых на  несуществующие имена или на множественные счета, открытые одним и тем же лицом."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:136
+msgid "If We suspect any illegal or unlawful activity is performed via Your account, we reserve the right to disclose all information relating to You to the relevant authorities, as well as suspend and terminate Your account, as well as seize and confiscate any funds in Your account."
+msgstr "Если Мы подозреваем ведение какой бы то ни было нелегальной или незаконной деятельности через Ваш счёт, 24boption сохраняет право раскрыть всю информацию, касающуюся Вас, уполномоченным органам, а также приостановить и/или закрыть Ваш счет, и/или изъять какие бы то ни было денежные средства с Вашего счёта по выше упомянутым причинам."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:139
+msgid "12. Intellectual Property"
+msgstr "12. Интеллектуальная собственность"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:142
+#, php-format
+msgid "All content, trademarks, services marks, trade names, logos, icons any other intellectual property connected to the Site or the Services (the IP Rights) are the sole and exclusive property of %s or its affiliates or agents. You may use the IP Rights solely as set out in this Agreement, and You will not acquire any rights whatsoever in the IP Rights. You agree not to delete any copyright notices or other indications of protected intellectual property rights from materials that You print or download from the Site. Images displayed on the Site are either the property of %s or used with permission. You agree not to upload, post, reproduce or distribute any information, software or other material protected by copyright or any other intellectual property right (as well as rights of publicity and privacy) without first obtaining the permission of the owner of such rights and the prior written consent of %s."
+msgstr "Всё содержание, торговые марки, знаки обслуживания, торговые имена, логотипы, иконки, любая другая интеллектуальная собственность, относящаяся к Сайту или Услугам (“Права ИС”) являются единственной и исключительной собственностью %s или её партнёров или агентов. Вы можете использовать Права ИС исключительно как описано в этом Соглашении, и Вы не будете получать какие бы то ни было Права ИС. Вы соглашаетесь не удалять какие бы то ни было уведомления об авторском праве из материалов, которые Вы распечатываете или загружаете с Сайта. Изображения, отображаемые на Сайте, являются либо собственностью %s, либо используются с нашего разрешения. Вы соглашаетесь не закачивать, не размещать, не воспроизводить или распространять какую бы то ни было информацию, программное обеспечение или другие материалы, защищённые авторским правом или какими бы то ни было правами интеллектуальной собственности (также как и публичными правами и правами на приватность) без предварительного получения разрешения от владельца таких прав и письменного предварительного согласия %s."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:145
+msgid "13. Indemnification"
+msgstr "13. Возмещение Ущерба"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:148
+#, php-format
+msgid "You agree to defend, hold harmless and indemnify %s and its officers, directors, employees, agents, contractors, consultants and suppliers from and against any and all claims, liabilities, damages, losses, costs and expenses, including without limitation attorney fees and costs, arising out of or in any way connected with (I) your access to or use of the Site or Services; (II) Your violation of any of the terms of this Agreement; or (III) Your breach of any applicable laws, regulations or directives."
+msgstr "Вы соглашаетесь предоставить возмещение, защиту и неприкосновенность %s и её служащим, директорам, сотрудникам, агентам, исполнителям, консультантам и поставщикам от и против каких бы то ни было претензий, ответственности, ущерба, потерь, расходов и издержек, включая, без ограничений, издержек на адвокатов, исходящих из или каким либо способом связанных с (I) Вашим доступом или пользованием Сайтом или Услугами; (II) нарушением Вами каких бы то ни было правил данного соглашения; или (III) нарушением Вами каких бы то ни было соответствующих законов, норм и директив."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:151
+msgid "14. Term and Termination"
+msgstr "14. Срок Действия и Условия Прекращения Соглашения"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:154
+#, php-format
+msgid "The term of the Agreement shall be unlimited, however We will be allowed to terminate this Agreement and Your account at any time by notice to You. As of termination, You shall not be able to carry out new transactions, and You agree to cease accessing the Site and the Services. You agree that %s, at its sole discretion and with or without notice, may terminate Your access to any or all Services, close Your open transaction and remove and discard any information or content within a Service. Termination of this Agreement shall not affect any provision of this Agreement which is expressly or by implication intended to come into force or continue in force on or after that termination."
+msgstr "Срок действия Соглашения является неограниченным, тем не менее, Мы имеем право прекратить действие данного Соглашения и Вашего торгового счёта в любое время, при этом уведомив Вам. После прекращения действия Соглашения, Вы не сможете открывать новые сделки, и Вы соглашаетесь прекратить доступ к Сайту и Услугам. Вы соглашаетесь, что %s, на своё собственное усмотрение с предупреждением или без него, может прекратить Ваш доступ ко всем Услугам, закрыть Ваши открытые сделки и удалить и избавиться от какой бы то ни было информации в рамках Услуг. Прекращение действия данного Соглашения не должно влиять на какие бы то ни было положения и условия данного Соглашения, которые, прямо или косвенно, должны вступить в действие или продолжать действовать во время или после такого прекращения."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:157
+msgid "15. Privacy"
+msgstr "15. Конфиденциальность"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:160
+msgid "You hereby agree that We will collect personally identifiable information (PII) from You and about You, including (but not limited to) Your name, date of birth, address, email address, information concerning means of payment and contact information. In addition, You hereby grant Us Your consent to collect information about Your activity, including (but not limited to) date and time of access of the Site and Services, length of access of the Site and Services, IP address, language use and all scopes of trades performed by You. You also grant Us Your consent to collect PII by use of cookies placed on Your computer."
+msgstr "Настоящим Вы соглашаетесь, что Мы будем собирать личную информацию (PII) от Вас и про Вас, включая (но не ограничиваясь) Ваше имя, дату рождения, адрес, адрес электронной почты, информацию, касающуюся способов платежей, и контактную информацию. Помимо этого, настоящим Вы даёте Нам Ваше согласие на сбор информации о Вашей деятельности, включая (но, не ограничиваясь) дату и время доступа к Сайту и Услугам, продолжительность доступа к Сайту и Услугам, IP адрес, использования языка и все аспекты связанные с Вашей торговлей. Вы также даёте 24boption Ваше согласие на сбор личной информации, используя cookies, расположенные на Вашем компьютере."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:162
+msgid "We use the PII (including by way of disclosing it to associated entities or to third parties) to provide You with the Services, to undertake necessary security and identify verification checks, to provide customer support, to process any of Your online transactions and for any other purpose related to the operation of the Site and the Services. Your PII may also be used by Us (or by third parties to which we disclose the PII) to provide You with promotional offers and information regarding Our products and services as well as products and services from third parties. We may also use the PII for other internal purposes, such as evaluating, providing, and improving the Services and the Site. We may disclose Your PII if required by law or competent authority, or if We believe such disclosure necessary to protect and defend Our rights or property, the personal safety of other users of the Site and\\or the Services or the public. We reserve the right to share the PII with other online sites` operators, banks, credit card companies and relevant agencies and authorities, if, We determine in Our sole discretion, that You have cheated or attempted to defraud Us, or if We suspect You are committing or have committed any fraudulent activity, or if You breach this Agreement. We may transfer Your PII to jurisdictions outside Your jurisdiction of residence and\\or outside the European Union. The data protection and privacy laws of the jurisdictions to which the PII will be transferred may not be as comprehensive as those in the European Union; in which case We will take measures to ensure a similar level of protection is provided to Your PII."
+msgstr "Наша компания использует личную информацию (включая её раскрытие аффилированным лицам или третьим сторонам), чтобы обеспечить Вам Услуги, гарантировать необходимую безопасность и установить проверки подлинности, обеспечить поддержку клиентов, производить любые Ваши онлайн сделки и для какой бы то ни было другой цели, относящейся к функционированию Сайта и Услуг. Ваша личная информация может быть также использована нами (или третьими сторонами, которым мы раскрываем личную информацию), чтобы обеспечить Вам льготные предложения и информацию, относительно продуктов и наших услуг, а также как продукции и услуг третьих сторон. Мы можем также использовать личную информацию для других внутренних целей, таких как оценка, обеспечение и улучшение Услуг и Сайта.Мы можем раскрыть Вашу личную информацию, если этого потребует закон или компетентный орган, или, если такое раскрытие представляется необходимым нам, чтобы защитить права или собственность нашей компании, личную безопасность других пользователей Сайта и/или Услуг или общества. Мы сохраняем право делиться личной информацией с другими операторами онлайн сайтов, банками, компаниями, выдающими банковские карты и соответствующими агентствами и органами, если мы посчитаем по собственному мнению, что Вы обманули или пытались обмануть нас, или если Мы подозревает, что Вы совершаете или совершили какое бы то ни было обманное действие, или если Вы нарушили данное Соглашение. Вы можете отказаться от получение сообщений от нас, отослав электронное письмо на адрес со страницы поддержки, с Вашего почтового ящика, на который зарегистрирован Ваш счёт на нашем сайте, с просьбой его закрытия. Мы можем передавать Вашу личную информацию соответствующим органам за пределы юрисдикции Вашего проживания и/или вне Европейского Союза. Согласно Защите данных и законов о неприкосновенности частной жизни, юрисдикции в которые будет передаваться личная информация, могут быть не такими обширными, как в Европейском Союзе. В таком случае мы придприймем меры, чтобы обеспечить адекватный уровень защиты Вашей личной информации."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:165
+msgid "16. General"
+msgstr "16. Общие положения"
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:168
+msgid "This Agreement shall be governed by and interpreted in accordance with the laws of the Crete Islands excluding that body of law pertaining to conflict of laws. Any legal action or proceeding arising under this Agreement will be brought exclusively in courts located in the Crete Islands, and the parties hereby irrevocably consent to the personal jurisdiction and venue therein. In the event that any provision in this Agreement is held to be invalid or unenforceable by a court of competent jurisdiction, the remaining provisions of this Agreement will remain in full force and effect and will be interpreted so as to give effect, to the fullest extent possible, to the purpose of that provision. The failure or delay on Our part to enforce any right, power, remedy or provision of this Agreement, or partial exercise of such right, power, remedy or provision will not be deemed a waiver of such right, power, remedy or provision."
+msgstr "Это Соглашение должно регулироваться и толковаться в соответствии с законами Кипра, исключая часть, входящую в правовую коллизию. Какое бы то ни было правовое действие или процесс, возникающие по данному Соглашению, будут рассматриваться исключительно в судах, расположенных на Кипре, и настоящим стороны безоговорочно соглашаются с персональной юрисдикцией и местом рассмотрения дела. В случае если какое бы то ни было положение в данном Соглашении признано недействительным или невыполнимым судом компетентной юрисдикции, оставшиеся положения данного Соглашения останутся в полной силе без изменений и будут толковаться, чтобы привести в действие, в наиболее возможной мере, цель этого положения. Несовершенные действия или задержка со стороны нашей компании в осуществлении, какого бы то ни было права, полномочия, судебной защиты или положения данного Соглашения или частичное исполнение такого права, полномочия, судебной защиты или положения, не будут означать отказа от такого права, полномочия, судебной защиты или положения. "
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:171
+msgid "We sall be entitled, in our sole discretion, to amend, modify, or discontinue, from time to time, any of the Services. The Company shall not be liable for any loss suffered by You resulting from any changes made and You shall have no claims against the Company in such regard. We may transfer, assign or pledge this Agreement or any rights and/or obligations hereunder to any third party without Your consent. You may not transfer, assign or pledge in any manner whatsoever any of Your rights or obligations under this Agreement. Unless explicitly stated in this Agreement, nothing in this Agreement shall: (I) be construed as creating any agency, arrangement, trust of fiduciary relationships or any similar relationship between You and Us; (II) create or confer any rights or benefits to any third party, or (III) grant You any security interest in any asset of the Company, including (but not limited to) any sum held in Your account. For the avoidance of doubt, it is hereby clarified that any funds held in Your account will not accrue any interest. All promotions, bonuses or special offers are subject to additional terms and conditions and any bonus credited to Your account must be used in adherence with such terms and conditions. We reserve the right, at Our sole and exclusive discretion, to withdraw any promotion, bonus or special offer at any time. If We believes You are abusing or attempting to abuse a bonus or other promotion, or are likely to benefit through abuse or lack of good faith, then We may, at Our sole and exclusive discretion, deny, withhold or withdraw from You any bonus or promotion, either temporarily or permanently, or terminate Your account without being under no obligation to pay You any funds held in Your account."
+msgstr "У нас есть право, по собственному усмотрению, вносить поправки, изменять или прекращать, время от времени, какие бы то ни было из Услуг. Мы не несём ответственности за какую бы то ни было потерю, понесённую Вами, в результате каких бы то ни было произведённых изменений, и Вы не должны иметь каких бы то ни было претензий в адрес нашего сайта в этом отношении. мы можем передавать, уступать или закладывать это Соглашение, либо какие бы то ни было права и/или обязанности, в силу настоящего Соглашения, какой бы то ни было третьей стороне без Вашего согласия. Вы не можете передавать, уступать или закладывать, каким бы то ни было способом, в силу настоящего Соглашения, какие бы то ни было из Ваших прав или обязанностей по данному Соглашению. Кроме случаев, прямо указанных в данном Соглашении, ничто в данном Соглашении не может: (I) считаться таким, которое создаёт, какое бы то ни было представительство, соглашение, фонд фидуциарных отношений или какие бы то ни было похожие отношения между Вами и Нашей компанией; (II) создаёт или предоставляет какие бы то ни было права или выгоды какой бы то ни было третьей стороне или (III) даёт Вам какое бы то ни было обеспечительное право на какую бы то ни было нашей ответственности, включая (но не ограничиваясь) какую бы то ни было сумму на Вашем аккаунте."
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:174
+msgid "We reserve the right to set off any positive balances in Your account against any amount owed by You to Us. Any notice provided by Us to You, either through Your account, the Site or by e-mail will be deemed received within 24 hours from the time in which such notice was provided by Us.We may amend the terms of this Agreement from time to time, at Our sole and exclusive discretion and without providing any prior notice, by posting the amended Agreement on the Site. You are responsible for checking whether the Agreement was amended before each time You use the Site and\\or the Services. Any amendment shall come into force as of the day it was published on the Site. If You do not agree to be bound by the changes to the Agreement, do not use or access the Site and\\or the Services, and inform Us in writing immediately. Your continued use of the Site and\\or the Services constitutes Your acceptance to the amended Agreement."
+msgstr "Во избежание сомнений, настоящим уточнено, что какие бы то ни было платёжные средства, содержащиеся на Вашем аккаунте, не будут накапливать какие бы то ни было проценты. Все акции, бонусы или специальные предложения являются предметом дополнительных правил и условий, и любой бонус, зачисленный на Ваш аккаунт, должен быть использован в соответствии с этими правилами и условиями. Мы  право, по нашему единоличному и исключительному усмотрению, отозвать какой бы то ни было бонус, акцию или специальное предложение в любое время. Если Мы предполагаем, что Вы злоупотребляете или пытаетесь злоупотребить бонусом или другими акциями, или, вероятно, получите выгоду посредством злоупотребления или недобросовестности, тогда наша компания может, по единоличному и исключительному усмотрению, отклонить, остановить или отозвать от Вас какой бы то ни было бонус или акцию, временно или навсегда, или остановить действие Вашего аккаунта без обязательств выплаты Вам каких бы то ни было денежных средств, содержащихся на Вашем счёте. Мы сохраняем право вычитать какие то ни было средства с баланса на Вашем аккаунте в счёт Вашей задолженности Нам. Какое бы то ни было уведомление, предоставленное Вам нашей компанией, будь то через Ваш аккаунт, Сайт, или email, будет считаться полученным в срок не позднее 24 часов от времени, когда такое уведомление было предоставлено Нами. Мы можем, время от времени, вносить изменения в правила данного Соглашения, по Нашему единоличному и исключительному усмотрению и без предоставления какого бы то ни было  предварительного уведомления, путём размещения изменённого Соглашения на Сайте. "
+
+#: Z:\home\option\www\html\binary/views/faq/termsandconditions.php:177
+#, php-format
+msgid "%s reserves the right to change the terms and conditions without prior notice. This Agreement constitutes the entire and whole agreement between You and Us in respect of the use of the Site and the Services, and supersedes any and all prior agreement between You and Us in relation to the use of the Site and the Services. You confirm that You have not relied on any representation of the Company save for any express representation made by Us in this Agreement. This Agreement has been drafted in the English language. In the event of any discrepancy between the meanings of any translated versions of this Agreement and the English language version, the meaning of the English language version shall prevail."
+msgstr "Вы ответственны за проверку на предмет внесённых изменений каждый раз перед использованием Вами Сайта и/или Услуг. Каждое изменение вступает в силу в день публикации на Сайте. Если Вы не согласны быть связанными изменениями в Соглашении, не используйте и не осуществляйте доступ к Сайту и/или Услугам и сообщите %s немедленно в письменной форме. В случае Вашего продолжения пользования Сайтом и/или Услугами, Вы подтверждаете Ваше согласие на изменения Соглашения. Это Соглашение устанавливает целое и полное соглашение между Вами и нашей компании в отношении пользования Сайтом и Услугами и отменяет любые и все предыдущие соглашения между Вами и нашей компании в отношении использования Сайта и Услуг. Также Компания оставляет за собой право изменять правила использования сайта без предварительного уведомления клиентов. Вы подтверждаете, что Вы не полагались на какие бы то ни было заверения Компании, за исключением каких бы то ни было выраженных заявлений, сделанных нами в данном Соглашении. Это Соглашение было составлено на русском языке. В случае какого либо несоответствия между значениями каких бы то ни было переведённых версий данного Соглашения и англоязычной версии, значение версии на английском языке имеет преимущественную силу."
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:24
+#: Z:\home\option\www\html\binary/views/faq/what.php:27
+msgid "What is binary option."
+msgstr "Что такое бинарные опционы."
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:31
+msgid "- a system of instant contract, according to which the alleged behavior of selected assets on the stock exchanges, namely their fall or rise over time."
+msgstr "- это система мгновенных контрактов, согласно которым утверждается поведение выбранных активов на фондовых биржах, а именно: их падение, либо рост за определённый промежуток времени."
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:33
+msgid "Exchange trader chooses assets with which it will work , and indicates the forecast of their behavior in the market . It is further alleged in vyigrasha payout , and the amount of compensation for proigrashe , as well as the specific rate and time of completion of the option. In other words, you do not buy the assets themselves (be it currency , precious metals, oil , stocks , etc. ), and bet on their behavior in the market , building on the current changes that affect their price. Thus the trader can raise money even at the minimum jumps assets , not even thinking about the necessity of obtaining of the original."
+msgstr "Трейдер самостоятельно выбирает биржевые активы, с которыми он будет работать и указывает прогноз их поведения на рынке. Далее утверждается процент выплаты при выиграше, и сумма компенсаций при проиграше, а также конкретная ставка и время завершения опциона. Иными словами вы не покупаете сами активы (будь это валюта, драгоценные металы, нефть, акции и др.), а делаете ставки на их поведение на рынке, отталкиваясь от текущих изменений, которые влияют на их цену. Таким образом трейдер может поднять деньги даже на минимальных скачках активов, даже не думая о необходимости их первоначального преобретения."
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:35
+msgid "The advantages of binary options:"
+msgstr "Преимущества бинарных обционов:"
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:37
+msgid "Managed risks - a characteristic feature of binary options is the initial notice in the trader about the risks. You know exactly the amount that will be able to win a preliminary assessment of the risks, even before it had a deal. Ease of operation - depends only on the change factor prices, and hence: profit requires less information, and items. That's why binary options are popular not only among experienced traders, but also among those new to the trade."
+msgstr "Управляемые риски — характерной особенностью бинарных опционов является изначальная уведомленность трейдера о существующих рисках. Вы конкретно знаете сумму, которую сможете выиграть, предварительно оцениы риски, еще до того как совершили сделку. Простота в работе — во многом зависит только от фактора изменения цены, а следовательно: получение прибыли требует меньше информации, а также деталей. Вот почему бинарные опционы пользуются популярностью не только среди бывалых трейдеров, но и среди новичков в сфере торговли. "
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:40
+msgid "The relative availability - achieved value for money in itself is not an asset, and in the contract for the predicted price movement. This is what allows us to overcome the price threshold, which is not all traders can overcome when dealing with tangible assets (precious metals, oil, currency pairs, etc.) Profitability - perhaps this is one of the root causes of popularity of binary options abroad, since this figure is often more than the profit from similar rates but with the assets. Here it is sufficient to predict the behavior of assets otnoshetniyu to the current point (growth or decline) to get the result.Profitability - perhaps this is one of the root causes of popularity of binary options abroad, since this figure is often more than the profit from similar rates but with the assets. Here it is sufficient to predict the behavior of assets otnoshetniyu to the current point (growth or decline) to get the result."
+msgstr "Относительная доступность — достигается вложением денег не в сам актив, а в контракт на спрогнозированное движение цены. Именно это и позволяет преодолеть ценовой порог, который далеко не всем трейдерам под силу преодолеть при работе с материальными активами (ценные металы, нефть, валютные пары и др.) Прибыльность — пожалуй это одна из первопричин популярности бинарных опционов зарубежом, так как именно этот показатель зачастую превышает прибыль от аналогичных ставок но уже с активами. Здесь достаточно спрогнозировать поведение активов по отношетнию с текущей точкой (рост, или падение) для получения результата. "
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:42
+msgid "What is the difference between binary and stock options:"
+msgstr "В чём разница между бинарными и биржевыми опционами:"
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:44
+msgid "Binary options are there in the market since the year 2008 and first appeared on the Chicago Board Options Exchange (CBOE) and the options are European style so-called All or nothing. Although if you dig a little deeper , we can understand - the emergence of binary options in the OTC market originated much earlier. Certainly , the growing popularity of binary options required relatively simple, where in most cases the basic rule of winning option is only correct choice of the direction of movement of assets (call, or put). In other words, there is no need to accurately determine the extent of the growth or decline of exchange of assets for possible revenue from the purchased assets , but only to anticipate higher prices or price reduction of their market value. In addition to all the above, you can immediately evaluate the gains and risks of a particular amount that is fixed and the transaction itself."
+msgstr "Бинарные опционы существуют на рынке еще с 2008го года и появились впервые на чикагской бирже опционов (CBOE) и относятся к опционам «европейского типа» так называемые All or nothing. Хотя если копнуть глубже, то можно понять – появление бинарных опционов на внебиржевом рынке зародилось намного раньше. Наверняка, растущая популярность бинарных опционов обязана сравнительной простотой, где в большинстве случаев основным правилом победы опциона есть лишь правильный выбор направления движения стоимости активов (call, либо put). Другими словами нет необходимости точно определять степень роста, либо падения биржевых активов для получения возможных доходов из покупаемых активов, а лишь предугадать подорожание, либо удешевление их рыночной стоимости. В добавок ко всему вышесказанному вы сразу можете оценить доходы и риски конкретной суммой, которая и фиксируется самой сделкой."
+
+#: Z:\home\option\www\html\binary/views/faq/what.php:47
+msgid "Here's an example : the current market value of gold is 1313,014 at 12:15 , at 13:00 and reaches 1316,470 . Gold prices rose and Call transaction during this period became profitable for the asset and an income of 80 % to $ 1,000 is $ 800 profit in 45 minutes. But do not forget about the rates low degree of risk , for example where the trader is at 400 % of earnings will receive significantly less pay and at the same time to protect themselves from the loss of the entire amount bid at proigrashnom option and will receive compensation from the rate . In general , it is worth noting that the opinion on the effectiveness of various strategies and options are separated by a seasoned trader prefers its already proven methodology ."
+msgstr "Вот пример: текущая рыночная стоимость золота в 12:15 составляет 1313.014 , а в 13:00 достигает отметки 1316.470. Стоимость золота поднялась и Call сделки за данный период стали прибыльными для данного актива и при доходе в 80% с 1000$ это 800$ прибыли за 45 минут. Однако не стоит забывать и о ставках с малым степенем риска, где например трейдер при 400% заработка получит значительно меньше выплату, и в то же время обезопасит себя от потери всей суммы ставки при проиграшном опционе и получит компенсацию от ставки. В целом, стоит отметить, что мнения об эффективности работы различных стратегий с опционами разделяются и каждый опытный трейдер предпочитает свою уже проверенную методику."
+
+#~ msgid ""
+#~ "Click \"CALL\" if you think the price will rise above the current rate at "
+#~ "the expiry, or click \"PUT\" if you think the price\n"
+#~ "                    will fall below the current rate at the expiry."
+#~ msgstr ""
+#~ " Нажмите \"CALL\", если вы полагаете, что его цена будет выше по "
+#~ "истечению опциона. Нажмите \"PUT\", если \n"
+#~ " вы ожидаете, что цена будет ниже текущего уровня. "
+#~ msgid ""
+#~ "Click \"CALL\" if you think the price will rise above the current rate at "
+#~ "the expiry, or click \"PUT\" if you think the price will fall below the "
+#~ "current rate at the expiry and click \"Apply\""
+#~ msgstr ""
+#~ " Нажмите \"CALL\", если вы полагаете, что его цена будет выше по "
+#~ "истечению опциона. Нажмите \"PUT\", если вы ожидаете, что цена будет ниже "
+#~ "текущего уровня и нажмите \"Применить\"."
+#~ msgid ""
+#~ "Click \"CALL\" if you think the price will rise above the current rate at "
+#~ "the expiry, or click \"PUT\" if you think the "
+#~ "price                         will fall below the current rate at the "
+#~ "expiry."
+#~ msgstr ""
+#~ " Нажмите \"CALL\", если вы полагаете, что его цена будет выше по "
+#~ "истечению опциона. Нажмите \"PUT\", если                       вы "
+#~ "ожидаете, что цена будет ниже текущего уровня. "
+#~ msgid "New password "
+#~ msgstr "Новый пароль "
+#~ msgid "Change"
+#~ msgstr "Изменить"
+#~ msgid "Change of personal information"
+#~ msgstr "Изменение персональных данных"
+#~ msgid "Your Name"
+#~ msgstr "Ваше Имя"
+#~ msgid "Your Last Name"
+#~ msgstr "Ваша Фамилия"
+#~ msgid "Your E-mail"
+#~ msgstr "Ваш E-mail"
+#~ msgid "Your Date"
+#~ msgstr "Дата Вашего"
+#~ msgid "of birth"
+#~ msgstr "рождения"
+#~ msgid "(minimum 5, maximum 20 char)"
+#~ msgstr "(от 5, до 20 символов)"
+#~ msgid ""
+#~ "The relative availability - achieved value for money in itself is not an "
+#~ "asset, and in the contract for the predicted price movement. This is what "
+#~ "allows us to overcome the price threshold, which is not all traders can "
+#~ "overcome when dealing with tangible assets (precious metals, oil, "
+#~ "currency pairs, etc.)"
+#~ msgstr ""
+#~ "Относительная доступность — достигается вложением денег не в сам актив, а "
+#~ "в контракт на спрогнозированное движение цены. Именно это и позволяет "
+#~ "преодолеть ценовой порог, который далеко не всем трейдерам под силу "
+#~ "преодолеть при работе с материальными активами (ценные металы, нефть, "
+#~ "валютные пары и др.)"
+#~ msgid "test poedit"
+#~ msgstr "тест поедита"
+

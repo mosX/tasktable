@@ -1,0 +1,30 @@
+Options -Indexes
+AddDefaultCharset utf-8
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_URI} (/|\.htm|\.php|\.html|/[^.]*)$  [NC]
+
+RewriteRule (.*) index.php
+
+ErrorDocument 400 " "
+ErrorDocument 402 " "
+ErrorDocument 401 " "
+ErrorDocument 403 " "
+ErrorDocument 404 " "
+ErrorDocument 500 " "
+
+php_flag display_errors 1
+php_flag display_startup_errors 0
+php_flag html_errors 0
+php_flag docref_root 0
+php_flag docref_ext 0
+php_flag log_errors 1
+php_value error_log /home/clickroom/logs/error_php.log
+php_flag ignore_repeated_errors 0
+php_flag ignore_repeated_source 0
+php_flag report_memleaks 1
+php_flag track_errors 1
+php_flag log_errors_max_len 0
