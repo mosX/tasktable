@@ -14,6 +14,7 @@
 
         <ul class="nav navbar-nav navbar-collapse collapse" id="headerMenu">
             <li class="active"><a href="/">Календарь</a></li>
+            <li class="active"><a data-toggle="modal" data-target="#addLessonModal" >Добавить Предмет</a></li>
             <!--<li><a class="contacts_link" href="/help/about/"><?=_("About us")?></a></li>
             <li><a class="oustaff_link" href="http://affiliate.24bopt.com/"><?=_("Affiliates")?></a></li>-->
             

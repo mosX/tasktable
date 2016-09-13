@@ -21,11 +21,12 @@
     <form class="form" action="" method="POST">
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-4">
-                    Заметка
-                </div>
+                <div class="col-sm-4">Заметка</div>
+                    
+                
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="message">
+                    <input type="text" class="form-control" name="message" value="<?=$_POST['message']?>">
+                    <div class="error"><?=$this->m->error->message?></div>
                 </div>
             </div>
         </div>
@@ -35,7 +36,7 @@
                     Начало
                 </div>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control clockpicker" name="start">
+                    <input type="text" class="form-control clockpicker" name="start" value="<?=$_POST['start']?>">
                 </div>
             </div>
         </div>
@@ -45,7 +46,8 @@
                     Окончание
                 </div>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control clockpicker" name="end">
+                    <input type="text" class="form-control clockpicker" name="end" value="<?=$_POST['end']?>">
+                    <div class="error"><?=$this->m->error->date?></div>
                 </div>
             </div>
         </div>

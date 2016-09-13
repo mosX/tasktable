@@ -20,6 +20,7 @@
             
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $tasks->addNew();
+                $this->m->error = $tasks->error;
             }
         }
     }

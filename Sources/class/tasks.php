@@ -19,7 +19,7 @@ class Tasks{
     }
     
     public function addNew(){
-        
+        $this->validation = true;
         $year = $_GET['year'];
         $month = $_GET['month'];
         $day = $_GET['day'];
@@ -31,12 +31,30 @@ class Tasks{
         $start_date = $year.'-'.$month.'-'.$day.' '.$start;
         $end_date = $year.'-'.$month.'-'.$day.' '.$end;
         
+        if(!$message){
+            $this->validation = false;
+            $this->error->message = 'Вы должны ввести заметку';
+        }
+        
+        if(strtotime($end_date) < strtotime($start_date)){
+            $this->validation = false;
+            $this->error->date = 'Дата окончания не может быть раньше даты начала';
+        }
+        
+        if(!$this->validation){
+            return false;
+        }
+        
         $row->start = $start_date;
         $row->end = $end_date;
         $row->message = $message;
         $row->date = date('Y-m-d H:i:s');
         
-        $this->m->_db->insertObject('tasks',$row);
+        if($this->m->_db->insertObject('tasks',$row)){
+            redirect('/?date='.date("Y-m-d",strtotime($start)));
+        }else{
+            p($this->m->_db->_sql);
+        }
         //p($this->m->_db->_sql);
     }
     
