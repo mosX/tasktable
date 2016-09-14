@@ -141,44 +141,10 @@ class xAuth {
         $value = md5($passwd . mosHash(@$_SERVER['HTTP_USER_AGENT']));
         return $value;
     }
-
-    //public function employe_login($login,$password){
-    public function employe_login($number, $user_id, $password){
-        $user_id = (int)$user_id;
-        $number = (int)$number;
-        
-        $this->m->_db->setQuery(
-                    "SELECT `internals`.* "
-                    . " FROM `internals` "
-                    . " WHERE 1"
-                    . " AND `internals`.`user_id` = ".$user_id
-                    . " AND `internals`.`number` = '".$number."'"
-                    . " AND `internals`.`password` = '".$password."'"
-                    . " LIMIT 1"
-                );
-        $this->m->_db->loadObject($user);
-        
-        if(!$user){
-            die('{"status":"error","message":"Не верные данные"}');
-        }
-        
-        $this->_session->guest = '0';
-        $this->_session->username = $user->number;
-        $this->_session->userid = (int) $user->id;
-        $this->_session->usertype = "employe";
-        $this->_session->gid = 3;
-        $this->_session->ip = $_SERVER["REMOTE_ADDR"];
-        $this->_session->user_agent = $_SERVER['HTTP_USER_AGENT'];
-        $this->_session->cookie = $_COOKIE[$refcookiename];
-
-        $this->_session->update();
-        
-        echo '{"status":"success","url":"/employe/"}';
-    }
     
-    public function login($url = '/',$email, $password){
-        $email = $email ? $email : stripslashes(strval(getParam($_POST, 'email', '    ')));
-        $passwd = $password ? $password : stripslashes(strval(getParam($_POST, 'password', '')));
+    public function login($email, $password,$url = '/'){
+        $email = strip_tags(trim($email));
+        $passwd = strip_tags(trim($password));
 
         if (!$email || !$passwd) {
             redirect("/?error=login-incorrect");
@@ -194,7 +160,7 @@ class xAuth {
                 " SELECT `users`.*"
                 . " FROM `users` "
                 . " WHERE `users`.`email` = " . $this->m->_db->Quote($email)
-                . " AND `users`.`gid` IN (1,2)"
+                //. " AND `users`.`gid` IN (1,2)"
                 . " AND `users`.`status` = 1"
                 . " LIMIT 1;"
         );
@@ -267,102 +233,11 @@ class xAuth {
 
         redirect($url);
     }
-
-    public function mobileLogin($email, $passwd, $gcmToken){
-        if (!$email || !$passwd){
-            die('{"name":"login","status":"false","errorMessage":"Не заполнены все поля"}');
-        }
-
-        $this->m->_db->setQuery(    //получаем пользователей и на демо и не на демо
-                " SELECT `users`.*"
-                . " FROM `users` "
-                . " WHERE `users`.`email` = " . $this->m->_db->Quote($email)
-                . " AND `users`.`gid` IN (1,2)"
-                . " AND `users`.`status` = 1"
-                . " LIMIT 1;"
-        );
-        $this->m->_db->loadObject($user);
-        
-        if(!$user){
-            die('{"name":"login","status":"false","errorMessage":"Такой email не зарегестрирован"}');
-        }
-        if($user && $user->status <= 0){
-            die('{"name":"login","status":"false","errorMessage":"Аккаунт забанен"}');
-        }
-
-        if(!$user){
-            die('{"name":"login","status":"false","errorMessage":"Не верные данные"}');
-        }
-
-        if ($user->status < 0 || (int)$user->bad_withdraw_answer >= 5) {
-            die('{"name":"login","status":"false","errorMessage":"Аккаунт забанен"}');
-        }
-
-        /*if ((int)$user->bad_auth >= 5) {
-            die('{"name":"login","status":"false","errorMessage":"Аккаунт забанен"}');
-        }*/
-       
-        list($hash, $salt) = explode(':', $user->password);
-
-        $cryptpass = md5(md5($passwd) . $salt);
-        
-        if ($hash != $cryptpass) {
-            $this->m->add_to_history($user->id, "login", "failedlogin");
-
-            $this->m->_db->setQuery(
-                    "UPDATE `users` "
-//                    . " SET `users`.`bad_auth` = `users`.`bad_auth` + 1 "
-                    . " SET `users`.`bad_auth` = 0 "
-                    . " ,`users`.`last_modified` = NOW() "
-                    
-                    . " WHERE `users`.`id` = " . (int)$user->id
-                    . " LIMIT 1;"
-            );
-            $this->m->_db->query();
-            if ($user->bad_auth >= 4) {
-                die('{"name":"login","status":"error","message":"Лимит запросов превышен"}');
-            }
-            
-            die('{"name":"login","status":"false","errorMessage":"Неправильный пароль"}');
-        }
-
-        $this->m->add_to_history($user->id);
-
-        $this->_session->guest = '0';
-        $this->_session->username = $user->email;
-        $this->_session->userid = (int) $user->id;
-        $this->_session->usertype = "user";
-        $this->_session->gid = (int) $user->gid;
-        $this->_session->ip = $_SERVER["REMOTE_ADDR"];
-        $this->_session->user_agent = $_SERVER['HTTP_USER_AGENT'];
-        $this->_session->cookie = $_COOKIE[$refcookiename];
-
-        $this->_session->update();
-        
-        $this->m->_db->setQuery(
-                " UPDATE `users` "
-                . " SET `users`.`last_login` = NOW() "
-                . " ,`users`.`last_ip` = " . $this->m->_db->Quote($_SERVER["REMOTE_ADDR"])
-                . " ,`users`.`gcmToken` = '".$gcmToken."' "
-                . ($user->bad_auth ? " ,`users`.`bad_auth` = 0 " : "")
-                . " WHERE `users`.`id` = " . (int)$user->id
-                . " LIMIT 1;"
-        );
-        $this->m->_db->query();
-        
-        if(!$this->_session->session_id ){
-            die('{"name":"login","status":"false","errorMessage":"Нету сессии"}');
-        }
-        
-        $this->m->_user = $this->getUser();
-        
-        die('{"name":"login","status":"true","id":"'.$this->m->_user->id.'","sesid":"'.$this->_session->session_id.'"}');
-    }
     
-    public function ajaxLogin($url = '/', $email, $passwd){
-        
-        if (!$email || !$passwd){
-            //return array("status" => "error", "error" => _("Не заполнены все поля"));
+    public function ajaxLogin( $email, $password,$url = '/'){        
+        $email = strip_tags(trim($email));
+        $password = strip_tags(trim($password));
+        if (!$email || !$password){
             die('{"status":"error","message":"Не заполнены все поля"}');
         }
 
@@ -370,16 +245,9 @@ class xAuth {
                 " SELECT `users`.*"
                 . " FROM `users` "
                 . " WHERE `users`.`email` = " . $this->m->_db->Quote($email)
-                //. " AND `users`.`gid` < 10"
-                . " AND `users`.`gid` IN (1,2)"
                 . " AND `users`.`status` = 1"
-                //. " AND `users`.`demo` = ".(int)$demo
-                //. ($demo ? " AND `users`.`demo` = 1":" AND `users`.`demo` = 0")
-                //. " AND `users`.`status` = 1"
                 . " LIMIT 1;"
         );
-        
-        //$row = $this->m->_db->loadObjectList('demo');
         $this->m->_db->loadObject($user);
         
         if(!$user){
@@ -396,16 +264,10 @@ class xAuth {
         if ($user->status < 0 || (int)$user->bad_withdraw_answer >= 5) {
             die('{"status":"error","message":"Аккаунт забанен"}');
         }
-
-        /*if ((int)$user->bad_auth >= 5) {
-            die('{"status":"error","message":"Аккаунт забанен"}');
-        }*/
-
-        //$refcookiename = "999be3440691882c7227dfad792c7833"; //md5("refcookiename-keygames");
         
         list($hash, $salt) = explode(':', $user->password);
 
-        $cryptpass = md5(md5($passwd) . $salt);
+        $cryptpass = md5(md5($password) . $salt);
         
         if ($hash != $cryptpass) {
             $this->m->add_to_history($user->id, "login", "failedlogin");
@@ -493,28 +355,19 @@ class xAuth {
         $user_id = intval($this->_session->userid);
         if (!$user_id)return array();
 
-        if($this->_session->gid == 3){  //если єто сотрудник
-            $this->m->_db->setQuery(
-                        "SELECT `internals`.* "
-                        . " FROM `internals` "
-                        . " WHERE `internals`.`id` = ".$user_id
-                        . " LIMIT 1"
-                    );
-            $this->m->_db->loadObject($instance);
-            
-            $instance->session = $this->_session->session_id;
-            $instance->gid = 3;
-        }else{  //если єто пользователь
-            $this->m->_db->setQuery(
-                    " SELECT `users`.* "
-                    . " FROM `users` "
-                    . " WHERE `users`.`gid` IN (1,2)"
-                    . " AND `users`.`status` > -1 "
-                    . " AND `users`.`id` = " . $this->m->_db->Quote($user_id)
-            );
-            $this->m->_db->loadObject($instance);
-            unset($instance->password);
-        }
+        
+        $this->m->_db->setQuery(
+                " SELECT `users`.* "
+                . " FROM `users` "
+                . " WHERE 1"
+                . " AND `users`.`status` > -1 "
+                . " AND `users`.`id` = " . $this->m->_db->Quote($user_id)
+        );
+        
+        $this->m->_db->loadObject($instance);
+
+        unset($instance->password);
+        
 
         return $instance;
     }

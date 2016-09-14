@@ -8,6 +8,16 @@
             
         }
         
+        public function filledAction(){
+            $this->disableTemplate();
+            $this->disableView();
+            
+            xload('class.tasks');
+            $tasks = new Tasks($this->m);
+            $this->m->data = $tasks->getFilledDates($year,$month);
+            echo json_encode($this->m->data);            
+        }
+        
         public function addtypeAction(){
             $this->disableTemplate();
             $this->disableView();

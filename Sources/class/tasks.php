@@ -7,14 +7,83 @@ class Tasks{
     }
     
     public function getFilledDates(){
+        $date = strtotime(date('Y-m-d'));
+        if($_GET['date']){            
+            $date = strtotime($_GET['date']);
+        }
+        $start = date('Y-m-01 00:00:00',$date);
+        $end = date('Y-m-t 23:59:59',$date);
+        
+        //получаем перманентные записи
         $this->m->_db->setQuery(
                     "SELECT DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') as start "
                     . " , UNIX_TIMESTAMP(start) as timestamp"
                     . " FROM `tasks` "
                     . " WHERE `tasks`.`status` = 1"
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " AND `tasks`.`permanent` = 1"
+                    . " AND `tasks`.`status` = 1"
+                    . " GROUP BY start"
+                );
+        $permanents = $this->m->_db->loadObjectList();        
+        $start_month = (int)date("m",strtotime($start));
+        $permanents_dates = array();
+        
+        foreach($permanents as $item){
+            $dayOfWeek = date('N',strtotime($item->start));
+            $startDayOfWeek = strtotime($item->start);
+            
+            $temp_date = strtotime($start);
+            
+            while(date('m',$temp_date) == $start_month){    //пока тот же месяц
+                
+                if($temp_date < $startDayOfWeek){   //если дата создание больше чем дата счетчика
+                    $temp_date += 60*60*24;
+                    continue;
+                }
+                
+                if(date("N",$temp_date) == $dayOfWeek){
+                    $permanents_dates[] = $temp_date;
+                }
+                
+                $temp_date += 60*60*24;
+            }
+        }
+        
+        $this->m->_db->setQuery(
+                    "SELECT DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') as start "
+                    . " , UNIX_TIMESTAMP(start) as timestamp"
+                    . " FROM `tasks` "
+                    . " WHERE `tasks`.`status` = 1"
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " AND `tasks`.`start` > '".$start."'"
+                    . " AND `tasks`.`end` < '".$end."'"
+                    . " AND `tasks`.`permanent` = 0"
+                    . " AND `tasks`.`status` = 1"
                     . " GROUP BY start"
                 );
         $data = $this->m->_db->loadObjectList();
+        $single_dates = array();
+        if($data){
+            foreach($data as $item){
+                $single_dates[] = strtotime($item->start);
+            }
+        }
+        
+        $result = array_merge($permanents_dates,$single_dates);
+        $result = array_unique($result);
+        
+        return $result;
+    }
+    
+    public function getLessonsList(){
+        $this->m->_db->setQuery(
+                    "SELECT `lessons`.* "
+                    . " FROM `lessons`"
+                    . " WHERE `lessons`.`user_id` = ".$this->m->_user->id
+                );
+        $data  = $this->m->_db->loadObjectList();
+        
         return $data;
     }
     
@@ -45,17 +114,16 @@ class Tasks{
             return false;
         }
         
+        $row->user_id = $this->m->_user->id;
         $row->start = $start_date;
         $row->end = $end_date;
+        $row->permanent = (bool)$_POST['permanent'];
         $row->message = $message;
         $row->date = date('Y-m-d H:i:s');
         
         if($this->m->_db->insertObject('tasks',$row)){
             redirect('/?date='.date("Y-m-d",strtotime($start)));
-        }else{
-            p($this->m->_db->_sql);
         }
-        //p($this->m->_db->_sql);
     }
     
     public function getData($date){
@@ -66,6 +134,7 @@ class Tasks{
                     "SELECT * FROM `tasks` "
                     . " WHERE `tasks`.`start` > '".$start."'"
                     . " AND `tasks`.`end` < '".$end."'"
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " ORDER BY `id` DESC"
                 );
         $data = $this->m->_db->loadObjectList();

@@ -9,7 +9,8 @@
         $('.clockpicker').clockpicker({
             placement: 'bottom',
             align: 'left',
-            donetext: 'OK'
+            donetext: 'OK',
+            autoclose:true
         });
     });
 </script>
@@ -26,6 +27,30 @@
                 
                 <div class="col-sm-8">
                     <input type="text" class="form-control" name="message" value="<?=$_POST['message']?>">
+                    <div class="error"><?=$this->m->error->message?></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-4">Постояное расписание</div>
+                
+                <div class="col-sm-8">
+                    <input type="checkbox" name="permanent" <?=$_POST['permanent']? 'checked=checked' :''?>>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-4">Предмет</div>
+
+                <div class="col-sm-8">
+                    <select name="type" class="form-control">
+                        <option>Без типа</option>
+                        <?php foreach($this->m->lessons as $item){ ?>
+                            <option value="<?=$item->id?>"><?=$item->name?></option>
+                        <?php } ?>
+                    </select>
                     <div class="error"><?=$this->m->error->message?></div>
                 </div>
             </div>

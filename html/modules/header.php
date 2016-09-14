@@ -14,15 +14,17 @@
 
         <ul class="nav navbar-nav navbar-collapse collapse" id="headerMenu">
             <li class="active"><a href="/">Календарь</a></li>
-            <li class="active"><a data-toggle="modal" data-target="#addLessonModal" >Добавить Предмет</a></li>
-            <!--<li><a class="contacts_link" href="/help/about/"><?=_("About us")?></a></li>
-            <li><a class="oustaff_link" href="http://affiliate.24bopt.com/"><?=_("Affiliates")?></a></li>-->
-            
+            <li><a data-toggle="modal" data-target="#addLessonModal">Добавить Предмет</a></li>
+            <li><a href="/students/">Студенты</a></li>
         </ul>
         
-        <ul class="pull-right control_menu list-inline">                        
-            
-            
+        <ul class="pull-right nav navbar-nav">
+            <?php if($this->_user->id){ ?>
+                <li><a href="/logout/">Выход</a></li>
+            <?php }else{ ?>
+                <li><a data-toggle="modal" data-target="#loginModal" href="">Вход</a></li>
+                <li><a href="/registration/">Регистрация</a></li>
+            <?php } ?>
         </ul>
     </div>
 </nav>

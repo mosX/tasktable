@@ -48,21 +48,36 @@
             this.addDateTags();
             this.addDays();
         },
-        
+        getFilledDatas:function(callback){            
+            var self = this;
+            
+            $.ajax({
+                url:'/manage/filled/?date='+self.year+'-'+(self.month+1)+'-01',
+                type:'GET',
+                success:function(msg){
+                    self.reservedDates = JSON.parse(msg);
+                    
+                    callback();
+                    
+                }
+            });
+        },
         nextMonth:function(){
+            var self = this;
             var d = new Date(this.year,this.month+1);
             this.month = d.getMonth();
             this.year = d.getYear()+1900;
             
-            this.render();
+            this.getFilledDatas(function(){self.render();});
         },
         
         prevMonth:function(){
+            var self = this;
             var d = new Date(this.year,this.month-1);
             this.month = d.getMonth();
             this.year = d.getYear()+1900;
             
-            this.render();
+            this.getFilledDatas(function(){self.render();});
         },
         
         actions:function(){
@@ -172,7 +187,7 @@
 <script>
     var reservedDates = new Array();
     <?php foreach($this->m->data as $item){ ?>
-        reservedDates.push(<?=$item->timestamp?>);
+        reservedDates.push(<?=$item?>);
     <?php } ?>
     $('document').ready(function(){
         var cal = new Calendar({

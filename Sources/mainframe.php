@@ -50,7 +50,8 @@ class mainframe {
         $this->parsePath();
         $this->setLang();
         $this->_user = $this->_auth->getUser();
-        $this->unread_message=$this->get_unread_message();
+        
+        //$this->unread_message=$this->get_unread_message();
         
         if (is_object($this->_user) && $this->_user->id > 0) {
             $this->_islogin = true;

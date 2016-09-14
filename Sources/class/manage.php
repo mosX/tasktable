@@ -5,7 +5,7 @@ class Manage{
     public function __construct(mainframe & $mainframe){
         $this->m = $mainframe;
     }
-    
+        
     public function addType(){
         $name = strip_tags(trim($_POST['name']));
         
@@ -14,11 +14,13 @@ class Manage{
             return false;
         }
         
+        $row->user_id = $this->m->_user->id;
         $row->name = $name;
         $row->date = date("Y-m-d H:i:s");
+        
         if($this->m->_db->insertObject('lessons',$row)){
             echo '{"status":"success"}';
         }
-    }    
+    }
 }
 ?>

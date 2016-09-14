@@ -17,6 +17,7 @@
             xload('class.tasks');
             $tasks = new Tasks($this->m);
             $this->m->data = $tasks->getData($this->m->date);
+            $this->m->lessons = $tasks->getLessonsList();
             
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $tasks->addNew();
