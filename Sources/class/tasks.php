@@ -13,10 +13,12 @@ class Tasks{
         }
         $start = date('Y-m-01 00:00:00',$date);
         $end = date('Y-m-t 23:59:59',$date);
+        $permanents_dates = array();
         
         //получаем перманентные записи
         $this->m->_db->setQuery(
                     "SELECT DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') as start "
+                    . " , DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') as permanent_update "
                     . " , UNIX_TIMESTAMP(start) as timestamp"
                     . " FROM `tasks` "
                     . " WHERE `tasks`.`status` = 1"
@@ -27,16 +29,15 @@ class Tasks{
                 );
         $permanents = $this->m->_db->loadObjectList();        
         $start_month = (int)date("m",strtotime($start));
-        $permanents_dates = array();
         
         foreach($permanents as $item){
             $dayOfWeek = date('N',strtotime($item->start));
-            $startDayOfWeek = strtotime($item->start);
+            //$startDayOfWeek = strtotime($item->start);
+            $startDayOfWeek = strtotime($item->permanent_update);
             
             $temp_date = strtotime($start);
             
             while(date('m',$temp_date) == $start_month){    //пока тот же месяц
-                
                 if($temp_date < $startDayOfWeek){   //если дата создание больше чем дата счетчика
                     $temp_date += 60*60*24;
                     continue;
@@ -59,7 +60,7 @@ class Tasks{
                     . " AND `tasks`.`start` > '".$start."'"
                     . " AND `tasks`.`end` < '".$end."'"
                     . " AND `tasks`.`permanent` = 0"
-                    . " AND `tasks`.`status` = 1"
+                                    
                     . " GROUP BY start"
                 );
         $data = $this->m->_db->loadObjectList();
@@ -117,7 +118,9 @@ class Tasks{
         $row->user_id = $this->m->_user->id;
         $row->start = $start_date;
         $row->end = $end_date;
-        $row->permanent = (bool)$_POST['permanent'];
+        $row->permanent = $_POST['permanent'] ? 1:0;
+        
+        $row->permanent_update = $row->permanent ? $row->start : 0;
         $row->message = $message;
         $row->date = date('Y-m-d H:i:s');
         
@@ -129,15 +132,24 @@ class Tasks{
     public function getData($date){
         $start = date("Y-m-d 00:00:00",strtotime($date));
         $end = date("Y-m-d 23:59:59",strtotime($date));
+        //p(date('N',strtotime($start)));
         
         $this->m->_db->setQuery(
-                    "SELECT * FROM `tasks` "
-                    . " WHERE `tasks`.`start` > '".$start."'"
+                    "SELECT * "
+                    . " FROM `tasks` "
+                    . " WHERE 1 "
+                    . " AND (`tasks`.`start` > '".$start."'"
                     . " AND `tasks`.`end` < '".$end."'"
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " AND `tasks`.`permanent` = 0)"
+                
+                    . " OR (`tasks`.`permanent` = 1 AND DAYOFWEEK(`tasks`.`start`)-1 = '".date('N',strtotime($start))."') "
+                
+                    . " AND `tasks`.`status` = 1"
                     . " ORDER BY `id` DESC"
                 );
         $data = $this->m->_db->loadObjectList();
+        //p($data);
         
         return $data;
     }

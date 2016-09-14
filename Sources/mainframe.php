@@ -51,6 +51,8 @@ class mainframe {
         $this->setLang();
         $this->_user = $this->_auth->getUser();
         
+        $this->checkPermanents();
+        
         //$this->unread_message=$this->get_unread_message();
         
         if (is_object($this->_user) && $this->_user->id > 0) {
@@ -75,6 +77,52 @@ class mainframe {
 
         $this->page();
         $this->output();
+    }
+    
+    public function checkPermanents(){
+        $this->_db->setQuery(
+                    "SELECT `tasks`.* "
+                    . " FROM `tasks` "
+                    . " WHERE `tasks`.`permanent` = 1"
+                    . " AND `tasks`.`status` = 1"
+                    . " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
+                );
+        $data = $this->_db->loadObjectList();
+        if(!$data) return;
+        
+        //получаем день недели начала 
+        foreach($data as $item){
+            $dayOfWeek = date("N",strtotime($item->start));
+            $temp_date = strtotime($item->permanent_update);
+            while($temp_date < time()){
+                $temp_date += 60*60*24;
+                if(date("N",$temp_date) == $dayOfWeek){
+                    //добавляем в задачи поле
+                    $row = new stdClass();
+                    $row->user_id = $item->user_id;
+                    $row->message = $item->message;
+                    $row->lesson = $item->lesson;
+                    $row->permanent = 0;
+                    $row->start = date("Y-m-d ".date("H",strtotime($item->start)).":".date("i",strtotime($item->start)).":00",$temp_date);
+                    $row->end = date("Y-m-d ".date("H",strtotime($item->end)).":".date("i",strtotime($item->end)).":00",$temp_date);
+                    //$row->start = $item->start;
+                    //$row->end = $item->end;
+                    $row->date = date("Y-m-d H:i:s");
+                    $row->status = 1;
+                    //p($row);
+                    $this->_db->insertObject('tasks',$row);
+                }
+                
+            }
+            //обновляем поле permanent_update
+            $this->_db->setQuery(
+                        "UPDATE `tasks` SET `tasks`.`permanent_update` = '".date("Y-m-d H:i:s")."'"
+                        . " WHERE `tasks`.`id` = ".$item->id
+                        . " LIMIT 1"
+                    );
+            $this->_db->query();
+        }
+        
     }
     
     public function redisConnect(){
