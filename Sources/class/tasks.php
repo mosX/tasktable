@@ -88,6 +88,95 @@ class Tasks{
         return $data;
     }
     
+    public function getEditData($id){
+        $id = (int)$id;
+        if(!$id) return false;
+        
+        $this->m->_db->setQuery(
+                    "SELECT * FROM `tasks` WHERE `tasks`.`id` = ".$id   
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " LIMIT 1"
+                );
+        $this->m->_db->loadObject($data);
+        
+        if(!$data) return false;
+        
+        return $data;
+    }
+    
+    public function edit($id){
+        $this->validation = true;
+        //получаем заявку
+        $this->m->_db->setQuery(
+                    "SELECT `tasks`.* "
+                    . " FROM `tasks` "
+                    . " WHERE `tasks`.`id` = ".$id
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " LIMIT 1"
+                );
+        $this->m->_db->loadObject($task);
+        
+        if(!(int)$_POST['date']){
+            $this->validation = false;
+            $this->error->message = 'Вы должны ввести дату';
+        }
+        
+        $year = date("Y",strtotime($_POST['date']));
+        $month = date("m",strtotime($_POST['date']));
+        $day = date("d",strtotime($_POST['date']));
+        
+        $message = strip_tags(trim($_POST['message']));
+        
+        $start = $_POST['start'];
+        $end = $_POST['end'];
+        
+        $start_date = $year.'-'.$month.'-'.$day.' '.$start;
+        $end_date = $year.'-'.$month.'-'.$day.' '.$end;
+        
+        if(!$message){
+            $this->validation = false;
+            $this->error->message = 'Вы должны ввести заметку';
+        }
+        
+        if(strtotime($end_date) < strtotime($start_date)){
+            $this->validation = false;
+            $this->error->date = 'Дата окончания не может быть раньше даты начала';
+        }
+        
+        if(!$this->validation){
+            return false;
+        }
+        
+        $row->id = $task->id;
+        $row->user_id = $this->m->_user->id;
+        $row->lesson = $_POST['type'];
+        $row->start = $start_date;
+        $row->end = $end_date;
+        $row->permanent = $_POST['permanent'] ? 1:0;
+        if(strtotime($row->start) > time()){
+            $row->permanent_update = $row->start;
+        }
+        
+        //$row->permanent_update = $row->permanent ? $row->start : 0;
+        $row->message = $message;
+        $row->date = date('Y-m-d H:i:s');
+        
+        if($this->m->_db->updateObject('tasks',$row,'id')){
+            xload('class.students');
+            $class = new Students($this->m);
+            $class->removeStudents($row->id);
+            //получаем выбранных студентов
+            foreach($_POST['students'] as $item){
+                if($item != 0)$students[] = $item;
+            }
+            $students = array_unique($students);
+            foreach($students as $item)$class->addStudent($item,$row->id);
+            
+            redirect('/tasks/edit/'.$id);
+            //redirect('/?date='.date("Y-m-d",strtotime($start)));
+        }
+    }
+    
     public function addNew(){
         $this->validation = true;
         $year = $_GET['year'];
@@ -116,6 +205,7 @@ class Tasks{
         }
         
         $row->user_id = $this->m->_user->id;
+        $row->lesson = $_POST['type'];
         $row->start = $start_date;
         $row->end = $end_date;
         $row->permanent = $_POST['permanent'] ? 1:0;
@@ -124,7 +214,16 @@ class Tasks{
         $row->message = $message;
         $row->date = date('Y-m-d H:i:s');
         
-        if($this->m->_db->insertObject('tasks',$row)){
+        if($this->m->_db->insertObject('tasks',$row,'id')){
+            xload('class.students');
+            $class = new Students($this->m);
+            //получаем выбранных студентов
+            foreach($_POST['students'] as $item){
+                if($item != 0)$students[] = $item;
+            }
+            $students = array_unique($students);
+            foreach($students as $item)$class->addStudent($item,$row->id);
+            
             redirect('/?date='.date("Y-m-d",strtotime($start)));
         }
     }
@@ -135,8 +234,10 @@ class Tasks{
         //p(date('N',strtotime($start)));
         
         $this->m->_db->setQuery(
-                    "SELECT * "
+                    "SELECT `tasks`.* "
+                    . " , `lessons`.`name` as lessons_name"
                     . " FROM `tasks` "
+                    . " LEFT JOIN `lessons` ON `lessons`.`id` = `tasks`.`lesson`"
                     . " WHERE 1 "
                     . " AND (`tasks`.`start` > '".$start."'"
                     . " AND `tasks`.`end` < '".$end."'"
@@ -149,6 +250,7 @@ class Tasks{
                     . " ORDER BY `id` DESC"
                 );
         $data = $this->m->_db->loadObjectList();
+        
         //p($data);
         
         return $data;

@@ -88,14 +88,12 @@ class mainframe {
                     . " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
                 );
         $data = $this->_db->loadObjectList();
-        if(!$data) return;
         
         //получаем день недели начала 
         foreach($data as $item){
             $dayOfWeek = date("N",strtotime($item->start));
             $temp_date = strtotime($item->permanent_update);
-            while($temp_date < time()){
-                $temp_date += 60*60*24;
+            while($temp_date < time()){                                
                 if(date("N",$temp_date) == $dayOfWeek){
                     //добавляем в задачи поле
                     $row = new stdClass();
@@ -111,8 +109,8 @@ class mainframe {
                     $row->status = 1;
                     //p($row);
                     $this->_db->insertObject('tasks',$row);
-                }
-                
+                }                
+                $temp_date += 60*60*24;
             }
             //обновляем поле permanent_update
             $this->_db->setQuery(
