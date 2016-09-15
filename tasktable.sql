@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Сен 14 2016 г., 18:41
+-- Время создания: Сен 15 2016 г., 18:53
 -- Версия сервера: 5.6.26-log
 -- Версия PHP: 5.6.12
 
@@ -42,7 +42,8 @@ INSERT INTO `lessons` (`id`, `user_id`, `name`, `date`) VALUES
 (2, 0, 'english', '2016-09-14 08:59:10'),
 (3, 0, 'english', '2016-09-14 13:24:30'),
 (4, 0, 'english', '2016-09-14 13:25:28'),
-(5, 1, 'english', '2016-09-14 13:28:46');
+(5, 1, 'english', '2016-09-14 13:28:46'),
+(6, 1, 'польский', '2016-09-15 12:28:32');
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,8 @@ CREATE TABLE `students` (
 
 INSERT INTO `students` (`id`, `user_id`, `firstname`, `lastname`, `status`, `date`) VALUES
 (1, 1, 'Slawik', '', 1, '2016-09-14 13:54:35'),
-(2, 1, 'Slawik', 'Sivinyuk', 1, '2016-09-14 13:58:50');
+(2, 1, 'Slawik', 'Sivinyuk', 1, '2016-09-14 13:58:50'),
+(3, 1, 'второй', 'ученик', 1, '2016-09-15 12:27:57');
 
 -- --------------------------------------------------------
 
@@ -91,11 +93,33 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `user_id`, `message`, `lesson`, `permanent`, `start`, `end`, `date`, `permanent_update`, `status`) VALUES
-(8, 0, 'сентябрь', 0, 0, '2016-09-15 08:03:00', '2016-09-15 02:29:00', '2016-09-13 15:27:46', '0000-00-00 00:00:00', 1),
-(9, 0, 'заметка', 0, 0, '2016-09-05 22:00:00', '2016-09-05 23:00:00', '2016-09-13 15:30:59', '0000-00-00 00:00:00', 1),
-(10, 0, '1111', 0, 0, '2016-10-05 09:00:00', '2016-10-04 23:00:00', '2016-09-13 15:31:26', '0000-00-00 00:00:00', 1),
-(11, 1, 'заметка у цу', 0, 0, '2016-09-08 09:10:00', '2016-09-08 17:00:00', '2016-09-14 13:37:50', '0000-00-00 00:00:00', 1),
-(12, 1, 'Постоянно в понедельник', 0, 1, '2016-08-17 08:05:00', '2016-08-17 09:05:00', '2016-08-17 14:21:26', '0000-00-00 00:00:00', 1);
+(1, 1, 'permanent', 5, 1, '2016-09-28 09:00:00', '2016-09-28 10:00:00', '2016-09-15 12:12:53', '2016-09-28 09:00:00', 1),
+(2, 1, 'проверка учеников', 6, 0, '2016-09-14 09:00:00', '2016-09-14 10:00:00', '2016-09-15 14:41:32', '0000-00-00 00:00:00', 1),
+(3, 1, 'вторая дата', 6, 0, '2016-09-14 11:00:00', '2016-09-14 12:00:00', '2016-09-15 15:17:16', '0000-00-00 00:00:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `task_students`
+--
+
+CREATE TABLE `task_students` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `task_students`
+--
+
+INSERT INTO `task_students` (`id`, `user_id`, `task_id`, `student_id`, `date`) VALUES
+(6, 1, 2, 1, '2016-09-15 14:41:32'),
+(7, 1, 2, 2, '2016-09-15 14:41:32'),
+(8, 1, 2, 3, '2016-09-15 14:41:33'),
+(9, 1, 3, 3, '2016-09-15 15:17:16');
 
 -- --------------------------------------------------------
 
@@ -125,7 +149,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `password`, `country`, `email`, `phone`, `birthday`, `status`, `bad_auth`, `last_login`, `last_modified`, `last_ip`, `date`) VALUES
-(1, 'Slawik', 'Sivinyuk', '25a276e8f671957cbff0b4b973e2bc30:PzIU1dpJ79txE7j5', NULL, '279229931@qip.ru', '', '0000-00-00 00:00:00', 1, 0, '2016-09-14 13:27:46', '0000-00-00 00:00:00', '127.0.0.1', '2016-09-14 12:16:52');
+(1, 'Slawik', 'Sivinyuk', '25a276e8f671957cbff0b4b973e2bc30:PzIU1dpJ79txE7j5', NULL, '279229931@qip.ru', '', '0000-00-00 00:00:00', 1, 0, '2016-09-15 08:41:34', '0000-00-00 00:00:00', '127.0.0.1', '2016-09-14 12:16:52');
 
 -- --------------------------------------------------------
 
@@ -154,7 +178,7 @@ CREATE TABLE `x_session` (
 --
 
 INSERT INTO `x_session` (`id`, `session_id`, `time`, `userid`, `username`, `guest`, `guest_key`, `usertype`, `status`, `remember`, `gid`, `ip`, `user_agent`) VALUES
-(3, 'f17240fae9c1af61a180aa1d91f63a0a', 1473867424, 1, '279229931@qip.ru', 0, '', 'user', 1, 0, 0, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0');
+(5, 'd4779052821f7eb66429972d859f1f27', 1473954680, 1, '279229931@qip.ru', 0, '', 'user', 1, 0, 0, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0');
 
 --
 -- Индексы сохранённых таблиц
@@ -176,6 +200,12 @@ ALTER TABLE `students`
 -- Индексы таблицы `tasks`
 --
 ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `task_students`
+--
+ALTER TABLE `task_students`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -201,17 +231,22 @@ ALTER TABLE `x_session`
 -- AUTO_INCREMENT для таблицы `lessons`
 --
 ALTER TABLE `lessons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `task_students`
+--
+ALTER TABLE `task_students`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
@@ -221,7 +256,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `x_session`
 --
 ALTER TABLE `x_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
