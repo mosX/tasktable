@@ -150,46 +150,133 @@
             </tr>
         <?php } ?>
     </table>
+    <?php 
+            foreach($this->m->data as $item){ 
+                $start = strtotime($item->start);
+                
+                $end = strtotime($item->end);
+                $date = strtotime($this->m->date);
+                
+                $data[] = array(strtotime(date("Y-m-d ".date("H",$start).":".date("i",$start).":00",$date)),strtotime(date("Y-m-d ".date("H",$end).":".date("i",$end).":00",$date)));
+                
+                
+            } 
+            
+        ?>
+    
     <script>
-        $('document').ready(function(){
-            var ws = $('#canvas')[0];
-            var ctx = ws.getContext('2d');
-
-            ws.width = $('#canvas').width();
-            ws.height = $('#canvas').height();
-            
-            var start_day = <?=strtotime(date("Y-m-d 00:00:00",strtotime($this->m->date)))?>;
-            var end_day = <?=strtotime(date("Y-m-d 23:59:59",strtotime($this->m->date)))?>;
-            
-            var interval = end_day - start_day+1;
-            
-            ctx.save();                
-                ctx.fillStyle = 'rgba(255,0,0,0.5)';
-                ctx.rect(20,20,10,300);
-                ctx.fill();
-            ctx.restore();  
-            
-            var start = 0;
-            while(start <= interval){
-                var y = (300/interval)*start;
-                
-                ctx.save();
-                    ctx.lineWidth = 1;
-
-                    ctx.strokeStyle = '#5ca905';
-
-                    //ctx.translate(x+40, 0.5);
-
-                    ctx.beginPath();
-                        ctx.moveTo(20, 20+y);
-                        ctx.lineTo(100, 20+y);
-                    ctx.closePath();
-
-                    ctx.stroke();
-                ctx.restore();
-                
-                start += 3600;
+        
+        
+        function Workload(obj){
+            this.parent = obj.parent;
+            try{
+                this.workloads = JSON.parse(obj.workloads);
+            }catch(e){
+                return false;
             }
+            
+            
+            this.ws = $(this.parent)[0];
+            this.ctx = this.ws.getContext('2d');
+            
+            this.ws.width = $('#canvas').width();
+            this.ws.height = $('#canvas').height();
+            
+            this.start_day = obj.start_day-1;
+            
+            this.end_day = obj.end_day;
+            
+            this.x_margin = 20;
+            this.y_margin = 20;
+            this.width = 10;
+            this.height = 300;
+            
+            this.interval = this.end_day - this.start_day;
+            
+            this.hourPositions();
+            
+            for(var key in this.workloads){                
+                this.setWorloads(this.workloads[key]);               
+            }
+        }
+        Workload.prototype = {
+            parent:null,
+            ws:null,ctx:null,
+            start_day:0,end_day:0,
+            interval:0,
+            setWorloads:function(data){
+                var start = data[0]-this.start_day;
+                var end = data[1]-this.start_day;
+                                
+                var start_y = this.timeToY(start);
+                var end_y = this.timeToY(end);
+                                
+                this.ctx.save();
+                    this.ctx.lineWidth = 2;
+                    this.ctx.strokeStyle = 'red';
+
+                    this.ctx.beginPath();
+                        this.ctx.moveTo(40.5, 20+start_y);
+                        this.ctx.lineTo(40.5, 20+end_y);
+                    this.ctx.closePath();
+
+                    this.ctx.stroke();
+                this.ctx.restore();
+                
+                this.ctx.save();
+                    this.ctx.lineWidth = 1;
+                    this.ctx.strokeStyle = 'red';
+
+                    this.ctx.beginPath();
+                        this.ctx.moveTo(40.5, 20+start_y);
+                        this.ctx.lineTo(40.5, 20+end_y);
+                    this.ctx.closePath();
+
+                    this.ctx.stroke();
+                this.ctx.restore();
+
+            },
+            hourPositions:function(){
+                this.ctx.save();
+                    this.ctx.fillStyle = 'rgba(0,155,100,0.5)';
+                    this.ctx.rect(this.x_margin,this.y_margin,this.width,this.height);
+                    this.ctx.fill();
+                this.ctx.restore();
+
+                var start = 0;
+                
+                while(start <= this.interval){
+                    var y = this.timeToY(start);
+
+                    this.ctx.save();
+                        this.ctx.lineWidth = 1;
+                        this.ctx.strokeStyle = '#5ca905';
+
+                        this.ctx.beginPath();
+                            this.ctx.moveTo(this.x_margin + this.width, this.y_margin+y);
+                            this.ctx.lineTo(40.5, 20+y);
+                        this.ctx.closePath();
+
+                        this.ctx.stroke();
+                    this.ctx.restore();
+
+                    start += 3600;
+                }
+            },
+            timeToY:function(time){
+                var y = (300/this.interval)*time;
+                return y;
+            }
+        }
+        
+        $('document').ready(function(){
+            var object = new Workload({
+                parent:$('#canvas'),
+                start_day:<?=strtotime(date("Y-m-d 00:00:00",strtotime($this->m->date)))?>,
+                end_day:<?=strtotime(date("Y-m-d 23:59:59",strtotime($this->m->date)))?>,
+                workloads:'<?=json_encode($data)?>',
+            });
+            
         });
     </script>
     <div id="daystat">
