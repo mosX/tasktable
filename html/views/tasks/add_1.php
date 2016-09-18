@@ -146,19 +146,11 @@
                     <input type="submit" class="btn btn-primary" value="Сохранить">
                 </div>
             </div>
-        </div>      
+        </div>
+      
     </form>
-     <?php 
-            foreach($this->m->data as $item){ 
-                $start = strtotime($item->start);
-                
-                $end = strtotime($item->end);
-                $date = strtotime($this->m->date);
-                
-                $data[] = array(strtotime(date("Y-m-d ".date("H",$start).":".date("i",$start).":00",$date)),strtotime(date("Y-m-d ".date("H",$end).":".date("i",$end).":00",$date)));    
-            } 
-            
-        ?>
+    
+    
     <script>
         function Workload(obj){
             this.parent = obj.parent;
@@ -167,6 +159,7 @@
             }catch(e){
                 return false;
             }
+            
             
             this.ws = $(this.parent)[0];
             this.ctx = this.ws.getContext('2d');
@@ -180,8 +173,8 @@
             
             this.x_margin = 20;
             this.y_margin = 20;
-            this.width = this.ws.width - this.x_margin*2;
-            this.height = 7;
+            this.width = 10;
+            this.height = 300;
             
             this.interval = this.end_day - this.start_day;
             
@@ -200,21 +193,33 @@
                 var start = data[0]-this.start_day;
                 var end = data[1]-this.start_day;
                                 
-                var start_x = this.timeToX(start);
-                var end_x = this.timeToX(end);
-                
-                
+                var start_y = this.timeToY(start);
+                var end_y = this.timeToY(end);
+                                
                 this.ctx.save();
-                    this.ctx.lineWidth = 5;
+                    this.ctx.lineWidth = 2;
                     this.ctx.strokeStyle = 'red';
 
                     this.ctx.beginPath();
-                        this.ctx.moveTo(this.x_margin+start_x, this.y_margin+4);
-                        this.ctx.lineTo(this.x_margin+end_x, this.y_margin+4);
+                        this.ctx.moveTo(40.5, 20+start_y);
+                        this.ctx.lineTo(40.5, 20+end_y);
                     this.ctx.closePath();
 
                     this.ctx.stroke();
                 this.ctx.restore();
+                
+                this.ctx.save();
+                    this.ctx.lineWidth = 1;
+                    this.ctx.strokeStyle = 'red';
+
+                    this.ctx.beginPath();
+                        this.ctx.moveTo(40.5, 20+start_y);
+                        this.ctx.lineTo(40.5, 20+end_y);
+                    this.ctx.closePath();
+
+                    this.ctx.stroke();
+                this.ctx.restore();
+
             },
             hourPositions:function(){
                 this.ctx.save();
@@ -226,42 +231,26 @@
                 var start = 0;
                 
                 while(start <= this.interval){
-                    var x = this.timeToX(start);
-                    
+                    var y = this.timeToY(start);
+
                     this.ctx.save();
                         this.ctx.lineWidth = 1;
                         this.ctx.strokeStyle = '#5ca905';
 
                         this.ctx.beginPath();
-                            this.ctx.moveTo(this.x_margin+x , this.y_margin);
-                            this.ctx.lineTo(20.5+x, this.y_margin - 10);
+                            this.ctx.moveTo(this.x_margin + this.width, this.y_margin+y);
+                            this.ctx.lineTo(40.5, 20+y);
                         this.ctx.closePath();
 
                         this.ctx.stroke();
-                    this.ctx.restore();
-                    
-                    
-                    var d = new Date( (this.start_day+start +1) *1000);
-                    var hours = d.getHours();
-                    hours = hours < 10 ? '0'+hours:hours;
-                    var minutes = d.getMinutes();
-                    minutes = minutes < 10 ? '0'+minutes:minutes;
-                    //Текст
-                    var text = hours+':'+minutes;
-                    var textWidth = this.ctx.measureText(text).width / 2;
-                    
-                    this.ctx.save();
-                        this.ctx.fillStyle = "#999";
-                        this.ctx.font = "normal 9pt Arial";
-                        this.ctx.fillText(text, this.x_margin+x - textWidth, 10);
                     this.ctx.restore();
 
                     start += 3600;
                 }
             },
-            timeToX:function(time){
-                var x = (this.width/this.interval)*time;
-                return x;
+            timeToY:function(time){
+                var y = (300/this.interval)*time;
+                return y;
             }
         }
         
@@ -276,7 +265,7 @@
         });
     </script>
     <div id="daystat">
-        <canvas style="width:100%; height:40px" id="canvas"></canvas>
+        <canvas style="outline: 1px solid red;" id="canvas" width="400" height="400"></canvas>
     </div>
 
     <table class="table">
@@ -290,6 +279,18 @@
             </tr>
         <?php } ?>
     </table>
-   
+    <?php 
+            foreach($this->m->data as $item){ 
+                $start = strtotime($item->start);
+                
+                $end = strtotime($item->end);
+                $date = strtotime($this->m->date);
+                
+                $data[] = array(strtotime(date("Y-m-d ".date("H",$start).":".date("i",$start).":00",$date)),strtotime(date("Y-m-d ".date("H",$end).":".date("i",$end).":00",$date)));
+                
+                
+            } 
+            
+        ?>
     
 </div>

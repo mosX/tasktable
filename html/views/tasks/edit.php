@@ -22,6 +22,17 @@
         </div>
         <div class="form-group">
             <div class="row">
+                <div class="col-sm-4">Цвет заметки</div>
+                
+                <div class="col-sm-8">
+                    <input type="text" class="form-control jscolor {valueElement:'color_picker',value:'<?=$_POST['color'] ? $_POST['color'] : $this->m->data->color?>'}">
+                    <input id='color_picker' type="hidden" name="color" value="<?=$_POST['color'] ? $_POST['color'] : $this->m->data->color?>">
+                    <div class="error"><?=$this->m->error->message?></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
                 <div class="col-sm-4">Постояное расписание</div>
                 
                 <div class="col-sm-8">

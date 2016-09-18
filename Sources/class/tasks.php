@@ -149,6 +149,7 @@ class Tasks{
         
         $row->id = $task->id;
         $row->user_id = $this->m->_user->id;
+        $row->color = $_POST['color'];
         $row->lesson = $_POST['type'];
         $row->start = $start_date;
         $row->end = $end_date;
@@ -184,6 +185,7 @@ class Tasks{
         $day = $_GET['day'];
         
         $message = strip_tags(trim($_POST['message']));
+        
         $start = $_POST['start'];
         $end = $_POST['end'];
         
@@ -205,12 +207,13 @@ class Tasks{
         }
         
         $row->user_id = $this->m->_user->id;
+        $row->lesson = $_POST['color'];
         $row->lesson = $_POST['type'];
         $row->start = $start_date;
         $row->end = $end_date;
         $row->permanent = $_POST['permanent'] ? 1:0;
         
-        $row->permanent_update = $row->permanent ? $row->start : 0;
+        $row->permanent_update = $row->start;
         $row->message = $message;
         $row->date = date('Y-m-d H:i:s');
         
@@ -225,6 +228,8 @@ class Tasks{
             foreach($students as $item)$class->addStudent($item,$row->id);
             
             redirect('/?date='.date("Y-m-d",strtotime($start)));
+        }else{
+            p($this->m->_db->_sql);
         }
     }
     

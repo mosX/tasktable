@@ -9,7 +9,7 @@
         }
         
         public function editAction(){
-            $this->m->addJS('jquery-ui-1.9.2.custom.min');
+            $this->m->addJS('jquery-ui-1.9.2.custom.min')->addJS('jscolor.min');
             $this->m->addCSS('ui-lightness/jquery-ui-1.9.2.custom.min');
             
             $this->m->addJS('clockpicker/clockpicker');
@@ -33,7 +33,7 @@
         }
         
         public function addAction(){
-            $this->m->addJS('clockpicker/clockpicker');
+            $this->m->addJS('clockpicker/clockpicker')->addJS('jscolor.min');
             $this->m->addCSS('clockpicker/clockpicker')->addCSS('clockpicker/standalone');
             
             $this->m->date = date("Y-m-d",strtotime($_GET['year'].'-'.$_GET['month'].'-'.$_GET['day']));            
