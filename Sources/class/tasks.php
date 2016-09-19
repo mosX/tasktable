@@ -7,11 +7,13 @@ class Tasks{
     }
     
     public function getFilledDates(){
-        $date = strtotime(date('Y-m-d'));
+        $date = strtotime(date('Y-m-d'));        
         if($_GET['date']){            
             $date = strtotime($_GET['date']);
         }
+        
         $start = date('Y-m-01 00:00:00',$date);
+        
         $end = date('Y-m-t 23:59:59',$date);
         $permanents_dates = array();
         
@@ -20,14 +22,28 @@ class Tasks{
                     "SELECT DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') as start "
                     . " , DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') as permanent_update "
                     . " , UNIX_TIMESTAMP(start) as timestamp"
+                    //. " , `permanent_exceptions`.`id` as 'ignore'"
                     . " FROM `tasks` "
+                    //. " LEFT JOIN `permanent_exceptions` ON `permanent_exceptions`.`task_id` = `tasks`.`id` AND DATE_FORMAT(`permanent_exceptions`.`date`,'%Y-%m-%d') = DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d')"   //проверка на исключение
                     . " WHERE `tasks`.`status` = 1"
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " AND `tasks`.`permanent` = 1"
                     . " AND `tasks`.`status` = 1"
+                    //. " AND `permanent_exceptions`.`id` IS NULL"
                     . " GROUP BY start"
                 );
-        $permanents = $this->m->_db->loadObjectList();        
+        $permanents = $this->m->_db->loadObjectList();
+        
+        $this->m->_db->setQuery(
+                    "SELECT `permanent_exceptions`.* "
+                    . " , UNIX_TIMESTAMP(date) as timestamp"
+                    . " FROM `permanent_exceptions` "
+                    . " WHERE `permanent_exceptions`.`date` > '".$start."'"
+                    . " AND `permanent_exceptions`.`date` < '".$end."'"
+                    . " AND `permanent_exceptions`.`user_id` = ".$this->m->_user->id 
+                );
+        $permanent_exceptions = $this->m->_db->loadObjectList('timestamp');
+        
         $start_month = (int)date("m",strtotime($start));
         
         foreach($permanents as $item){
@@ -44,6 +60,10 @@ class Tasks{
                 }
                 
                 if(date("N",$temp_date) == $dayOfWeek){
+                    if($permanent_exceptions[$temp_date]){
+                        $temp_date += 60*60*24;
+                        continue;
+                    }
                     $permanents_dates[] = $temp_date;
                 }
                 
@@ -133,10 +153,10 @@ class Tasks{
         $start_date = $year.'-'.$month.'-'.$day.' '.$start;
         $end_date = $year.'-'.$month.'-'.$day.' '.$end;
         
-        if(!$message){
+        /*if(!$message){
             $this->validation = false;
             $this->error->message = 'Вы должны ввести заметку';
-        }
+        }*/
         
         if(strtotime($end_date) < strtotime($start_date)){
             $this->validation = false;
@@ -192,10 +212,10 @@ class Tasks{
         $start_date = $year.'-'.$month.'-'.$day.' '.$start;
         $end_date = $year.'-'.$month.'-'.$day.' '.$end;
         
-        if(!$message){
+        /*if(!$message){
             $this->validation = false;
             $this->error->message = 'Вы должны ввести заметку';
-        }
+        }*/
         
         if(strtotime($end_date) < strtotime($start_date)){
             $this->validation = false;
@@ -227,9 +247,10 @@ class Tasks{
             $students = array_unique($students);
             foreach($students as $item)$class->addStudent($item,$row->id);
             
+            //redirect('/?date='.date("Y-m-d",strtotime($start)));
             redirect('/?date='.date("Y-m-d",strtotime($start)));
         }else{
-            p($this->m->_db->_sql);
+            //p($this->m->_db->_sql);
         }
     }
     
@@ -241,8 +262,10 @@ class Tasks{
         $this->m->_db->setQuery(
                     "SELECT `tasks`.* "
                     . " , `lessons`.`name` as lessons_name"
+                    . " , `permanent_exceptions`.`id` as 'ignore'"
                     . " FROM `tasks` "
                     . " LEFT JOIN `lessons` ON `lessons`.`id` = `tasks`.`lesson`"
+                    . " LEFT JOIN `permanent_exceptions` ON `permanent_exceptions`.`task_id` = `tasks`.`id` AND DATE_FORMAT(`permanent_exceptions`.`date`,'%Y-%m-%d') = DATE_FORMAT('".$start."','%Y-%m-%d')"   //проверка на исключение
                     . " WHERE 1 "
                     . " AND (`tasks`.`start` > '".$start."'"
                     . " AND `tasks`.`end` < '".$end."'"
@@ -251,13 +274,15 @@ class Tasks{
                 
                     . " OR (`tasks`.`permanent` = 1 AND DAYOFWEEK(`tasks`.`start`)-1 = '".date('N',strtotime($start))."') "
                 
-                    . " AND `tasks`.`status` = 1"
+                    . " AND `tasks`.`status` = 1"                    
                     . " ORDER BY `id` DESC"
                 );
         $data = $this->m->_db->loadObjectList();
         
-        //p($data);
-        
+        foreach($data as $key=>$item){
+            if($item->ignore) unset($data[$key]);
+        }
+                        
         return $data;
     }
 }

@@ -136,6 +136,18 @@
             }*/
             return '';
         },
+        checkToday:function(year,month,day){
+            var date = new Date();
+
+            var m = date.getMonth();
+            var y = date.getYear()+1900;
+            var d = date.getDate();
+            
+            if(year == y && month == m && day == d){
+                return 'today';
+            }
+            return '';
+        },
         addDays:function(){
             var k=0;
             var grey = false;
@@ -149,15 +161,16 @@
                             html += "<div class='c_day prev'>"+j+"</div>";
                         }
                     }else{
-                        console.log(this.current.first_day_of_week);
+                        //console.log(this.current.first_day_of_week);
                         var dayOfWeek = this.current.first_day_of_week;
                         
                         for(var j=this.prev.total_days-dayOfWeek+2;j<=this.prev.total_days;j++){                            
                             html += "<div class='c_day prev'>"+j+"</div>";
                         }
-                        console.log(dayOfWeek);
+                        //console.log(dayOfWeek);
                         for(var j=dayOfWeek ; j <= 7;j++){
-                            html += "<div class='c_day current "+this.checkHoliday(this.year,this.month,k+1)+"'>"+(++k)+"</div>";
+                            
+                            html += "<div class='c_day current "+this.checkToday(this.year,this.month,k+1)+" "+this.checkHoliday(this.year,this.month,k+1)+"'>"+(++k)+"</div>";
                         }
                     }
                     
@@ -168,7 +181,7 @@
                     var html = "<div class='c_row'>"                    
                     
                     for(var j=0;j<7;j++){                   
-                        html += "<div class='c_day "+(grey?'next':"current "+this.checkHoliday(this.year,this.month,k+1) +' '+this.checkReservatedDays(this.year,this.month,k+1))+"'>"+(++k)+"</div>";
+                        html += "<div class='c_day "+(grey?'next':"current "+this.checkToday(this.year,this.month,k+1)+" "+this.checkHoliday(this.year,this.month,k+1) +' '+this.checkReservatedDays(this.year,this.month,k+1))+"'>"+(++k)+"</div>";
 
                         if(k == this.current.total_days){   //определяем следующий месяц
                             grey = true;
@@ -269,7 +282,10 @@
         display:table-cell;
         text-align: center;
     }
-    
+    .c_row .c_day.today{
+        border-radius: 10px;
+        background: rgba(103,183,255,0.5);
+    }
     .c_row .c_day.holiday.reserved,.c_row .c_day.reserved{
         font-weight:bolder;
         color: red;

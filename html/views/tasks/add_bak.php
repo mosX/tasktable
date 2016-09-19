@@ -35,17 +35,6 @@
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-4">Цвет заметки</div>
-                
-                <div class="col-sm-8">
-                    <input type="text"  class="form-control jscolor {valueElement:'color_picker',value:'ffffff'}" value="<?=$_POST['color']?>">
-                    <input type="hidden" name="color" value="<?=$_POST['color']?>" id="color_picker">
-                    <div class="error"><?=$this->m->error->color?></div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
                 <div class="col-sm-4">Постояное расписание</div>
                 
                 <div class="col-sm-8">
@@ -64,7 +53,7 @@
                             <option value="<?=$item->id?>"><?=$item->name?></option>
                         <?php } ?>
                     </select>
-                    <div class="error"><?=$this->m->error->type?></div>
+                    <div class="error"><?=$this->m->error->message?></div>
                 </div>
             </div>
         </div>
@@ -80,6 +69,7 @@
             });
         </script>
         <style>
+            
             .student_block .element:first-child .remove_student{
                 display:none;
             }
@@ -115,7 +105,7 @@
                     
                     <div class="btn btn-primary add_student">Добавить</div>
                     
-                    <div class="error"><?=$this->m->error->students?></div>
+                    <div class="error"><?=$this->m->error->message?></div>
                 </div>
             </div>
         </div>
@@ -125,7 +115,6 @@
 
                 <div class="col-sm-8">
                     <input type="text" class="form-control clockpicker" name="start" value="<?=$_POST['start']?>">
-                    <div class="error"><?=$this->m->error->start?></div>
                 </div>
             </div>
         </div>
@@ -135,7 +124,7 @@
 
                 <div class="col-sm-8">
                     <input type="text" class="form-control clockpicker" name="end" value="<?=$_POST['end']?>">
-                    <div class="error"><?=$this->m->error->end?></div>
+                    <div class="error"><?=$this->m->error->date?></div>
                 </div>
             </div>
         </div>
@@ -146,20 +135,35 @@
                     <input type="submit" class="btn btn-primary" value="Сохранить">
                 </div>
             </div>
-        </div>      
+        </div>
+      
     </form>
-     <?php 
-            foreach($this->m->data as $item){ 
+
+    <table class="table">
+        <?php foreach($this->m->data as $item){ ?>
+            <tr>
+                <td><?=$item->message?></td>
+                <td><?=$item->lessons_name?></td>
+                <td><?=date("H:i",strtotime($item->start))?></td>
+                <td><?=date("H:i",strtotime($item->end))?></td>
+                <td><a href="/tasks/edit/<?=$item->id?>/" class="glyphicon glyphicon-pencil edit" ></a></td>
+            </tr>
+        <?php } ?>
+    </table>
+    <?php 
+            foreach($this->m->data as $item){
                 $start = strtotime($item->start);
                 
                 $end = strtotime($item->end);
                 $date = strtotime($this->m->date);
                 
-                $data[] = array(strtotime(date("Y-m-d ".date("H",$start).":".date("i",$start).":00",$date)),strtotime(date("Y-m-d ".date("H",$end).":".date("i",$end).":00",$date)));    
-            } 
-            
+                $data[] = array(strtotime(date("Y-m-d ".date("H",$start).":".date("i",$start).":00",$date)),strtotime(date("Y-m-d ".date("H",$end).":".date("i",$end).":00",$date)));                               
+            }             
         ?>
+    
     <script>
+        
+        
         function Workload(obj){
             this.parent = obj.parent;
             try{
@@ -167,6 +171,7 @@
             }catch(e){
                 return false;
             }
+            
             
             this.ws = $(this.parent)[0];
             this.ctx = this.ws.getContext('2d');
@@ -180,8 +185,8 @@
             
             this.x_margin = 20;
             this.y_margin = 20;
-            this.width = this.ws.width - this.x_margin*2;
-            this.height = 7;
+            this.width = 10;
+            this.height = 300;
             
             this.interval = this.end_day - this.start_day;
             
@@ -200,21 +205,33 @@
                 var start = data[0]-this.start_day;
                 var end = data[1]-this.start_day;
                                 
-                var start_x = this.timeToX(start);
-                var end_x = this.timeToX(end);
-                
-                
+                var start_y = this.timeToY(start);
+                var end_y = this.timeToY(end);
+                                
                 this.ctx.save();
-                    this.ctx.lineWidth = 5;
+                    this.ctx.lineWidth = 2;
                     this.ctx.strokeStyle = 'red';
 
                     this.ctx.beginPath();
-                        this.ctx.moveTo(this.x_margin+start_x, this.y_margin+4);
-                        this.ctx.lineTo(this.x_margin+end_x, this.y_margin+4);
+                        this.ctx.moveTo(40.5, 20+start_y);
+                        this.ctx.lineTo(40.5, 20+end_y);
                     this.ctx.closePath();
 
                     this.ctx.stroke();
                 this.ctx.restore();
+                
+                this.ctx.save();
+                    this.ctx.lineWidth = 1;
+                    this.ctx.strokeStyle = 'red';
+
+                    this.ctx.beginPath();
+                        this.ctx.moveTo(40.5, 20+start_y);
+                        this.ctx.lineTo(40.5, 20+end_y);
+                    this.ctx.closePath();
+
+                    this.ctx.stroke();
+                this.ctx.restore();
+
             },
             hourPositions:function(){
                 this.ctx.save();
@@ -226,42 +243,26 @@
                 var start = 0;
                 
                 while(start <= this.interval){
-                    var x = this.timeToX(start);
-                    
+                    var y = this.timeToY(start);
+
                     this.ctx.save();
                         this.ctx.lineWidth = 1;
                         this.ctx.strokeStyle = '#5ca905';
 
                         this.ctx.beginPath();
-                            this.ctx.moveTo(this.x_margin+x , this.y_margin);
-                            this.ctx.lineTo(20.5+x, this.y_margin - 10);
+                            this.ctx.moveTo(this.x_margin + this.width, this.y_margin+y);
+                            this.ctx.lineTo(40.5, 20+y);
                         this.ctx.closePath();
 
                         this.ctx.stroke();
-                    this.ctx.restore();
-                    
-                    
-                    var d = new Date( (this.start_day+start +1) *1000);
-                    var hours = d.getHours();
-                    hours = hours < 10 ? '0'+hours:hours;
-                    var minutes = d.getMinutes();
-                    minutes = minutes < 10 ? '0'+minutes:minutes;
-                    //Текст
-                    var text = hours+':'+minutes;
-                    var textWidth = this.ctx.measureText(text).width / 2;
-                    
-                    this.ctx.save();
-                        this.ctx.fillStyle = "#999";
-                        this.ctx.font = "normal 9pt Arial";
-                        this.ctx.fillText(text, this.x_margin+x - textWidth, 10);
                     this.ctx.restore();
 
                     start += 3600;
                 }
             },
-            timeToX:function(time){
-                var x = (this.width/this.interval)*time;
-                return x;
+            timeToY:function(time){
+                var y = (300/this.interval)*time;
+                return y;
             }
         }
         
@@ -276,44 +277,6 @@
         });
     </script>
     <div id="daystat">
-        <canvas style="width:100%; height:40px" id="canvas"></canvas>
+        <canvas style="outline: 1px solid red;" id="canvas" width="400" height="400"></canvas>
     </div>
-    <script>
-        $('document').ready(function(){
-            $('.clear_permanent').click(function(){
-                var id = parseInt($(this).attr('data-id'));
-                $.ajax({
-                    url:'/manage/clear_permanent/'+id+'/?date='+<?=strtotime($this->m->date)?>,
-                    type:'POST',
-                    success:function(msg){
-                        //console.log(msg);
-                        var json = JSON.parse(msg);
-                        if(json.status == 'success'){
-                            location.href = location.href;
-                        }
-                    }
-                });
-                
-                return false;
-            });
-        });
-    </script>
-    <table class="table">
-        <?php foreach($this->m->data as $item){ ?>
-            <tr style="background: #<?=$item->color?>;">
-                <td><?=$item->message?></td>
-                <td><?=$item->lessons_name?></td>
-                <td><?=date("H:i",strtotime($item->start))?></td>
-                <td><?=date("H:i",strtotime($item->end))?></td>
-                <td>
-                    <?php if($item->permanent){ ?>
-                        <a class="clear_permanent" data-id="<?=$item->id?>" href="">Отключить</a>
-                    <?php } ?>
-                    <a href="/tasks/edit/<?=$item->id?>/" class="glyphicon glyphicon-pencil edit" ></a>
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
-   
-    
 </div>

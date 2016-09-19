@@ -19,9 +19,27 @@
         <script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script> -->
     </head>
     <body>
-       <?=$this->module('modals')?>
+        <style>
+            #content{
+                min-height: 820px;
+                margin-bottom:30px;
+            }
+            #footer{
+                height: 40px;
+                background: rgb(248,248,248);
+            }
+        </style>
+        <?=$this->module('modals')?>
         
         <?=$this->module('header')?>
-       <?=$this->maincontent?>
+        <div id="content">
+            <?=$this->maincontent?>
+        </div>
+        
+        <div id="footer">
+            <div class="container">
+                
+            </div>
+        </div>
     </body>
 </html>

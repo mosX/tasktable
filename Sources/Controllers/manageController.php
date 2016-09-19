@@ -8,6 +8,17 @@
             
         }
         
+        public function clear_permanentAction(){
+            $this->disableTemplate();
+            $this->disableView();
+            
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                xload('class.manage');
+                $manage = new Manage($this->m);
+                $manage->clearPermanent($this->m->_path[2]);
+            }
+        }
+        
         public function filledAction(){
             $this->disableTemplate();
             $this->disableView();
