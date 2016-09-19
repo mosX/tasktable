@@ -8,6 +8,15 @@
             
         }
         
+        public function removeAction(){
+            $this->disableTemplate();
+            $this->disableView();
+            
+            xload('class.tasks');
+            $tasks = new Tasks($this->m);
+            $tasks->remove($this->m->_path[2]);
+        }
+        
         public function editAction(){
             $this->m->addJS('jquery-ui-1.9.2.custom.min')->addJS('jscolor.min');
             $this->m->addCSS('ui-lightness/jquery-ui-1.9.2.custom.min');

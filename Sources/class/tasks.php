@@ -6,6 +6,46 @@ class Tasks{
         $this->m = $mainframe;
     }
     
+    public function remove($id,$date){
+        $id = (int)$id;
+        
+        //проверяем или есть
+        $this->m->_db->setQuery(
+                    "SELECT `tasks`.`id` "
+                    . " , `tasks`.`permanent`"
+                    . " FROM `tasks` "
+                    . " WHERE `tasks`.`id` = ".$id
+                    . " LIMIT 1"
+                );
+        $this->m->_db->loadObject($check);
+        
+        if(!$check->id){
+            echo '{"status":"error"}';
+            return false;
+        }
+        
+        if($check->permanent){
+            $row->user_id = $this->m->_user->id;
+            $row->task_id = $id;
+            $row->date = date("Y-m-d",$_GET['date']);
+            $row->created = date('Y-m-d H:i:s');
+
+            if($this->m->_db->insertObject('permanent_exceptions',$row)){
+                echo '{"status":"success"}';
+            }
+        }else{
+            $this->m->_db->setQuery(
+                        "UPDATE `tasks` SET `tasks`.`status` = 0"
+                        . " WHERE `tasks`.`id` = ".$id
+                        . " LIMIT 1"
+                    );
+            if($this->m->_db->query()){
+                echo '{"status":"success"}';        
+            }
+        }
+        
+    }
+    
     public function getFilledDates(){
         $date = strtotime(date('Y-m-d'));        
         if($_GET['date']){            
@@ -267,17 +307,18 @@ class Tasks{
                     . " LEFT JOIN `lessons` ON `lessons`.`id` = `tasks`.`lesson`"
                     . " LEFT JOIN `permanent_exceptions` ON `permanent_exceptions`.`task_id` = `tasks`.`id` AND DATE_FORMAT(`permanent_exceptions`.`date`,'%Y-%m-%d') = DATE_FORMAT('".$start."','%Y-%m-%d')"   //проверка на исключение
                     . " WHERE 1 "
-                    . " AND (`tasks`.`start` > '".$start."'"
+                    . " AND ((`tasks`.`start` > '".$start."'"
                     . " AND `tasks`.`end` < '".$end."'"
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " AND `tasks`.`permanent` = 0)"
                 
-                    . " OR (`tasks`.`permanent` = 1 AND DAYOFWEEK(`tasks`.`start`)-1 = '".date('N',strtotime($start))."') "
+                    . " OR (`tasks`.`permanent` = 1 AND DAYOFWEEK(`tasks`.`start`)-1 = '".date('N',strtotime($start))."')) "
                 
-                    . " AND `tasks`.`status` = 1"                    
+                    . " AND `tasks`.`status` = 1"
                     . " ORDER BY `id` DESC"
                 );
         $data = $this->m->_db->loadObjectList();
+        //p($data);
         
         foreach($data as $key=>$item){
             if($item->ignore) unset($data[$key]);

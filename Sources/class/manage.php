@@ -14,6 +14,17 @@ class Manage{
             return false;
         }
         
+        //проверяем или такого не было
+        $this->m->_db->setQuery(
+                    "SELECT `lessons`.`id` FROM `lessons` WHERE `lessons`.`name` = '".$name."'"
+                    . " LIMIT 1"
+                );
+        $check = $this->m->_db->loadResult();
+        if($check){
+            echo '{"status":"error","message":"Вы уже добавляли такое название"}';
+            return false;
+        }
+        
         $row->user_id = $this->m->_user->id;
         $row->name = $name;
         $row->date = date("Y-m-d H:i:s");
@@ -23,7 +34,7 @@ class Manage{
         }
     }
     
-    public function clearPermanent($id,$date){
+    /*public function clearPermanent($id,$date){
         $id = (int)$id;
         //получаем таск
         $this->m->_db->setQuery(
@@ -50,6 +61,6 @@ class Manage{
             echo '{"status":"success"}';
         }
         
-    }
+    }*/
 }
 ?>

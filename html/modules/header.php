@@ -15,7 +15,7 @@
         <ul class="nav navbar-nav navbar-collapse collapse" id="headerMenu">
             <li class="active"><a href="/">Календарь</a></li>
             <?php if($this->_user->id){ ?>
-                <li><a style="cursor:pointer;" data-toggle="modal" data-target="#addLessonModal">Добавить Предмет</a></li>
+                <li><a style="cursor:pointer;" data-toggle="modal" id="add_lesson_btn">Добавить Предмет</a></li>
                 <li><a href="/students/">Студенты</a></li>
             <?php } ?>
         </ul>

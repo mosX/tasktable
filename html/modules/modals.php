@@ -1,5 +1,23 @@
 <script>
+    function loadLessonsList(callback){
+        $.ajax({
+            url:'/lessons/list/',
+            type:'GET',
+            success:function(msg){
+                $('#addLessonModal .lessons_list').html(msg);
+                
+                callback();
+            }
+        });
+    }
     $('document').ready(function () {
+        $('#add_lesson_btn').click(function(){
+            loadLessonsList(function(){
+                $('#addLessonModal').modal('show');
+            });
+            return false;
+        });
+        
         $('#addLessonModal form').submit(function () {
             var name = $('input[name=type]', this).val();
 
@@ -12,8 +30,12 @@
                     if (json.status == 'error') {
                         $('#addLessonModal form .error').text(json.message);
                     } else {
+                        loadLessonsList(function(){
+                            //$('#addLessonModal').modal('show');
+                        });
+                        $('#addLessonModal form input[name=type]').val('');
                         $('#addLessonModal form .error').empty();
-                        $('#addLessonModal').modal('hide');
+                        //$('#addLessonModal').modal('hide');
                     }
                 }
             });
@@ -23,8 +45,6 @@
 </script>
 <div id="addLessonModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -34,9 +54,8 @@
                 <form class="form">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-4">
-                                Название
-                            </div>
+                            <div class="col-sm-4">Название</div>
+
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="type">
                                 <div class="error"></div>
@@ -53,6 +72,8 @@
                         </div>
                     </div>
                 </form>
+                <div class="lessons_list">
+                </div>
             </div>
         </div>
 

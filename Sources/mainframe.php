@@ -80,21 +80,38 @@ class mainframe {
     }
     
     public function checkPermanents(){
+        if(!$this->_user->id) return;
+        
         $this->_db->setQuery(
                     "SELECT `tasks`.* "
                     . " FROM `tasks` "
                     . " WHERE `tasks`.`permanent` = 1"
                     . " AND `tasks`.`status` = 1"
                     . " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
+                    . " AND `tasks`.`user_id` = ".$this->_user->id
                 );
         $data = $this->_db->loadObjectList();
+        if(!$data) return;
+        foreach($data as $item)$ids[] = $item->id;
+        
+        //получаем исключения
+        $this->_db->setQuery(
+                    "SELECT `permanent_exceptions`.* "
+                    . " , UNIX_TIMESTAMP(`permanent_exceptions`.`date`) as timestamp"
+                    . " FROM `permanent_exceptions`"
+                    . " WHERE `permanent_exceptions`.`task_id` IN (".implode(',',$ids).")"
+                );
+        $exseptions = $this->_db->loadObjectList('timestamp');
         
         //получаем день недели начала 
         foreach($data as $item){
+            
             $dayOfWeek = date("N",strtotime($item->start));
             $temp_date = strtotime($item->permanent_update);
-            while($temp_date < time()){                                
-                if(date("N",$temp_date) == $dayOfWeek){
+            
+            while($temp_date < time()){
+                //if(date("N",$temp_date) == $dayOfWeek && date("Y-m-d",$temp_date) != date("Y-m-d",$temp_date) && !$exseptions[$temp_date]){                
+                if(date("N",$temp_date) == $dayOfWeek && date("Y-m-d",$temp_date) != date("Y-m-d",strtotime($item->permanent_update)) && !$exseptions[$temp_date]){
                     //добавляем в задачи поле
                     $row = new stdClass();
                     $row->user_id = $item->user_id;
@@ -107,7 +124,7 @@ class mainframe {
                     //$row->end = $item->end;
                     $row->date = date("Y-m-d H:i:s");
                     $row->status = 1;
-                    //p($row);
+                    
                     $this->_db->insertObject('tasks',$row);
                 }                
                 $temp_date += 60*60*24;

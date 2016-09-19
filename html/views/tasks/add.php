@@ -296,6 +296,22 @@
                 
                 return false;
             });
+            
+            $('.remove').click(function(){
+                var el = $(this);
+                
+                $.ajax({
+                    url:$(el).attr('href'),
+                    type:'POST',
+                    success:function(msg){
+                        var json = JSON.parse(msg);
+                        if(json.status == 'success'){
+                            location.href = location.href;
+                    }
+                });
+                
+                return false;
+            });
         });
     </script>
     <table class="table">
@@ -306,10 +322,12 @@
                 <td><?=date("H:i",strtotime($item->start))?></td>
                 <td><?=date("H:i",strtotime($item->end))?></td>
                 <td>
-                    <?php if($item->permanent){ ?>
-                        <a class="clear_permanent" data-id="<?=$item->id?>" href="">Отключить</a>
-                    <?php } ?>
+                    
                     <a href="/tasks/edit/<?=$item->id?>/" class="glyphicon glyphicon-pencil edit" ></a>
+                    <a style="color: red;" href="/tasks/remove/<?=$item->id?>/?date=<?=strtotime($this->m->date)?>" class="glyphicon glyphicon-remove remove" ></a>
+                    <?php if($item->permanent){ ?>
+                        <!--<a class="clear_permanent" data-id="<?=$item->id?>" href="">Отключить</a>-->
+                    <?php } ?>
                 </td>
             </tr>
         <?php } ?>
