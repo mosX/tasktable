@@ -137,7 +137,7 @@ class Tasks{
         return $result;
     }
     
-    public function getLessonsList(){
+    /*public function getLessonsList(){
         $this->m->_db->setQuery(
                     "SELECT `lessons`.* "
                     . " FROM `lessons`"
@@ -146,7 +146,7 @@ class Tasks{
         $data  = $this->m->_db->loadObjectList();
         
         return $data;
-    }
+    }*/
     
     public function getEditData($id){
         $id = (int)$id;
@@ -244,6 +244,7 @@ class Tasks{
         $month = $_GET['month'];
         $day = $_GET['day'];
         
+        
         $message = strip_tags(trim($_POST['message']));
         
         $start = $_POST['start'];
@@ -266,7 +267,26 @@ class Tasks{
             return false;
         }
         
-        $row->user_id = $this->m->_user->id;
+        if($_POST['permanent']){
+            //p($_POST);
+            //получаем текущий день недели
+
+            $tempDay = date("N",strtotime($start_date));
+            $tempTimestamp = strtotime($start_date);
+            do{                
+                if($_POST['permanent'][date("N",$tempTimestamp)]){                    
+                    $this->addTaskElement($tempTimestamp, $start, $end);
+                }
+                $tempTimestamp += 60*60*24;                
+            }while($tempDay != date("N",$tempTimestamp));
+            
+        }else{
+            if($this->addTaskElement(strtotime($start_date), $start, $end,0)){
+                redirect('/?date='.date("Y-m-d",strtotime($start)));    
+            }
+        }
+        
+        /*$row->user_id = $this->m->_user->id;
         $row->lesson = $_POST['color'];
         $row->lesson = $_POST['type'];
         $row->start = $start_date;
@@ -291,7 +311,37 @@ class Tasks{
             redirect('/?date='.date("Y-m-d",strtotime($start)));
         }else{
             //p($this->m->_db->_sql);
+        }*/
+    }
+    
+    public function addTaskElement($timestamp, $start, $end, $permanent = 1){
+        
+        $row->user_id = $this->m->_user->id;
+        $row->color = $_POST['color'];
+        $row->lesson = $_POST['type'];
+        $row->start = date("Y-m-d ".$start,$timestamp);
+        $row->end = date("Y-m-d ".$end,$timestamp);
+        $row->permanent = $permanent;
+        
+        $row->permanent_update = $row->start;
+        $row->message = strip_tags(trim($_POST['message']));
+        $row->date = date('Y-m-d H:i:s');
+        
+        if($this->m->_db->insertObject('tasks',$row,'id')){
+            xload('class.students');
+            $class = new Students($this->m);
+            //получаем выбранных студентов
+            foreach($_POST['students'] as $item){
+                if($item != 0)$students[] = $item;
+            }
+            $students = array_unique($students);
+            foreach($students as $item)$class->addStudent($item,$row->id);
+            
+            //redirect('/?date='.date("Y-m-d",strtotime($start)));
+            //redirect('/?date='.date("Y-m-d",strtotime($start)));
         }
+        
+        return true;
     }
     
     public function getData($date){

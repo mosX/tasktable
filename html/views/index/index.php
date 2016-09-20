@@ -94,8 +94,9 @@
             $(this.parent).on('click','.c_day.current',function(){
                 var day = $(this).text();
                 
-                location.href = '/tasks/add/?year='+self.year+'&month='+(self.month+1)+'&day='+day;
-                //console.log('34234');
+                if($('.c_box.online').length > 0){                
+                    location.href = '/tasks/?year='+self.year+'&month='+(self.month+1)+'&day='+day;
+                }
             });
         },
         
@@ -215,7 +216,7 @@
 </script>
 
 <style>
-    #calendar{        
+    #calendar{
         text-align: center;
     }
     
@@ -310,7 +311,7 @@
 </style>
 <div class="container">
     <div id="calendar">        
-        <div class="c_box">
+        <div class="c_box <?=$this->m->_user->id ? 'online':''?>">
             <div class='header'>
                 <div class="prev_button"></div><div class="current_date">April 2016</div><div class="next_button"></div>
             </div>
@@ -319,4 +320,16 @@
             </div>
         </div>
     </div>
+    
+    <table class="table" style="margin-top:20px;">
+        <?php foreach($this->m->currentTasks as $item){ ?>
+            <tr style="background:#<?=$item->color?>">
+                <td><?=$item->message?></td>
+                <td><?=$item->lessons_name?></td>
+                <td><?=date("H:i",strtotime($item->start))?></td>
+                <td><?=date("H:i",strtotime($item->end))?></td>
+            </tr>
+        <?php } ?>
+    </table>
 </div>
+
