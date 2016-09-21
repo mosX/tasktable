@@ -5,7 +5,7 @@
         }
         
         public function indexAction(){
-            
+            file_put_contents(XPATH.DS.'logs.txt', 'test',FILE_APPEND);
         }
         
         public function listAction(){

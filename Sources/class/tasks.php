@@ -62,6 +62,7 @@ class Tasks{
                     "SELECT DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') as start "
                     . " , DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') as permanent_update "
                     . " , UNIX_TIMESTAMP(start) as timestamp"
+                    . " , `tasks`.`id`"
                     //. " , `permanent_exceptions`.`id` as 'ignore'"
                     . " FROM `tasks` "
                     //. " LEFT JOIN `permanent_exceptions` ON `permanent_exceptions`.`task_id` = `tasks`.`id` AND DATE_FORMAT(`permanent_exceptions`.`date`,'%Y-%m-%d') = DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d')"   //проверка на исключение
@@ -104,12 +105,13 @@ class Tasks{
                         $temp_date += 60*60*24;
                         continue;
                     }
-                    $permanents_dates[] = $temp_date;
+                    $permanents_dates[] = $temp_date;                    
                 }
                 
                 $temp_date += 60*60*24;
             }
         }
+        
         
         $this->m->_db->setQuery(
                     "SELECT DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') as start "
@@ -124,6 +126,7 @@ class Tasks{
                     . " GROUP BY start"
                 );
         $data = $this->m->_db->loadObjectList();
+        
         $single_dates = array();
         if($data){
             foreach($data as $item){
@@ -133,6 +136,11 @@ class Tasks{
         
         $result = array_merge($permanents_dates,$single_dates);
         $result = array_unique($result);
+        
+        /*foreach($result as $item){
+            p(date("Y-m-d",$item));    
+        }*/
+        
         
         return $result;
     }
@@ -362,14 +370,16 @@ class Tasks{
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " AND `tasks`.`permanent` = 0)"
                 
-                    . " OR (`tasks`.`permanent` = 1 AND DAYOFWEEK(`tasks`.`start`)-1 = '".date('N',strtotime($start))."')) "
+                    . " OR ("
+                            . "`tasks`.`permanent` = 1 AND DAYOFWEEK(`tasks`.`start`)-1 = '".date('N',strtotime($start))."')"
+                            . " AND `tasks`.`permanent_update` < '".$start."'"
+                    .") "
                 
                     . " AND `tasks`.`status` = 1"
                     . " ORDER BY `id` DESC"
                 );
         $data = $this->m->_db->loadObjectList();
-        //p($data);
-        
+                
         foreach($data as $key=>$item){
             if($item->ignore) unset($data[$key]);
         }

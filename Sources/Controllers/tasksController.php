@@ -5,6 +5,7 @@
         }
         
         public function indexAction(){            
+            $this->m->addJS('workload');
             $this->m->addJS('clockpicker/clockpicker')->addJS('jscolor.min');
             $this->m->addCSS('clockpicker/clockpicker')->addCSS('clockpicker/standalone');
             
