@@ -19,5 +19,32 @@
         public function addAction(){
             
         }
+        
+        public function editAction(){
+            $this->disableTemplate();
+            $this->disableView();
+            
+            xload('class.students');
+            $students = new Students($this->m);
+            $students->edit();
+        }
+        
+        
+        public function edit_formAction(){
+            $this->disableTemplate();
+            
+            xload('class.students');
+            $students = new Students($this->m);
+            $this->m->data = $students->getEditData($this->m->_path[2]);
+        }
+        
+        public function removeAction(){
+            $this->disableTemplate();
+            $this->disableView();
+            
+            xload('class.students');
+            $students = new Students($this->m);
+            $students->removeStudent($this->m->_path[2]);
+        }
     }
 ?>
