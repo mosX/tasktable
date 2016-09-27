@@ -82,12 +82,14 @@ class mainframe {
     public function checkPermanents(){
         if(!$this->_user->id) return;
         
+        //получаем таски где время меньше начала текущего дня
         $this->_db->setQuery(
                     "SELECT `tasks`.* "
                     . " FROM `tasks` "
                     . " WHERE `tasks`.`permanent` = 1"
                     . " AND `tasks`.`status` = 1"
-                    . " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
+                    //. " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
+                . " AND `tasks`.`permanent_update` < '".date('Y-m-d 00:00:00')."'"
                     . " AND `tasks`.`user_id` = ".$this->_user->id
                 );
         $data = $this->_db->loadObjectList();
@@ -105,7 +107,6 @@ class mainframe {
         
         //получаем день недели начала 
         foreach($data as $item){
-            
             $dayOfWeek = date("N",strtotime($item->start));
             $temp_date = strtotime($item->permanent_update);
             

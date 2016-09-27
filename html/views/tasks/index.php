@@ -38,7 +38,7 @@
                 <div class="col-sm-4">Цвет заметки</div>
                 
                 <div class="col-sm-8">
-                    <input type="text"  class="form-control jscolor {valueElement:'color_picker',value:'ffffff'}" value="<?=$_POST['color']?>">
+                    <input type="text"  class="form-control jscolor {valueElement:'color_picker',value:'ffffff'}" value="">
                     <input type="hidden" name="color" value="<?=$_POST['color']?>" id="color_picker">
                     <div class="error"><?=$this->m->error->color?></div>
                 </div>
@@ -206,8 +206,10 @@
         $('document').ready(function(){
             $('.clear_permanent').click(function(){
                 var id = parseInt($(this).attr('data-id'));
+                var url = $(this).attr('href');
+                
                 $.ajax({
-                    url:'/manage/clear_permanent/'+id+'/?date='+<?=strtotime($this->m->date)?>,
+                    url:url,
                     type:'POST',
                     success:function(msg){
                         //console.log(msg);
@@ -246,14 +248,14 @@
                 <td><?=$item->lessons_name?></td>
                 <td><?=date("H:i",strtotime($item->start))?></td>
                 <td><?=date("H:i",strtotime($item->end))?></td>
-                <td>
-                    
+                <td>                    
                     <a href="/tasks/edit/<?=$item->id?>/" class="glyphicon glyphicon-pencil edit" ></a>
-                    <a style="color: red;" href="/tasks/remove/<?=$item->id?>/?date=<?=strtotime($this->m->date)?>" class="glyphicon glyphicon-remove remove" ></a>
+                    <a style="color: red; font-size:18px;" href="/tasks/remove/<?=$item->id?>/?date=<?=strtotime($this->m->date)?>" class="glyphicon glyphicon-remove remove" ></a>
                     
                     <?php if($item->permanent){ ?>
-                        <!--<a class="clear_permanent" data-id="<?=$item->id?>" href="">Отключить</a>-->
+                        <a style="color: darkorange; font-size:18px;" href="/tasks/clear_permanent/<?=$item->id?>/?date=<?=$this->m->date?>" class="glyphicon glyphicon-remove-circle clear_permanent" ></a>
                     <?php } ?>
+                    
                 </td>
                 <td>
                     <?php if($item->permanent == 1){ ?>

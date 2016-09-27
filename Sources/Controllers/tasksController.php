@@ -29,6 +29,14 @@
             }
         }
         
+        public function clear_permanentAction(){
+            $this->disableTemplate();
+            $this->disableView();
+            xload('class.tasks');
+            $tasks = new Tasks($this->m);
+            $tasks->clearPermanent($this->m->_path[2]);
+        }
+        
         public function removeAction(){
             $this->disableTemplate();
             $this->disableView();

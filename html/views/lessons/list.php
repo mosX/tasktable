@@ -63,8 +63,7 @@
 <table class="table" id="lessons_wraper">
     <?php 
         $i = 0;
-        foreach($this->m->data as $item){ 
-            
+        foreach($this->m->data as $item){
     ?>
         <tr data-id="<?=$item->id?>">
             <td><?=++$i?></td>

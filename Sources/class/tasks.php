@@ -6,6 +6,96 @@ class Tasks{
         $this->m = $mainframe;
     }
     
+    public function clearPermanent($id){
+        $id = (int)$id;
+        $date = date('Y-m-d 00:00:00',strtotime($_GET['date']));
+        
+        if(!$id){
+            echo '{"status":"error","message":"Не верный айди"}';
+            return false;
+        }
+        
+        //получаем запись для проверки и получения предыдущих дней
+        $this->m->_db->setQuery(
+                    "SELECT `tasks`.* "
+                    . " FROM `tasks` "
+                    . " WHERE `tasks`.`id` = ".$id
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " AND `tasks`.`permanent` = 1"
+                    . " LIMIT 1"
+                );
+        $this->m->_db->loadObject($data);
+        
+        if(!$data){
+            echo '{"status":"error","message":"Данные не были найдены"}';
+            return false;
+        }
+        
+        $this->setPastPermanentDates($data,$date);
+        //p($dates);
+        
+        $this->m->_db->setQuery(
+                    "UPDATE `tasks` "
+                    . " SET `tasks`.`status` = 0"
+                    . " WHERE `tasks`.`id` = ".$id
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " AND `tasks`.`permanent` = 1"
+                    . " LIMIT 1"
+                );
+        if($this->m->_db->query()){
+            echo '{"status":"success"}';
+        }else{
+            echo '{"status":"error"}';
+        }
+    }
+    
+    public function setPastPermanentDates($data,$date){
+        //foreach($data as $item)$ids[] = $item->id;
+        
+        //получаем исключения
+        $this->m->_db->setQuery(
+                    "SELECT `permanent_exceptions`.* "
+                    . " , UNIX_TIMESTAMP(`permanent_exceptions`.`date`) as timestamp"
+                    . " FROM `permanent_exceptions`"
+                    . " WHERE `permanent_exceptions`.`task_id` = ".$data->id
+                    . " AND `permanent_exceptions`.`date` < '".$date."'"
+                );
+        $exseptions = $this->m->_db->loadObjectList('timestamp');
+        
+        //получаем день недели начала 
+
+            $dayOfWeek = date("N",strtotime($data->start));
+            $temp_date = strtotime(date("Y-m-d",strtotime($data->permanent_update)));
+            
+            while($temp_date < strtotime($date)){
+                //if(date("N",$temp_date) == $dayOfWeek && date("Y-m-d",$temp_date) != date("Y-m-d",$temp_date) && !$exseptions[$temp_date]){                
+                if(date("N",$temp_date) == $dayOfWeek && date("Y-m-d",$temp_date) != date("Y-m-d",strtotime($data->permanent_update)) && !$exseptions[$temp_date]){
+                    //добавляем в задачи поле
+                    $row = new stdClass();
+                    $row->user_id = $data->user_id;
+                    $row->message = $data->message;
+                    $row->lesson = $data->lesson;
+                    $row->permanent = 0;
+                    $row->start = date("Y-m-d ".date("H",strtotime($data->start)).":".date("i",strtotime($data->start)).":00",$temp_date);
+                    $row->end = date("Y-m-d ".date("H",strtotime($data->end)).":".date("i",strtotime($data->end)).":00",$temp_date);
+                    
+                    $row->date = date("Y-m-d H:i:s");
+                    $row->status = 1;
+                    
+                    $this->m->_db->insertObject('tasks',$row);
+                } 
+                $temp_date += 60*60*24;
+            }
+            //обновляем поле permanent_update
+            /*$this->_db->setQuery(
+                        "UPDATE `tasks` SET `tasks`.`permanent_update` = '".date("Y-m-d H:i:s")."'"
+                        . " WHERE `tasks`.`id` = ".$item->id
+                        . " LIMIT 1"
+                    );
+            $this->_db->query();*/
+        
+    }
+    
     public function remove($id,$date){
         $id = (int)$id;
         
@@ -288,38 +378,12 @@ class Tasks{
                 $tempTimestamp += 60*60*24;                
             }while($tempDay != date("N",$tempTimestamp));
             
-        }else{
-            if($this->addTaskElement(strtotime($start_date), $start, $end,0)){
-                redirect('/?date='.date("Y-m-d",strtotime($start)));    
-            }
-        }
-        
-        /*$row->user_id = $this->m->_user->id;
-        $row->lesson = $_POST['color'];
-        $row->lesson = $_POST['type'];
-        $row->start = $start_date;
-        $row->end = $end_date;
-        $row->permanent = $_POST['permanent'] ? 1:0;
-        
-        $row->permanent_update = $row->start;
-        $row->message = $message;
-        $row->date = date('Y-m-d H:i:s');
-        
-        if($this->m->_db->insertObject('tasks',$row,'id')){
-            xload('class.students');
-            $class = new Students($this->m);
-            //получаем выбранных студентов
-            foreach($_POST['students'] as $item){
-                if($item != 0)$students[] = $item;
-            }
-            $students = array_unique($students);
-            foreach($students as $item)$class->addStudent($item,$row->id);
-            
-            //redirect('/?date='.date("Y-m-d",strtotime($start)));
             redirect('/?date='.date("Y-m-d",strtotime($start)));
         }else{
-            //p($this->m->_db->_sql);
-        }*/
+            if($this->addTaskElement(strtotime($start_date), $start, $end,0)){
+                redirect('/?date='.date("Y-m-d",strtotime($start)));
+            }
+        }
     }
     
     public function addTaskElement($timestamp, $start, $end, $permanent = 1){
@@ -346,7 +410,6 @@ class Tasks{
             foreach($students as $item)$class->addStudent($item,$row->id);
             
             //redirect('/?date='.date("Y-m-d",strtotime($start)));
-            //redirect('/?date='.date("Y-m-d",strtotime($start)));
         }
         
         return true;
@@ -372,7 +435,8 @@ class Tasks{
                 
                     . " OR ("
                             . "`tasks`.`permanent` = 1 AND DAYOFWEEK(`tasks`.`start`)-1 = '".date('N',strtotime($start))."')"
-                            . " AND `tasks`.`permanent_update` < '".$start."'"
+                            . " AND `tasks`.`permanent_update` < '".$end."'"
+                            //. " AND `tasks`.`permanent_update` < `tasks`.`start`"
                     .") "
                 
                     . " AND `tasks`.`status` = 1"
