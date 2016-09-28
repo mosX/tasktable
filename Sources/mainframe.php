@@ -82,17 +82,36 @@ class mainframe {
     public function checkPermanents(){
         if(!$this->_user->id) return;
         
+        //TODO опять вернулись с чего начинали... проверяем только заявки прошлых дней. Сделать что бы проверяло по окончанию занятия!!!!!!!!!!!!!
+        
         //получаем таски где время меньше начала текущего дня
         $this->_db->setQuery(
                     "SELECT `tasks`.* "
+                    //. " , DATE_FORMAT(`tasks`.`end`,'%H:%i:%s') as format"
                     . " FROM `tasks` "
                     . " WHERE `tasks`.`permanent` = 1"
                     . " AND `tasks`.`status` = 1"
                     //. " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
-                . " AND `tasks`.`permanent_update` < '".date('Y-m-d 00:00:00')."'"
+                    //. " AND `tasks`.`permanent_update` < '".date('Y-m-d 00:00:00')."'"
+                
+                        . " AND ("
+                            ."`tasks`.`permanent_update` < '".date('Y-m-d 00:00:00')."'"
+                        .")"
+                        /*. " AND ("
+                            //."`tasks`.`permanent_update` < '".date('Y-m-d 00:00:00')."'"
+                            
+                            //. " AND DATE_FORMAT(`tasks`.`permanent_update`,'%H:%i:%s') < DATE_FORMAT(`tasks`.`end`,'%H:%i:s')"
+                            . " AND( "
+                                . " (DATE_FORMAT(`tasks`.`permanent_update`,'%H:%i:%s') < DATE_FORMAT(`tasks`.`end`,'%H:%i:s') )"
+                                ."OR "
+                                ." (DATE_FORMAT(`tasks`.`permanent_update`,'%Y:%m:%d') < '".date("Y-m-d 00:00:00")."')"
+                            .")"
+                        .")"*/
+                
                     . " AND `tasks`.`user_id` = ".$this->_user->id
                 );
         $data = $this->_db->loadObjectList();
+        
         if(!$data) return;
         foreach($data as $item)$ids[] = $item->id;
         
@@ -103,7 +122,11 @@ class mainframe {
                     . " FROM `permanent_exceptions`"
                     . " WHERE `permanent_exceptions`.`task_id` IN (".implode(',',$ids).")"
                 );
-        $exseptions = $this->_db->loadObjectList('timestamp');
+        $exseptions_tmp = $this->_db->loadObjectList();
+        
+        foreach($exseptions_tmp as $item){
+            $exseptions[$item->timestamp][$item->task_id] = $item;
+        }
         
         //получаем день недели начала 
         foreach($data as $item){
@@ -114,13 +137,16 @@ class mainframe {
                 $temp_date += 60*60*24;
                 $upd_timestamp =  strtotime($item->permanent_update);
                 if(date("N",$temp_date) != $dayOfWeek) continue;
+                //if($exseptions[$temp_date]) continue;       //улучшить систему исключений тут
                 
-                if($exseptions[$temp_date]) continue;       //улучшить систему исключений тут
 
-                if(date("Y-m-d",$temp_date) == date("Y-m-d",$upd_timestamp)){                       //если тот же день                    
+                if(date("Y-m-d",$temp_date) == date("Y-m-d",$upd_timestamp)){                       //если тот же день
                     $end_date = date(date("Y",$upd_timestamp).'-'.date("m",$upd_timestamp).'-'.date("d",$upd_timestamp).' H:i:s',strtotime($item->end));                    
+                    
                     if(date("Y-m-d H:i:s",$upd_timestamp) > $end_date) continue;
                 }
+                
+                if($exseptions[$temp_date][$item->id]) continue;
                 
                 //добавляем в задачи поле
                 $row = new stdClass();
