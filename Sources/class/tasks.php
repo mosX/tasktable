@@ -165,6 +165,7 @@ class Tasks{
                 );
         $permanents = $this->m->_db->loadObjectList();
         
+        
         $this->m->_db->setQuery(
                     "SELECT `permanent_exceptions`.* "
                     . " , UNIX_TIMESTAMP(date) as timestamp"
@@ -173,7 +174,8 @@ class Tasks{
                     . " AND `permanent_exceptions`.`date` < '".$end."'"
                     . " AND `permanent_exceptions`.`user_id` = ".$this->m->_user->id 
                 );
-        $permanent_exceptions = $this->m->_db->loadObjectList('timestamp');
+        //$permanent_exceptions = $this->m->_db->loadObjectList('timestamp');
+        $permanent_exceptions = $this->m->_db->loadObjectList();
         
         $start_month = (int)date("m",strtotime($start));
         
@@ -191,15 +193,21 @@ class Tasks{
                 }
                 
                 if(date("N",$temp_date) == $dayOfWeek){
-                    if($permanent_exceptions[$temp_date]){
-                        $temp_date += 60*60*24;
-                        continue;
+                    //бегаем в цикле по искючениям и смотрим или есть для нашего таска в єтот день исключение
+                    foreach($permanent_exceptions as $item2){
+                        if($item2->task_id == $item->id  && $item2->timestamp == $temp_date){
+                            
+                            $temp_date += 60*60*24;
+                            continue;
+                        }
                     }
+                    
                     $permanents_dates[] = $temp_date;                    
                 }
                 
                 $temp_date += 60*60*24;
             }
+            
         }
         
         
@@ -430,7 +438,7 @@ class Tasks{
                     . " WHERE 1 "
                     . " AND ((`tasks`.`start` > '".$start."'"
                     . " AND `tasks`.`end` < '".$end."'"
-                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    
                     . " AND `tasks`.`permanent` = 0)"
                 
                     . " OR ("
@@ -438,7 +446,7 @@ class Tasks{
                             . " AND `tasks`.`permanent_update` < '".$end."'"
                             //. " AND `tasks`.`permanent_update` < `tasks`.`start`"
                     .") "
-                
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " AND `tasks`.`status` = 1"
                     . " ORDER BY `id` DESC"
                 );

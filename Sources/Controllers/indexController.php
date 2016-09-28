@@ -5,7 +5,7 @@
         }
 
         public function indexAction(){
-            $this->m->addJS('workload');
+            $this->m->addJS('workload')->addJS('calendar');
             xload('class.tasks');
             $tasks = new Tasks($this->m);
             $this->m->data = $tasks->getFilledDates();            

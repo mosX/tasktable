@@ -108,27 +108,35 @@ class mainframe {
         //получаем день недели начала 
         foreach($data as $item){
             $dayOfWeek = date("N",strtotime($item->start));
-            $temp_date = strtotime($item->permanent_update);
+            $temp_date = strtotime(date("Y-m-d 00:00:00",strtotime($item->permanent_update) - 60*60*24)); //отнимаем что бы в вайле первым делом прибавить
             
             while($temp_date < time()){
-                //if(date("N",$temp_date) == $dayOfWeek && date("Y-m-d",$temp_date) != date("Y-m-d",$temp_date) && !$exseptions[$temp_date]){                
-                if(date("N",$temp_date) == $dayOfWeek && date("Y-m-d",$temp_date) != date("Y-m-d",strtotime($item->permanent_update)) && !$exseptions[$temp_date]){
-                    //добавляем в задачи поле
-                    $row = new stdClass();
-                    $row->user_id = $item->user_id;
-                    $row->message = $item->message;
-                    $row->lesson = $item->lesson;
-                    $row->permanent = 0;
-                    $row->start = date("Y-m-d ".date("H",strtotime($item->start)).":".date("i",strtotime($item->start)).":00",$temp_date);
-                    $row->end = date("Y-m-d ".date("H",strtotime($item->end)).":".date("i",strtotime($item->end)).":00",$temp_date);
-                    //$row->start = $item->start;
-                    //$row->end = $item->end;
-                    $row->date = date("Y-m-d H:i:s");
-                    $row->status = 1;
-                    
-                    $this->_db->insertObject('tasks',$row);
-                }                
                 $temp_date += 60*60*24;
+                $upd_timestamp =  strtotime($item->permanent_update);
+                if(date("N",$temp_date) != $dayOfWeek) continue;
+                
+                if($exseptions[$temp_date]) continue;       //улучшить систему исключений тут
+
+                if(date("Y-m-d",$temp_date) == date("Y-m-d",$upd_timestamp)){                       //если тот же день                    
+                    $end_date = date(date("Y",$upd_timestamp).'-'.date("m",$upd_timestamp).'-'.date("d",$upd_timestamp).' H:i:s',strtotime($item->end));                    
+                    if(date("Y-m-d H:i:s",$upd_timestamp) > $end_date) continue;
+                }
+                
+                //добавляем в задачи поле
+                $row = new stdClass();
+                $row->user_id = $item->user_id;
+                $row->message = $item->message;
+                $row->lesson = $item->lesson;
+                $row->color = $item->color;
+                $row->permanent = 0;
+                $row->start = date("Y-m-d ".date("H",strtotime($item->start)).":".date("i",strtotime($item->start)).":00",$temp_date);
+                $row->end = date("Y-m-d ".date("H",strtotime($item->end)).":".date("i",strtotime($item->end)).":00",$temp_date);
+                //$row->start = $item->start;
+                //$row->end = $item->end;
+                $row->date = date("Y-m-d H:i:s");
+                $row->status = 1;
+
+                $this->_db->insertObject('tasks',$row);
             }
             //обновляем поле permanent_update
             $this->_db->setQuery(

@@ -68,6 +68,7 @@ class xAuth {
         $this->_session->guest = 1;
         $this->_session->username = '';
         $this->_session->time = time();
+        $this->_session->ip = $_SERVER["REMOTE_ADDR"];
         $this->_session->gid = 0;
 
         $this->_session->generateId();
@@ -232,6 +233,114 @@ class xAuth {
         }
 
         redirect($url);
+    }
+    
+    public function checkOnline($uuid){
+        $this->m->_db->setQuery(
+                    "SELECT `x_session`.* "
+                    . " FROM `x_session` WHERE `x_session`.`uuid` = '".$uuid."'"
+                    . " LIMIT 1"
+                );
+        $this->m->_db->loadObject($result);
+        return $result;
+    }
+    
+    public function mobileLogin( $email, $password,$uuid){
+        $email = strip_tags(trim($email));
+        $password = strip_tags(trim($password));
+        $uuid = strip_tags(trim($uuid));
+        
+        if (!$email || !$password){
+            die('{"status":"error","message":"Не заполнены все поля"}');
+        }
+        
+        //Проверяем или такой уид не авторизирован
+        $session = $this->checkOnline($uuid);        
+        if($session){//просто получить данные пользователя и вернуть сессию
+            echo '{"status":"success","session":"'.$session->session_id.'"}';
+            return true;            
+        }
+
+        $this->m->_db->setQuery(
+                " SELECT `users`.*"
+                . " FROM `users` "
+                . " WHERE `users`.`email` = " . $this->m->_db->Quote($email)
+                . " AND `users`.`status` = 1"
+                . " LIMIT 1;"
+        );
+        $this->m->_db->loadObject($user);
+        
+        if(!$user){
+            die('{"status":"error","message":"Такой email не зарегестрирован"}');
+        }
+        if($user && $user->status <= 0){
+            die('{"status":"error","message":"Аккаунт забанен"}');
+        }
+
+        if(!$user){
+            die('{"status":"error","message":"Не верные данные"}');
+        }
+
+        if ($user->status < 0 || (int)$user->bad_withdraw_answer >= 5) {
+            die('{"status":"error","message":"Аккаунт забанен"}');
+        }
+        
+        list($hash, $salt) = explode(':', $user->password);
+
+        $cryptpass = md5(md5($password) . $salt);
+        
+        if ($hash != $cryptpass) {
+            $this->m->add_to_history($user->id, "login", "failedlogin");
+
+            $this->m->_db->setQuery(
+                    "UPDATE `users` "
+                    //. " SET `users`.`bad_auth` = `users`.`bad_auth` + 1 "
+                    . " SET `users`.`bad_auth` = 0 "
+                    . " ,`users`.`last_modified` = NOW() "
+                    . " WHERE `users`.`id` = " . (int)$user->id
+                    . " LIMIT 1;"
+            );
+            $this->m->_db->query();
+            if ($user->bad_auth >= 4) {
+                die('{"status":"error","message":"Лимит запросов превышен"}');
+            }
+            
+            die('{"status":"error","message":"Неправильный пароль"}');
+        }
+
+        $this->m->add_to_history($user->id);
+
+        $this->_session->guest = '0';
+        $this->_session->username = $user->email;
+        $this->_session->userid = (int) $user->id;
+        $this->_session->uuid = $uuid;
+        $this->_session->usertype = "user";
+        $this->_session->gid = (int) $user->gid;
+        $this->_session->ip = $_SERVER["REMOTE_ADDR"];
+        $this->_session->user_agent = $_SERVER['HTTP_USER_AGENT'];
+        $this->_session->cookie = $_COOKIE[$refcookiename];
+
+        $this->_session->update();
+        
+        $this->m->_db->setQuery(
+                " UPDATE `users` "
+                . " SET `users`.`last_login` = NOW() "
+                . " ,`users`.`last_ip` = " . $this->m->_db->Quote($_SERVER["REMOTE_ADDR"])
+                . ($user->bad_auth ? " ,`users`.`bad_auth` = 0 " : "")
+                . " WHERE `users`.`id` = " . (int)$user->id
+                . " LIMIT 1;"
+        );
+        $this->m->_db->query();
+        
+        if(!$this->_session->session_id ){
+            die('{"status":"error","message":"Нету сессии"}');
+        }
+        
+        $this->m->_user = $this->getUser();
+        
+        die('{"status":"success","session":"'.$this->_session->session_id .'"}');
+        
+        //return array("status" => "success", "url" => "'$url'", 'ssid'=>$this->_session->session_id , 'user' => $row->firstname, 'id' => $row->id, "messages" => $this->m->get_unread_message());
     }
     
     public function ajaxLogin( $email, $password,$url = '/'){        
