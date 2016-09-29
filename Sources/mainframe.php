@@ -90,24 +90,14 @@ class mainframe {
                     //. " , DATE_FORMAT(`tasks`.`end`,'%H:%i:%s') as format"
                     . " FROM `tasks` "
                     . " WHERE `tasks`.`permanent` = 1"
-                    . " AND `tasks`.`status` = 1"
-                    //. " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
-                    //. " AND `tasks`.`permanent_update` < '".date('Y-m-d 00:00:00')."'"
-                
-                        . " AND ("
-                            ."`tasks`.`permanent_update` < '".date('Y-m-d 00:00:00')."'"
-                        .")"
-                        /*. " AND ("
-                            //."`tasks`.`permanent_update` < '".date('Y-m-d 00:00:00')."'"
-                            
-                            //. " AND DATE_FORMAT(`tasks`.`permanent_update`,'%H:%i:%s') < DATE_FORMAT(`tasks`.`end`,'%H:%i:s')"
-                            . " AND( "
-                                . " (DATE_FORMAT(`tasks`.`permanent_update`,'%H:%i:%s') < DATE_FORMAT(`tasks`.`end`,'%H:%i:s') )"
-                                ."OR "
-                                ." (DATE_FORMAT(`tasks`.`permanent_update`,'%Y:%m:%d') < '".date("Y-m-d 00:00:00")."')"
-                            .")"
-                        .")"*/
-                
+                    . " AND `tasks`.`status` = 1"                    
+                    . " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
+                    . " AND (("
+                            ."DATE_FORMAT(`tasks`.`permanent_update`,'%H:%i:%s') < DATE_FORMAT(`tasks`.`end`,'%H:%i:%s')"
+                            . " AND DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') = '".date("Y-m-d")."'"
+                    . " )OR( "
+                        . " DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') != '".date("Y-m-d")."'"                        
+                    . " ) )"
                     . " AND `tasks`.`user_id` = ".$this->_user->id
                 );
         $data = $this->_db->loadObjectList();

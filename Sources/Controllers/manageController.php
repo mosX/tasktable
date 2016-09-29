@@ -20,12 +20,14 @@
         }
         
         public function filledAction(){
+            header("Access-Control-Allow-Origin: *");
+                        
             $this->disableTemplate();
             $this->disableView();
             
             xload('class.tasks');
             $tasks = new Tasks($this->m);
-            $this->m->data = $tasks->getFilledDates($year,$month);
+            $this->m->data = $tasks->getFilledDates();
             echo json_encode($this->m->data);            
         }
         

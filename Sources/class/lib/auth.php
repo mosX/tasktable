@@ -236,6 +236,9 @@ class xAuth {
     }
     
     public function checkOnline($uuid){
+        $uuid = strip_tags(trim($uuid));
+        if(!$uuid) return false;
+        
         $this->m->_db->setQuery(
                     "SELECT `x_session`.* "
                     . " FROM `x_session` WHERE `x_session`.`uuid` = '".$uuid."'"
