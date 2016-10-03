@@ -36,9 +36,17 @@
             $this->disableView();
             
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                xload('class.manage');
+                xload('class.lessons');
+                $lessons = new Lessons($this->m);
+                if($lessons->addLesson() == false){
+                    echo '{"status":"error","message":"'.$lessons->error.'"}';
+                }else{
+                    echo '{"status":"success"}';
+                }
+                
+                /*xload('class.manage');
                 $manage = new Manage($this->m);
-                $manage->addType();
+                $manage->addType();*/
             }
         }
     }

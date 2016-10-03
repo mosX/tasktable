@@ -4,7 +4,63 @@
             if(!$this->m->_user->id) redirect('/');
         }
         
-        public function indexAction(){            
+        public function mobile_addAction(){
+            header("Access-Control-Allow-Origin: *");
+            $this->disableTemplate();
+            $this->disableView();
+            xload('class.tasks');
+            $tasks = new Tasks($this->m);
+            
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                if($tasks->addNew()){
+                    echo '{"status":"success"}';
+                    return;
+                }
+                $this->m->error = $tasks->error;
+                //p($this->m->error);
+            }
+        }
+        
+        public function remove_mobileAction(){
+            header("Access-Control-Allow-Origin: *");
+            $this->disableTemplate();
+            $this->disableView();
+            
+            xload('class.tasks');
+            $tasks = new Tasks($this->m);
+            $tasks->remove($_GET['id']);
+        }
+        
+        public function mobile_getAction(){
+            header("Access-Control-Allow-Origin: *");
+            $this->disableTemplate();
+            $this->disableView();
+            xload('class.tasks');
+            xload('class.students');
+            xload('class.lessons');
+            $lessons = new Lessons($this->m);
+            $tasks = new Tasks($this->m);
+            $students = new Students($this->m);
+            
+            $this->m->date = date("Y-m-d",strtotime($_GET['year'].'-'.$_GET['month'].'-'.$_GET['day']));
+            $this->m->data = $tasks->getData($this->m->date);
+            $this->m->lessons = $lessons->getLessonsList();
+            $this->m->students = $students->getStudentsList();
+            
+            foreach($this->m->data as $item){
+                $item->start = date("H:i",strtotime($item->start));
+                $item->end = date("H:i",strtotime($item->end));
+            }
+            
+            $package = new stdClass();
+            $package->tasks = $this->m->data;
+            $package->lessons = $this->m->lessons;
+            $package->students = $this->m->students;
+            
+            echo json_encode($package);
+        }
+        
+        public function indexAction(){
             $this->m->addJS('workload');
             $this->m->addJS('clockpicker/clockpicker')->addJS('jscolor.min');
             $this->m->addCSS('clockpicker/clockpicker')->addCSS('clockpicker/standalone');
@@ -24,7 +80,9 @@
             $this->m->students = $students->getStudentsList();
             
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $tasks->addNew();
+                if($tasks->addNew() === true){
+                    redirect('/?date='.date("Y-m-d",strtotime($start)));
+                }
                 $this->m->error = $tasks->error;
             }
         }

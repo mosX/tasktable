@@ -359,12 +359,12 @@ class Tasks{
         }
     }
     
+    
     public function addNew(){
         $this->validation = true;
         $year = $_GET['year'];
         $month = $_GET['month'];
         $day = $_GET['day'];
-        
         
         $message = strip_tags(trim($_POST['message']));
         
@@ -373,11 +373,6 @@ class Tasks{
         
         $start_date = $year.'-'.$month.'-'.$day.' '.$start;
         $end_date = $year.'-'.$month.'-'.$day.' '.$end;
-        
-        /*if(!$message){
-            $this->validation = false;
-            $this->error->message = 'Вы должны ввести заметку';
-        }*/
         
         if(strtotime($end_date) < strtotime($start_date)){
             $this->validation = false;
@@ -401,12 +396,15 @@ class Tasks{
                 $tempTimestamp += 60*60*24;                
             }while($tempDay != date("N",$tempTimestamp));
             
-            redirect('/?date='.date("Y-m-d",strtotime($start)));
+            return true;            
+            //redirect('/?date='.date("Y-m-d",strtotime($start)));
         }else{
             if($this->addTaskElement(strtotime($start_date), $start, $end,0)){
-                redirect('/?date='.date("Y-m-d",strtotime($start)));
+                //redirect('/?date='.date("Y-m-d",strtotime($start)));
+                return true;
             }
         }
+        return false;
     }
     
     public function addTaskElement($timestamp, $start, $end, $permanent = 1){

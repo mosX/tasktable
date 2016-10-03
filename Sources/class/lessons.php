@@ -6,6 +6,40 @@ class Lessons{
         $this->m = $mainframe;
     }
     
+    public function addLesson(){
+        $name = strip_tags(trim($_POST['name']));
+        
+        if(!$name){
+            $this->error = 'Вы должны ввести название';
+            //echo '{"status":"error","message":"Вы должны ввести название"}';
+            return false;
+        }
+        
+        //проверяем или такого не было
+        $this->m->_db->setQuery(
+                    "SELECT `lessons`.`id` "
+                    . " FROM `lessons` "
+                    . " WHERE `lessons`.`name` = '".$name."'"
+                    . " AND `lessons`.`user_id` = ".$this->m->_user->id
+                    . " LIMIT 1"
+                );
+        $check = $this->m->_db->loadResult();
+        if($check){
+            $this->error = 'Вы уже добавляли такое название';
+            //echo '{"status":"error","message":"Вы уже добавляли такое название"}';
+            return false;
+        }
+        
+        $row->user_id = $this->m->_user->id;
+        $row->name = $name;
+        $row->date = date("Y-m-d H:i:s");
+        
+        if($this->m->_db->insertObject('lessons',$row)){
+            //echo '{"status":"success"}';
+            return true;
+        }
+    }
+    
     public function remove($id){
         $id = (int)$id;
         if(!$id) return;
@@ -20,7 +54,7 @@ class Lessons{
             echo '{"status":"success"}';
         }else{
             echo '{"status":"error"}';
-        }        
+        }
     }
     
     public function edit($id){
@@ -47,6 +81,7 @@ class Lessons{
                     . " FROM `lessons`"
                     . " WHERE `lessons`.`user_id` = ".$this->m->_user->id
                     . " AND `lessons`.`status` = 1"
+                    . " ORDER BY `id` DESC"
                 );
         $data  = $this->m->_db->loadObjectList();
         
@@ -59,6 +94,7 @@ class Lessons{
                     . " FROM `lessons`"
                     . " WHERE `lessons`.`user_id` = ".$this->m->_user->id  
                     . " AND `lessons`.`status` = 1"
+                    . " ORDER BY `id` DESC"
                     . " LIMIT 10"
                 );
         $data = $this->m->_db->loadObjectList();

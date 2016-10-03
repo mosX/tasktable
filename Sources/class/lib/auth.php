@@ -22,6 +22,7 @@ class xAuth {
         $_COOKIE['PHPSESSID'] = $ssid;
         
         $this->_session->userid = $session[0]->userid;
+        $this->_session->session_id = $session[0]->session_id;
 
         setcookie(md5('cookiename'), $ssid, false, '/');
         session_id($ssid);
@@ -434,16 +435,17 @@ class xAuth {
         //return array("status" => "success", "url" => "'$url'", 'ssid'=>$this->_session->session_id , 'user' => $row->firstname, 'id' => $row->id, "messages" => $this->m->get_unread_message());
     }
 
-    public function logout($url = '/') {
+    public function logout() {
         $session = & $this->_session;
         $session->delete();
-
+        
         $lifetime = time() - 86400;
         setcookie(md5('cookiename'), ' ', $lifetime, '/');
 
         @session_destroy();
 
-        redirect($url);
+        return true;
+        
     }
 
     public function set($property, $value = null) {

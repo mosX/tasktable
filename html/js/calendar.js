@@ -4,7 +4,6 @@
         this.height = obj.height?obj.height:'500px';
         this.reservedDates = obj.reservedDates;
         
-        
         $('#calendar .c_box').css({'width':this.width,'height':this.height});
                 
         this.month_array = new Array('January','February','March','April','May','June',"July",'August','September','October','November','December');
@@ -93,7 +92,7 @@
             $(this.parent).on('click','.c_day.current',function(){
                 var day = $(this).text();
                 
-                if($('.c_box.online').length > 0){                
+                if($('.c_box.online').length > 0){
                     location.href = '/tasks/?year='+self.year+'&month='+(self.month+1)+'&day='+day;
                 }
             });
