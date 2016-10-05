@@ -34,8 +34,9 @@ class Lessons{
         $row->name = $name;
         $row->date = date("Y-m-d H:i:s");
         
-        if($this->m->_db->insertObject('lessons',$row)){
+        if($this->m->_db->insertObject('lessons',$row,'id')){
             //echo '{"status":"success"}';
+            $this->id = $row->id;
             return true;
         }
     }
@@ -69,9 +70,9 @@ class Lessons{
                     . " LIMIT 1"
                 );
         if($this->m->_db->query()){
-            echo '{"status":"success"}';
+            return true;
         }else{
-            echo '{"status":"error"}';
+            return false;
         }
     }
     

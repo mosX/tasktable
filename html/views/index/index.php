@@ -15,8 +15,7 @@
     });
 </script>
 
-
-<div class="container">
+<div class="container">   
     <div id="calendar">        
         <div class="c_box <?=$this->m->_user->id ? 'online':''?>">
             <div class='header'>
@@ -27,7 +26,6 @@
             </div>
         </div>
     </div>
-    
    
 <?php if($this->m->currentTasks ){ ?>
      <?php 

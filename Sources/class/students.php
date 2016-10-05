@@ -112,9 +112,12 @@ class Students{
                     . " LIMIT 1"
                 );
         if($this->m->_db->query()){
-            echo '{"status":"success"}';
+            //echo '{"status":"success"}';
+            return true;
         }else{
-            echo '{"status":"error"}';
+            
+            //echo '{"status":"error"}';
+            return false;
         }
     }
     

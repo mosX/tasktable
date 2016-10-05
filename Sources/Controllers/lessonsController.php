@@ -17,18 +17,38 @@
             $lessons->remove($_GET['id']);
         }
         
+        public function edit_mobileAction(){
+            header("Access-Control-Allow-Origin: *");
+            $this->disableTemplate();
+            $this->disableView();
+            xload('class.lessons');
+            $lessons = new Lessons($this->m);
+            
+            $_POST = json_decode(file_get_contents('php://input'), true);   //для Content-Type: application/json
+            
+            if($lessons->edit($_POST['id'])==true){
+                echo '{"status":"success"}';
+            }else{
+                echo '{"status":"error"}';
+            }
+        }
+        
         public function add_mobileAction(){
             header("Access-Control-Allow-Origin: *");
             $this->disableTemplate();
             $this->disableView();
             xload('class.lessons');
             $lessons = new Lessons($this->m);
+            
+            $_POST = json_decode(file_get_contents('php://input'), true);   //для Content-Type: application/json
+            
             if($lessons->addLesson() == false){
                 echo '{"status":"error","message":"'.$lessons->error.'"}';
             }else{
                 $package = new stdClass();
                 $package->status = 'success';
-                $package->data = $lessons->getList();
+                $package->id = $lessons->id;
+                //$package->data = $lessons->getList();
                 echo json_encode($package);
             }
         }
@@ -57,7 +77,11 @@
             $this->disableView();
             xload('class.lessons');
             $lessons = new Lessons($this->m);
-            $lessons->edit($this->m->_path[2]);
+            if($lessons->edit($this->m->_path[2])){
+                echo '{"status":"success"}';
+            }else{
+                echo '{"status":"error"}';
+            }
             
         }
         
