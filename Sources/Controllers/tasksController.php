@@ -11,6 +11,8 @@
             xload('class.tasks');
             $tasks = new Tasks($this->m);
             
+            $_POST = json_decode(file_get_contents('php://input'), true);   //для Content-Type: application/json
+            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if($tasks->addNew()){
                     echo '{"status":"success"}';
@@ -29,6 +31,26 @@
             xload('class.tasks');
             $tasks = new Tasks($this->m);
             $tasks->remove($_GET['id']);
+        }
+        
+        public function mobile_get_editAction(){
+            header("Access-Control-Allow-Origin: *");
+            $this->disableTemplate();
+            $this->disableView();
+            xload('class.tasks');
+            xload('class.students');
+            
+            $students = new Students($this->m);
+            $tasks = new Tasks($this->m);
+            $data = $tasks->getEditData($_GET['id']);
+            
+            $data->start = date("H:i",strtotime($data->start));
+            $data->end = date("H:i",strtotime($data->end));
+                
+            
+            $data->students = $students->getTaskStudents($_GET['id']);
+            
+            echo json_encode($data);
         }
         
         public function mobile_getAction(){
@@ -75,6 +97,7 @@
             $students = new Students($this->m);
             
             $this->m->data = $tasks->getData($this->m->date);
+            
             $this->m->lessons = $lessons->getLessonsList();
             
             $this->m->students = $students->getStudentsList();

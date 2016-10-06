@@ -225,7 +225,6 @@ class Tasks{
             }            
         }
         
-        
         $this->m->_db->setQuery(
                     "SELECT DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') as start "
                     . " , UNIX_TIMESTAMP(start) as timestamp"
@@ -454,7 +453,7 @@ class Tasks{
                     . " AND ("
                             ."("
                                 ."`tasks`.`start` > '".$start."'"
-                                . " AND `tasks`.`end` < '".$end."'"                    
+                                . " AND `tasks`.`end` < '".$end."'"
                                 . " AND `tasks`.`permanent` = 0"
                             .") OR ( "
                                 ." ( "
