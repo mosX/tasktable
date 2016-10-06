@@ -120,6 +120,7 @@ class Tasks{
                     . " , `tasks`.`permanent`"
                     . " FROM `tasks` "
                     . " WHERE `tasks`.`id` = ".$id
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " LIMIT 1"
                 );
         $this->m->_db->loadObject($check);
@@ -132,11 +133,13 @@ class Tasks{
         if($check->permanent){
             $row->user_id = $this->m->_user->id;
             $row->task_id = $id;
-            $row->date = date("Y-m-d",$_GET['date']);
+            $row->date = date("Y-m-d",strtotime($_GET['date']));
             $row->created = date('Y-m-d H:i:s');
 
             if($this->m->_db->insertObject('permanent_exceptions',$row)){
                 echo '{"status":"success"}';
+            }else{                
+                echo '{"status":"error"}';
             }
         }else{
             $this->m->_db->setQuery(
@@ -146,6 +149,9 @@ class Tasks{
                     );
             if($this->m->_db->query()){
                 echo '{"status":"success"}';        
+            }else{
+                p($this->m->_db->_sql);
+                echo '{"status":"error"}';
             }
         }
         
@@ -381,18 +387,18 @@ class Tasks{
         if(!$this->validation){
             return false;
         }
-        
+        //p($_POST);
         if($_POST['permanent']){
-            //p($_POST);
             //получаем текущий день недели
-
             $tempDay = date("N",strtotime($start_date));
             $tempTimestamp = strtotime($start_date);
-            do{                
-                if($_POST['permanent'][date("N",$tempTimestamp)]){                    
+            
+            do{
+                //p(date('Y-m-d',$tempTimestamp));
+                if($_POST['permanent'][date("N",$tempTimestamp)]){
                     $this->addTaskElement($tempTimestamp, $start, $end);
                 }
-                $tempTimestamp += 60*60*24;                
+                $tempTimestamp += 60*60*24;
             }while($tempDay != date("N",$tempTimestamp));
             
             return true;            

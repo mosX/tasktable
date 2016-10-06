@@ -19,6 +19,6 @@
             if($this->m->_auth->logout()){
                 redirect('/');
             }
-        }        
+        }
     }
 ?>

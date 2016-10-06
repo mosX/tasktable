@@ -14,9 +14,12 @@
             $_POST = json_decode(file_get_contents('php://input'), true);   //для Content-Type: application/json
             
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                if($tasks->addNew()){
+                if($tasks->addNew() == true){
                     echo '{"status":"success"}';
                     return;
+                }else{
+                    echo '{"status":"error"}';
+                    
                 }
                 $this->m->error = $tasks->error;
                 //p($this->m->error);

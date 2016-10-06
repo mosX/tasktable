@@ -251,7 +251,7 @@
                 <td><?=date("H:i",strtotime($item->end))?></td>
                 <td>                    
                     <a href="/tasks/edit/<?=$item->id?>/" class="glyphicon glyphicon-pencil edit"  style="margin-right:10px;"></a>
-                    <a style="margin-right:10px;color: red; font-size:18px;" href="/tasks/remove/<?=$item->id?>/?date=<?=strtotime($this->m->date)?>" class="glyphicon glyphicon-remove remove" ></a>
+                    <a style="margin-right:10px;color: red; font-size:18px;" href="/tasks/remove/<?=$item->id?>/?date=<?=$this->m->date?>" class="glyphicon glyphicon-remove remove" ></a>
                     
                     <?php if($item->permanent){ ?>
                         <a style="color: darkorange; font-size:18px;" href="/tasks/clear_permanent/<?=$item->id?>/?date=<?=$this->m->date?>" class="glyphicon glyphicon-remove-circle clear_permanent" ></a>
