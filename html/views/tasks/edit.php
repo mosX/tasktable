@@ -31,15 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-4">Постояное расписание</div>
-                
-                <div class="col-sm-8">
-                    <input type="checkbox" name="permanent" <?=$_POST['permanent'] ? 'checked=checked' :($this->m->data->permanent ? 'checked=checked':'')?>>
-                </div>
-            </div>
-        </div>
+        
          <div class="form-group">
             <div class="row">
                 <div class="col-sm-4">Дата заявки</div>

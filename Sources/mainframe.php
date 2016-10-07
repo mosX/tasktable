@@ -81,9 +81,7 @@ class mainframe {
     
     public function checkPermanents(){
         if(!$this->_user->id) return;
-        
-        //TODO опять вернулись с чего начинали... проверяем только заявки прошлых дней. Сделать что бы проверяло по окончанию занятия!!!!!!!!!!!!!
-        
+                
         //получаем таски где время меньше начала текущего дня
         $this->_db->setQuery(
                     "SELECT `tasks`.* "
@@ -93,15 +91,17 @@ class mainframe {
                     . " AND `tasks`.`status` = 1"                    
                     . " AND `tasks`.`permanent_update` < '".date('Y-m-d H:i:s')."'"
                     . " AND (("
-                            ."DATE_FORMAT(`tasks`.`permanent_update`,'%H:%i:%s') < DATE_FORMAT(`tasks`.`end`,'%H:%i:%s')"
-                            . " AND DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') = '".date("Y-m-d")."'"
+                            . "DATE_FORMAT(`tasks`.`permanent_update`,'%H:%i:%s') < DATE_FORMAT(`tasks`.`end`,'%H:%i:%s')"   //дата обновления меньше чем окончания 
+                            . " AND `tasks`.`end` < '".date("Y-m-d H:i:s")."'"   //дата обновления меньше чем окончания +
+                            . " AND DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') = '".date("Y-m-d")."'"               //сегодняшний день
+                            
                     . " )OR( "
-                        . " DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') != '".date("Y-m-d")."'"                        
+                        . " DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') != '".date("Y-m-d")."'"
                     . " ) )"
                     . " AND `tasks`.`user_id` = ".$this->_user->id
                 );
         $data = $this->_db->loadObjectList();
-        
+       
         if(!$data) return;
         foreach($data as $item)$ids[] = $item->id;
         
@@ -145,13 +145,24 @@ class mainframe {
                 $row->lesson = $item->lesson;
                 $row->color = $item->color;
                 $row->permanent = 0;
+                $row->permanent_id = $item->id;
                 $row->start = date("Y-m-d ".date("H",strtotime($item->start)).":".date("i",strtotime($item->start)).":00",$temp_date);
                 $row->end = date("Y-m-d ".date("H",strtotime($item->end)).":".date("i",strtotime($item->end)).":00",$temp_date);
-                //$row->start = $item->start;
-                //$row->end = $item->end;
+                
                 $row->date = date("Y-m-d H:i:s");
                 $row->status = 1;
-
+                
+                //проверяем или такая запись уже есть
+                $this->_db->setQuery(
+                            "SELECT `tasks`.* "
+                            . " FROM `tasks` WHERE DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') = '".date("Y-m-d",$temp_date)."'"
+                            . " AND `tasks`.`permanent_id` = ".$row->permanent_id
+                            . " LIMIT 1"
+                        );
+                $this->_db->loadObject($check);
+                if($check) continue;
+                
+                
                 $this->_db->insertObject('tasks',$row);
             }
             //обновляем поле permanent_update

@@ -17,6 +17,7 @@
             <?php if($this->_user->id){ ?>
                 <li><a style="cursor:pointer;" data-toggle="modal" id="add_lesson_btn">Добавить Предмет</a></li>
                 <li><a href="/students/">Студенты</a></li>
+                <li><a href="/week/">На Неделю</a></li>
             <?php } ?>
         </ul>
         

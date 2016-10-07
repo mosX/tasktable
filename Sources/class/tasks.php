@@ -1,14 +1,76 @@
 <?php
-/*
-TODO mainframe exseptions
- * TODO tasks delete permanent exsceptions.
- * TODO отображение перманент в тот же день если уже была проверка и была создана разовая заявка
-  */
 class Tasks{
     protected $_table = 'tasks';
 
     public function __construct(mainframe & $mainframe){
         $this->m = $mainframe;
+    }
+    
+    public function getWeek(){
+        //снчала определим дату понедельника
+        $date = date("Y-m-d");
+        if(date("N",strtotime($date)) != 1){        
+            $monday = date('Y-m-d',strtotime( "previous monday" ,strtotime($date)));
+        }else{
+            $monday = date("Y-m-d 00:00:00",strtotime($date));
+        }
+        
+        if(date("N",strtotime($date)) != 5){
+            $friday = date('Y-m-d',strtotime( "next friday" ,strtotime($date)));
+        }else{
+            $friday = date("Y-m-d 23:59:59",strtotime($date));
+        }
+                
+        //получаем для начала не перманентные
+        $this->m->_db->setQuery(
+                    "SELECT `tasks`.* "
+                    . " FROM `tasks` "
+                    . " WHERE `tasks`.`status` = 1"
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " AND `tasks`.`start` > '".$monday."'"
+                    . " AND `tasks`.`end` < '".$friday."'"
+                );
+        $data = $this->m->_db->loadObjectList();
+        
+        //получаем перманентные которые были апдечены до
+        $this->m->_db->setQuery(
+                    "SELECT `tasks`.* "
+                    . " FROM `tasks` "
+                    . " WHERE `tasks`.`permanent` = 1"
+                    . " AND `tasks`.`status` = 1"
+                    . " AND `tasks`.`user_id` = ".$this->m->_user->id
+                    . " AND `tasks`.`permanent_update` < '".$friday."'"
+                );
+        $permanents = $this->m->_db->loadObjectList();
+        
+        $star_date = strtotime($monday)-60*60*24;
+        $end_date = strtotime($friday);
+        for($i = 0;$i<7;$i++){
+            $star_date +=60*60*24;
+            
+            foreach($permannets as $item){
+                
+            }
+        }
+        
+        //получаем исключения
+        $this->m->_db->setQuery(
+                    "SELECT `permanent_exceptions`.* "
+                    . " FROM `permanent_exceptions`"
+                    . " WHERE `permanent_exceptions`.`date` > '".$monday."'"
+                    . " AND `permanent_exceptions` < '".$friday ."'"
+                    . " AND `permanent_exceptions`.`user_id` = ".$this->m->_user->id
+                );
+        $exceptions = $this->m->_db->loadObjectList();
+        
+        p($permanents);
+        //p($data);
+        
+        foreach($permanents as $item){
+            
+        }
+                        
+        return $data;
     }
     
     public function clearPermanent($id){
@@ -150,7 +212,7 @@ class Tasks{
             if($this->m->_db->query()){
                 echo '{"status":"success"}';        
             }else{
-                p($this->m->_db->_sql);
+                //p($this->m->_db->_sql);
                 echo '{"status":"error"}';
             }
         }
@@ -172,6 +234,7 @@ class Tasks{
         $this->m->_db->setQuery(
                     "SELECT DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') as start "
                     . " , DATE_FORMAT(`tasks`.`permanent_update`,'%Y-%m-%d') as permanent_update "
+                    . " , `tasks`.`permanent_update` as updated "
                     . " , UNIX_TIMESTAMP(start) as timestamp"
                     . " , `tasks`.`id`"
                     //. " , `permanent_exceptions`.`id` as 'ignore'"
@@ -196,6 +259,7 @@ class Tasks{
                 );
         //$permanent_exceptions = $this->m->_db->loadObjectList('timestamp');
         $permanent_exceptions_tmp = $this->m->_db->loadObjectList();
+        
         foreach($permanent_exceptions_tmp as $item){
             $permanent_exceptions[$item->timestamp][$item->task_id] = $item;
         }
@@ -216,12 +280,16 @@ class Tasks{
                 }
                 
                 if(date("N",$temp_date) == $dayOfWeek){
-                    
-                    
-                    //бегаем в цикле по искючениям и смотрим или есть для нашего таска в єтот день исключение
-                    if($permanent_exceptions[$temp_date][$item->id]){
+                    if($permanent_exceptions[$temp_date][$item->id]){   //проверяем исключения
                         $temp_date += 60*60*24;    
                         continue;
+                    }
+                    
+                    if(date('Y-m-d',$temp_date) == date("Y-m-d")){  //если проверяем сегодняшнюю дату
+                        if(time() > strtotime($item->updated)){
+                            $temp_date += 60*60*24;    
+                            continue;
+                        }                        
                     }
                     
                     $permanents_dates[] = $temp_date;                    
@@ -412,8 +480,7 @@ class Tasks{
         return false;
     }
     
-    public function addTaskElement($timestamp, $start, $end, $permanent = 1){
-        
+    public function addTaskElement($timestamp, $start, $end, $permanent = 1){        
         $row->user_id = $this->m->_user->id;
         $row->color = $_POST['color'];
         $row->lesson = $_POST['type'];

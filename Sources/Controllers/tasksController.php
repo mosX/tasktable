@@ -107,7 +107,8 @@
             
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if($tasks->addNew() === true){
-                    redirect('/?date='.date("Y-m-d",strtotime($start)));
+                    //redirect('/?date='.date("Y-m-d",strtotime($_GET['year'].'-'.$_GET['month'].'-'.$_GET['day'].' '.$_GET['start'])));
+                    redirect('/');
                 }
                 $this->m->error = $tasks->error;
             }
