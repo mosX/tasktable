@@ -8,8 +8,40 @@
         cursor:pointer;
     }
 </style>
-<script>
+<script>    
+    function setEnd(){
+        parent = $('form');        
+        var arr = $('input[name=start]',parent).val().split(':');
+        
+        var hours = arr[0];
+        var minutes = arr[1];
+        
+        var d = new Date();
+        
+        d.setHours(hours);
+        d.setMinutes(minutes);
+
+        var new_d = new Date(d.getTime() + 60*90*1000);
+        
+        var new_hours = new_d.getHours();
+        var new_minutes = new_d.getMinutes();
+        
+        $('input[name=end]',parent).val(new_hours+ ':'+new_minutes );
+    }
+    
     $('document').ready(function () {
+        $('.clockpicker_start').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                donetext: 'OK',
+                autoclose:true,
+                afterDone: function(){
+                    console.log("after done");
+                    setEnd(false);
+                    //{{setEnd()}}
+                }
+            });
+        
         $('.clockpicker').clockpicker({
             placement: 'bottom',
             align: 'left',
@@ -154,7 +186,7 @@
                 <div class="col-sm-4">Начало</div>
 
                 <div class="col-sm-8">
-                    <input type="text" class="form-control clockpicker" name="start" value="<?=$_POST['start']?>">
+                    <input type="text" class="form-control clockpicker_start" name="start" value="<?=$_POST['start']?>">
                     <div class="error"><?=$this->m->error->start?></div>
                 </div>
             </div>

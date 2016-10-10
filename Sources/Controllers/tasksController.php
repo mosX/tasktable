@@ -85,6 +85,15 @@
             echo json_encode($package);
         }
         
+        public function clear_permanent_mobileAction(){
+            header("Access-Control-Allow-Origin: *");
+            $this->disableTemplate();
+            $this->disableView();
+            xload('class.tasks');
+            $tasks = new Tasks($this->m);
+            $tasks->clearPermanent($_GET['id']);
+        }
+        
         public function indexAction(){
             $this->m->addJS('workload');
             $this->m->addJS('clockpicker/clockpicker')->addJS('jscolor.min');

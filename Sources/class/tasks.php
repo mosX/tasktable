@@ -24,34 +24,35 @@ class Tasks{
         //получаем для начала не перманентные
         $this->m->_db->setQuery(
                     "SELECT `tasks`.* "
+                    . " , `lessons`.`name` as lesson_name"
                     . " FROM `tasks` "
+                    . " LEFT JOIN `lessons` ON `lessons`.`id` = `tasks`.`lesson`"
                     . " WHERE `tasks`.`status` = 1"
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " AND `tasks`.`start` > '".$monday."'"
                     . " AND `tasks`.`end` < '".$friday."'"
+                    . " AND `tasks`.`permanent` = 0"
                 );
         $data = $this->m->_db->loadObjectList();
         
+        foreach($data as $item){
+            $package[date("N",strtotime($item->start))][] = $item;
+        }
+        
+        
+        //p($package);
         //получаем перманентные которые были апдечены до
         $this->m->_db->setQuery(
                     "SELECT `tasks`.* "
+                    . " , `lessons`.`name` as lesson_name"
                     . " FROM `tasks` "
+                    . " LEFT JOIN `lessons` ON `lessons`.`id` = `tasks`.`lesson`"
                     . " WHERE `tasks`.`permanent` = 1"
                     . " AND `tasks`.`status` = 1"
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " AND `tasks`.`permanent_update` < '".$friday."'"
                 );
         $permanents = $this->m->_db->loadObjectList();
-        
-        $star_date = strtotime($monday)-60*60*24;
-        $end_date = strtotime($friday);
-        for($i = 0;$i<7;$i++){
-            $star_date +=60*60*24;
-            
-            foreach($permannets as $item){
-                
-            }
-        }
         
         //получаем исключения
         $this->m->_db->setQuery(
@@ -61,16 +62,32 @@ class Tasks{
                     . " AND `permanent_exceptions` < '".$friday ."'"
                     . " AND `permanent_exceptions`.`user_id` = ".$this->m->_user->id
                 );
-        $exceptions = $this->m->_db->loadObjectList();
-        
-        p($permanents);
-        //p($data);
-        
-        foreach($permanents as $item){
-            
+        $exceptions_tmp = $this->m->_db->loadObjectList();
+        foreach($exceptions_tmp as $item){
+            $exceptions[date("Y-m-d",strtotime($item->date))][$item->id] = $item;
         }
-                        
-        return $data;
+
+        foreach($permanents as $item){
+            if(date("N",strtotime($item->start)) < date("N",strtotime($item->permanent_update))){                
+                continue;
+            }
+            
+            if(date("N",strtotime($item->start)) == date("N",strtotime($item->permanent_update))){                 
+                $current_date = strtotime($monday) + (date("N",strtotime($item->start))-1) * 60*60*24;
+                $date = date('Y',$current_date).'-'.date('m',$current_date).'-'.date('d',$current_date);
+                
+                if(strtotime(date($date." H:i:s",strtotime($item->start))) < strtotime(date($date." H:i:s",strtotime($item->permanent_update)))){
+                    continue;    
+                }                
+            }
+            
+            if(!$exceptions[date("Y-m-d",strtotime($item->start))][$item->id]){
+                $package[date("N",strtotime($item->start))][] = $item;
+            }
+        }
+        
+        ksort($package);   
+        return $package;
     }
     
     public function clearPermanent($id){
@@ -129,7 +146,7 @@ class Tasks{
                 );
         $exseptions_tmp = $this->m->_db->loadObjectList();
         foreach($exseptions_tmp as $item){
-            $exseptions[$item->timestamp][$item->task_id] = $item;
+            $exseptions[strtotime($item->date)][$item->task_id] = $item;
         }
         
         //получаем день недели начала 
@@ -149,11 +166,9 @@ class Tasks{
 
                 if(date("Y-m-d H:i:s",$upd_timestamp) > $end_date) continue;
             }
-
-            if($exseptions[$temp_date][$item->id]) continue;
             
-            //if(date("N",$temp_date) == $dayOfWeek && date("Y-m-d",$temp_date) != date("Y-m-d",$temp_date) && !$exseptions[$temp_date]){                
-            //if(date("N",$temp_date) == $dayOfWeek && date("Y-m-d",$temp_date) != date("Y-m-d",strtotime($data->permanent_update)) && !$exseptions[$temp_date]){
+            if($exseptions[$temp_date][$data->id]) continue;
+            
                 //добавляем в задачи поле
                 $row = new stdClass();
                 $row->user_id = $data->user_id;
@@ -161,15 +176,24 @@ class Tasks{
                 $row->lesson = $data->lesson;
                 $row->color = $data->color;
                 $row->permanent = 0;
+                $row->permanent_id = $data->id;
                 $row->start = date("Y-m-d ".date("H",strtotime($data->start)).":".date("i",strtotime($data->start)).":00",$temp_date);
                 $row->end = date("Y-m-d ".date("H",strtotime($data->end)).":".date("i",strtotime($data->end)).":00",$temp_date);
 
                 $row->date = date("Y-m-d H:i:s");
                 $row->status = 1;
+                
+                //проверяем или такая запись уже есть
+                $this->m->_db->setQuery(
+                            "SELECT `tasks`.* "
+                            . " FROM `tasks` WHERE DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') = '".date("Y-m-d",$temp_date)."'"
+                            . " AND `tasks`.`permanent_id` = ".$row->permanent_id
+                            . " LIMIT 1"
+                        );
+                $this->m->_db->loadObject($check);
+                if($check) continue;
 
-                $this->m->_db->insertObject('tasks',$row);
-            //} 
-            //$temp_date += 60*60*24;
+                $this->m->_db->insertObject('tasks',$row);            
         }
     }
     
@@ -259,9 +283,10 @@ class Tasks{
                 );
         //$permanent_exceptions = $this->m->_db->loadObjectList('timestamp');
         $permanent_exceptions_tmp = $this->m->_db->loadObjectList();
-        
+        //p($permanent_exceptions_tmp);
         foreach($permanent_exceptions_tmp as $item){
-            $permanent_exceptions[$item->timestamp][$item->task_id] = $item;
+            $permanent_exceptions[strtotime($item->date)][$item->task_id] = $item;
+            
         }
         
         $start_month = (int)date("m",strtotime($start));
