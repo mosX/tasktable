@@ -151,7 +151,7 @@ class xSession extends DBTable {
             $past_logged    = time() - 6000; //1800
             $past_guest     = time() - 7200;
 
-            $query = "DELETE FROM $this->_tbl"
+            /*$query = "DELETE FROM $this->_tbl"
             . "\n WHERE "
             // purging expired logged sessions
             . "\n ( time < '" . (int)$past_logged . "' "
@@ -165,7 +165,19 @@ class xSession extends DBTable {
             . "\n ( time < '" . (int)$past_guest . "' "
             . "\n AND guest = 1"
             . "\n )"
-            ;
+            ;*/
+            
+            $query = "DELETE FROM `x_session`"
+            . " WHERE "                            
+            . " ("
+                . " time < '" . (int)$past_guest . "' "
+                . " AND guest = 1"
+            . " ) OR ("  // purging expired guest sessions            
+                . " time < '" . (int)$past_logged . "' "
+                . " AND guest = 0"
+                . " AND uuid  = ''"
+            . " )";
+            
         //} else {
         // kept for backward compatability
         //    $past = time() - $inc;

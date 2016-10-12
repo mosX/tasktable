@@ -79,6 +79,17 @@ class mainframe {
         $this->output();
     }
     
+    public function addToHistory($action){
+        $action = trim($action);
+        
+        $row->user_id = $this->_user->id;
+        $row->ip = $_SERVER["REMOTE_ADDR"];
+        $row->user_agent = $_SERVER['HTTP_USER_AGENT'];
+        $row->action = $action;
+        
+        $this->_db->insertObject('history',$row);
+    }
+    
     public function checkPermanents(){
         if(!$this->_user->id) return;
                 
@@ -403,8 +414,10 @@ class mainframe {
         xload('class.lib.database');
         $this->_db = new database($this->config->host, $this->config->user, $this->config->pass, $this->config->db, $this->config->prefix);
     }
-
     public function add_to_history($user_id = null, $type = null, $action = null, $value = null) {
+        
+    }
+    /*public function add_to_history($user_id = null, $type = null, $action = null, $value = null) {
         $history->user_id = (int)$user_id;
         if (!empty($type))
             $history->type = $type;
@@ -424,7 +437,7 @@ class mainframe {
             return true;
         
         return false;
-    }
+    }*/
     
     protected function parsePath() {
         $REQUEST_URI = $_SERVER["REQUEST_URI"];

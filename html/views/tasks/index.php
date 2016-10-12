@@ -276,7 +276,6 @@
         <?php foreach($this->m->data as $item){ ?>
             <tr style="background: #<?=$item->color?>;">
                 
-                <td><?=$item->end?></td>
                 <td><?=$item->message?></td>
                 <td><?=$item->lessons_name?></td>
                 <td><?=date("H:i",strtotime($item->start))?></td>

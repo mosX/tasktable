@@ -300,7 +300,8 @@ class xAuth {
                     "UPDATE `users` "
                     //. " SET `users`.`bad_auth` = `users`.`bad_auth` + 1 "
                     . " SET `users`.`bad_auth` = 0 "
-                    . " ,`users`.`last_modified` = NOW() "
+                    . " , `users`.`device_id` = '".$uuid."' "
+                    . " , `users`.`last_modified` = NOW() "
                     . " WHERE `users`.`id` = " . (int)$user->id
                     . " LIMIT 1;"
             );
@@ -312,7 +313,7 @@ class xAuth {
             die('{"status":"error","message":"Неправильный пароль"}');
         }
 
-        $this->m->add_to_history($user->id);
+        //$this->m->add_to_history($user->id);
 
         $this->_session->guest = '0';
         $this->_session->username = $user->email;
@@ -330,6 +331,7 @@ class xAuth {
                 " UPDATE `users` "
                 . " SET `users`.`last_login` = NOW() "
                 . " ,`users`.`last_ip` = " . $this->m->_db->Quote($_SERVER["REMOTE_ADDR"])
+                . " , `users`.`device_id` = '".$uuid."' "
                 . ($user->bad_auth ? " ,`users`.`bad_auth` = 0 " : "")
                 . " WHERE `users`.`id` = " . (int)$user->id
                 . " LIMIT 1;"
@@ -342,12 +344,14 @@ class xAuth {
         
         $this->m->_user = $this->getUser();
         
+        $this->m->addToHistory('login');
+        
         die('{"status":"success","session":"'.$this->_session->session_id .'"}');
         
         //return array("status" => "success", "url" => "'$url'", 'ssid'=>$this->_session->session_id , 'user' => $row->firstname, 'id' => $row->id, "messages" => $this->m->get_unread_message());
     }
     
-    public function ajaxLogin( $email, $password,$url = '/'){        
+    public function ajaxLogin( $email, $password,$url = '/'){
         $email = strip_tags(trim($email));
         $password = strip_tags(trim($password));
         if (!$email || !$password){
@@ -401,8 +405,6 @@ class xAuth {
             die('{"status":"error","message":"Неправильный пароль"}');
         }
 
-        $this->m->add_to_history($user->id);
-
         $this->_session->guest = '0';
         $this->_session->username = $user->email;
         $this->_session->userid = (int) $user->id;
@@ -429,6 +431,8 @@ class xAuth {
         }
         
         $this->m->_user = $this->getUser();
+        
+        $this->m->addToHistory('login');
         
         die('{"status":"success"}');
         

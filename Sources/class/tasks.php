@@ -6,19 +6,23 @@ class Tasks{
         $this->m = $mainframe;
     }
     
-    public function getWeek(){
-        //снчала определим дату понедельника
-        $date = date("Y-m-d");
-        if(date("N",strtotime($date)) != 1){        
-            $monday = date('Y-m-d',strtotime( "previous monday" ,strtotime($date)));
+    public function getWeek($date){
+        if(!$date){
+             $this->m->date = date("Y-m-d");
         }else{
-            $monday = date("Y-m-d 00:00:00",strtotime($date));
+            $this->m->date = date("Y-m-d",strtotime($date));
+        }
+        
+        if(date("N",strtotime($this->m->date)) != 1){        
+            $this->m->monday = date('Y-m-d',strtotime( "previous monday" ,strtotime($this->m->date)));
+        }else{
+            $this->m->monday = date("Y-m-d 00:00:00",strtotime($this->m->date));
         }
         
         if(date("N",strtotime($date)) != 5){
-            $friday = date('Y-m-d',strtotime( "next friday" ,strtotime($date)));
+            $this->m->saturday = date('Y-m-d',strtotime( "next saturday" ,strtotime($this->m->date)));
         }else{
-            $friday = date("Y-m-d 23:59:59",strtotime($date));
+            $this->m->saturday = date("Y-m-d 23:59:59",strtotime($this->m->date));
         }
                 
         //получаем для начала не перманентные
@@ -29,9 +33,10 @@ class Tasks{
                     . " LEFT JOIN `lessons` ON `lessons`.`id` = `tasks`.`lesson`"
                     . " WHERE `tasks`.`status` = 1"
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
-                    . " AND `tasks`.`start` > '".$monday."'"
-                    . " AND `tasks`.`end` < '".$friday."'"
+                    . " AND `tasks`.`start` > '".$this->m->monday."'"
+                    . " AND `tasks`.`end` < '".$this->m->saturday."'"
                     . " AND `tasks`.`permanent` = 0"
+                    . " ORDER BY `tasks`.`start` ASC"
                 );
         $data = $this->m->_db->loadObjectList();
         
@@ -39,8 +44,6 @@ class Tasks{
             $package[date("N",strtotime($item->start))][] = $item;
         }
         
-        
-        //p($package);
         //получаем перманентные которые были апдечены до
         $this->m->_db->setQuery(
                     "SELECT `tasks`.* "
@@ -50,7 +53,8 @@ class Tasks{
                     . " WHERE `tasks`.`permanent` = 1"
                     . " AND `tasks`.`status` = 1"
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
-                    . " AND `tasks`.`permanent_update` < '".$friday."'"
+                    . " AND `tasks`.`permanent_update` < '".$this->m->saturday."'"
+                    . " ORDER BY `tasks`.`start` ASC"
                 );
         $permanents = $this->m->_db->loadObjectList();
         
@@ -58,8 +62,8 @@ class Tasks{
         $this->m->_db->setQuery(
                     "SELECT `permanent_exceptions`.* "
                     . " FROM `permanent_exceptions`"
-                    . " WHERE `permanent_exceptions`.`date` > '".$monday."'"
-                    . " AND `permanent_exceptions` < '".$friday ."'"
+                    . " WHERE `permanent_exceptions`.`date` > '".$this->m->monday."'"
+                    . " AND `permanent_exceptions` < '".$this->m->saturday ."'"
                     . " AND `permanent_exceptions`.`user_id` = ".$this->m->_user->id
                 );
         $exceptions_tmp = $this->m->_db->loadObjectList();
@@ -73,7 +77,7 @@ class Tasks{
             }
             
             if(date("N",strtotime($item->start)) == date("N",strtotime($item->permanent_update))){                 
-                $current_date = strtotime($monday) + (date("N",strtotime($item->start))-1) * 60*60*24;
+                $current_date = strtotime($this->m->monday) + (date("N",strtotime($item->start))-1) * 60*60*24;
                 $date = date('Y',$current_date).'-'.date('m',$current_date).'-'.date('d',$current_date);
                 
                 if(strtotime(date($date." H:i:s",strtotime($item->start))) < strtotime(date($date." H:i:s",strtotime($item->permanent_update)))){
@@ -570,13 +574,15 @@ class Tasks{
                     .") "
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " AND `tasks`.`status` = 1"
-                    . " ORDER BY `id` DESC"
+                    . " ORDER BY `start` ASC"
                 );
-        $data = $this->m->_db->loadObjectList();
+        $ret = $this->m->_db->loadObjectList();
                         
-        foreach($data as $key=>$item){
-            if($item->ignore) unset($data[$key]);
+        foreach($ret as $key=>$item){
+            if($item->ignore) unset($ret[$key]);
         }
+        
+        foreach($ret as $item) $data[] = $item;
                         
         return $data;
     }

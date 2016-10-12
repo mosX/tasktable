@@ -1,4 +1,10 @@
 <div class="container">
+    <div class="btn-group" style="margin-bottom:20px;   ">
+        <a href="/week/?date=<?=date("Y-m-d",strtotime('-1 week',strtotime($this->m->date)))?>" class="btn btn-primary">Предыдущая</a>
+        <a href="/week/?date=<?=date("Y-m-d",strtotime('+1 week',strtotime($this->m->date)))?>" class="btn btn-primary">Следующая</a>
+    </div>
+    
+    <h3><?=date("Y/m/d",strtotime($this->m->monday))?> - <?=date("Y/m/d",strtotime($this->m->saturday))?></h3>
     <table class="table">
         <?php 
             $weeks = array(1=>'ПН',2=>'ВТ',3=>'СР',4=>'ЧТ',5=>'ПТ',6=>'СБ',7=>'ВС');
