@@ -112,7 +112,7 @@ class mainframe {
                     . " AND `tasks`.`user_id` = ".$this->_user->id
                 );
         $data = $this->_db->loadObjectList();
-       
+        
         if(!$data) return;
         foreach($data as $item)$ids[] = $item->id;
         
@@ -141,12 +141,27 @@ class mainframe {
                 //if($exseptions[$temp_date]) continue;       //улучшить систему исключений тут
                 
 
-                if(date("Y-m-d",$temp_date) == date("Y-m-d",$upd_timestamp)){                       //если тот же день
+                if(date("Y-m-d",$temp_date) == date("Y-m-d",$upd_timestamp)){                       //если тот же день                    
                     $end_date = date(date("Y",$upd_timestamp).'-'.date("m",$upd_timestamp).'-'.date("d",$upd_timestamp).' H:i:s',strtotime($item->end));                    
                     
-                    if(date("Y-m-d H:i:s",$upd_timestamp) > $end_date) continue;
+                    if(date("Y-m-d H:i:s",$upd_timestamp) > $end_date){ //если время обновления больше время окончания. 
+                        
+                        continue;
+                    }
+                                        
+                    
                 }
                 
+                if(date("Y-m-d",$temp_date) == date("Y-m-d")){   //сегодняшний календарный день                      
+                        //проверяем или не попала заявка за сегодняшний день которая еще состоялась
+                        $time_end = strtotime($item->end) - strtotime(date("Y-m-d 00:00:00",strtotime($item->end)));
+                        $time_now =  time() - strtotime(date("Y-m-d 00:00:00"));
+
+                        if($time_end > $time_now){
+                            continue;
+                        }
+                    }
+
                 if($exseptions[$temp_date][$item->id]) continue;
                 
                 //добавляем в задачи поле
@@ -172,8 +187,7 @@ class mainframe {
                         );
                 $this->_db->loadObject($check);
                 if($check) continue;
-                
-                
+                                
                 $this->_db->insertObject('tasks',$row);
             }
             //обновляем поле permanent_update

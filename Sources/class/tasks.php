@@ -243,8 +243,7 @@ class Tasks{
                 //p($this->m->_db->_sql);
                 echo '{"status":"error"}';
             }
-        }
-        
+        }        
     }
     
     public function getFilledDates(){
@@ -265,6 +264,8 @@ class Tasks{
                     . " , `tasks`.`permanent_update` as updated "
                     . " , UNIX_TIMESTAMP(start) as timestamp"
                     . " , `tasks`.`id`"
+                    . " , `tasks`.`start`"
+                    . " , `tasks`.`end`"
                     //. " , `permanent_exceptions`.`id` as 'ignore'"
                     . " FROM `tasks` "
                     //. " LEFT JOIN `permanent_exceptions` ON `permanent_exceptions`.`task_id` = `tasks`.`id` AND DATE_FORMAT(`permanent_exceptions`.`date`,'%Y-%m-%d') = DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d')"   //проверка на исключение
@@ -287,10 +288,9 @@ class Tasks{
                 );
         //$permanent_exceptions = $this->m->_db->loadObjectList('timestamp');
         $permanent_exceptions_tmp = $this->m->_db->loadObjectList();
-        //p($permanent_exceptions_tmp);
+        
         foreach($permanent_exceptions_tmp as $item){
-            $permanent_exceptions[strtotime($item->date)][$item->task_id] = $item;
-            
+            $permanent_exceptions[strtotime($item->date)][$item->task_id] = $item;            
         }
         
         $start_month = (int)date("m",strtotime($start));
@@ -315,6 +315,7 @@ class Tasks{
                     }
                     
                     if(date('Y-m-d',$temp_date) == date("Y-m-d")){  //если проверяем сегодняшнюю дату
+                        
                         if(time() > strtotime($item->updated)){
                             $temp_date += 60*60*24;    
                             continue;
@@ -348,6 +349,7 @@ class Tasks{
                 $single_dates[] = strtotime($item->start);
             }
         }
+        
         
         $result = array_merge($permanents_dates,$single_dates);
         $result = array_unique($result);
@@ -574,10 +576,10 @@ class Tasks{
                     .") "
                     . " AND `tasks`.`user_id` = ".$this->m->_user->id
                     . " AND `tasks`.`status` = 1"
-                    . " ORDER BY `start` ASC"
+                    . " ORDER BY DATE_FORMAT(`start`,'%H:%i:%s') ASC"
                 );
         $ret = $this->m->_db->loadObjectList();
-                        
+
         foreach($ret as $key=>$item){
             if($item->ignore) unset($ret[$key]);
         }
