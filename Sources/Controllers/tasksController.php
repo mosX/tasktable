@@ -18,11 +18,34 @@
                     echo '{"status":"success"}';
                     return;
                 }else{
-                    echo '{"status":"error"}';
-                    
+                    echo '{"status":"error"}';                    
                 }
                 $this->m->error = $tasks->error;
                 //p($this->m->error);
+            }
+        }
+        
+        
+        public function mobile_editAction(){
+            header("Access-Control-Allow-Origin: *");
+            $this->disableTemplate();
+            $this->disableView();
+            xload('class.tasks');
+            $tasks = new Tasks($this->m);
+            
+            $_POST = json_decode(file_get_contents('php://input'), true);   //для Content-Type: application/json
+            //p($_POST);
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                $tasks->edit($_POST['id']);
+                $this->m->json->error = $tasks->error;
+                if($this->m->json->error){
+                    $this->m->json->status = 'error';    
+                }else{
+                    $this->m->json->status = 'success';
+                }
+                
+                echo json_encode($this->m->json);
             }
         }
         
@@ -164,6 +187,9 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $tasks->edit($this->m->_path[2]);
                 $this->m->error = $tasks->error;
+                if(!$this->m->error){
+                    redirect('/tasks/edit/'.$this->m->_path[2]);
+                }
             }
         }
         

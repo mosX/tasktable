@@ -58,6 +58,8 @@ $config = array(
     'defaultlang' => 'ru',
     'available_languages' => array("en","sv","fi","es","ru","de","pl","zh-chs","da"),
     
+    "days" => array("Воскресение",'Понедельник','Вторник',"Среда", "Четверг", "Пятница", "Суббота"),
+    
     "contact_type" => array(
         "1"=>"Домашний",
         "2"=>"Рабочий",

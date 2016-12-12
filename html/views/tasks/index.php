@@ -49,10 +49,16 @@
             autoclose:true
         });
     });
+    
+    /*$('document').ready(function(){
+        var d = new Date();
+        console.log(d.getDay());
+    });*/
 </script>
+
 <div class="container">
     <div class="date_title">
-        <?=date("Y m d",strtotime($this->m->date))?>
+        <?=date("Y m d",strtotime($this->m->date))?> <span style="font-size:16px; font-weight:bolder"><?=$this->m->config->days[date("N",strtotime($this->m->date))]?></span>
     </div>
     <form class="form" action="" method="POST">
         <div class="form-group">

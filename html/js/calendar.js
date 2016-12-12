@@ -169,7 +169,7 @@
                         //console.log(dayOfWeek);
                         for(var j=dayOfWeek ; j <= 7;j++){
                             
-                            html += "<div class='c_day current "+this.checkToday(this.year,this.month,k+1)+" "+this.checkHoliday(this.year,this.month,k+1)+"'>"+(++k)+"</div>";
+                            html += "<div class='c_day current "+this.checkToday(this.year,this.month,k+1)+" "+this.checkHoliday(this.year,this.month,k+1)+" "+this.checkReservatedDays(this.year,this.month,k+1)+"'>"+(++k)+"</div>";
                         }
                     }
                     

@@ -93,6 +93,97 @@ class mainframe {
     public function checkPermanents(){
         if(!$this->_user->id) return;
                 
+        //получаем все активные перманентные
+        $this->_db->setQuery(
+                    "SELECT `tasks`.* "
+                    . " FROM `tasks` "
+                    . " WHERE `tasks`.`permanent` = 1"
+                    . " AND `tasks`.`status` = 1"
+                    . " AND `tasks`.`user_id` = ".$this->_user->id
+                );
+        $data = $this->_db->loadObjectList();
+                
+        foreach($data as $item)$ids[] = $item->id;        
+        
+        $this->_db->setQuery( //получаем исключения
+                    "SELECT `permanent_exceptions`.* "
+                    . " , UNIX_TIMESTAMP(`permanent_exceptions`.`date`) as timestamp"
+                    . " FROM `permanent_exceptions`"
+                    . " WHERE `permanent_exceptions`.`task_id` IN (".implode(',',$ids).")"
+                );
+        $exseptions_tmp = $this->_db->loadObjectList();
+        
+        foreach($exseptions_tmp as $item){
+            $exseptions[$item->timestamp][$item->task_id] = $item;
+        }
+        
+        $current_dayOfWeek = date("N",time());
+        //получаем день недели начала 
+        foreach($data as $item){
+            $dayOfWeek = date("N",strtotime($item->start));
+            $temp_date = strtotime(date("Y-m-d 00:00:00",strtotime($item->permanent_update) - 60*60*24)); //отнимаем что бы в вайле первым делом прибавить
+            
+            while($temp_date < time()){
+                $temp_date += 60*60*24;
+                
+                $upd_timestamp =  strtotime($item->permanent_update);
+                
+                if(date("N",$temp_date) != $dayOfWeek) continue;    //если не тот же день недели при переборе дней
+                
+                //будущее
+                if($temp_date > time()) continue;    //если будущий день
+                
+                //настоящее
+                if(date("Y-m-d",$temp_date) == date("Y-m-d",time())){   //если текущий день 
+                    if(time() < strtotime(date("H:i:s",strtotime($item->end)))) continue;   //если время меньше окончания                    
+                    if($upd_timestamp > strtotime(date("H:i:s",strtotime($item->end)))) continue;  //если уже обновлялось
+                }
+                
+                //прошлое
+                if(strtotime(date("Y-m-d 00:00:00",$upd_timestamp)) > strtotime(date("Y-m-d 00:00:00",$temp_date))) continue;
+                                
+                if($exseptions[$temp_date][$item->id]) continue;    //если есть исключение
+                
+                //добавляем в задачи поле
+                $row = new stdClass();
+                $row->user_id = $item->user_id;
+                $row->message = $item->message;
+                $row->lesson = $item->lesson;
+                $row->color = $item->color;
+                $row->permanent = 0;
+                $row->permanent_id = $item->id;
+                $row->start = date("Y-m-d ".date("H",strtotime($item->start)).":".date("i",strtotime($item->start)).":00",$temp_date);
+                $row->end = date("Y-m-d ".date("H",strtotime($item->end)).":".date("i",strtotime($item->end)).":00",$temp_date);
+                
+                $row->date = date("Y-m-d H:i:s");
+                $row->status = 1;
+                
+                //проверяем или такая запись уже есть
+                $this->_db->setQuery(
+                            "SELECT `tasks`.* "
+                            . " FROM `tasks` WHERE DATE_FORMAT(`tasks`.`start`,'%Y-%m-%d') = '".date("Y-m-d",$temp_date)."'"
+                            . " AND `tasks`.`permanent_id` = ".$row->permanent_id
+                            . " LIMIT 1"
+                        );
+                $this->_db->loadObject($check);
+                if($check) continue;
+                                
+                $this->_db->insertObject('tasks',$row);
+            }
+            //обновляем поле permanent_update
+            $this->_db->setQuery(
+                        "UPDATE `tasks` SET `tasks`.`permanent_update` = '".date("Y-m-d H:i:s")."'"
+                        . " WHERE `tasks`.`id` = ".$item->id
+                        . " LIMIT 1"
+                    );
+            $this->_db->query();
+        }
+        
+    }
+    
+    /*public function checkPermanents(){
+        if(!$this->_user->id) return;
+                
         //получаем таски где время меньше начала текущего дня
         $this->_db->setQuery(
                     "SELECT `tasks`.* "
@@ -112,7 +203,8 @@ class mainframe {
                     . " AND `tasks`.`user_id` = ".$this->_user->id
                 );
         $data = $this->_db->loadObjectList();
-        
+        //p($data);
+        //return false;
         if(!$data) return;
         foreach($data as $item)$ids[] = $item->id;
         
@@ -177,7 +269,7 @@ class mainframe {
                 
                 $row->date = date("Y-m-d H:i:s");
                 $row->status = 1;
-                
+                p($row);
                 //проверяем или такая запись уже есть
                 $this->_db->setQuery(
                             "SELECT `tasks`.* "
@@ -188,7 +280,7 @@ class mainframe {
                 $this->_db->loadObject($check);
                 if($check) continue;
                                 
-                $this->_db->insertObject('tasks',$row);
+                //$this->_db->insertObject('tasks',$row);
             }
             //обновляем поле permanent_update
             $this->_db->setQuery(
@@ -196,10 +288,10 @@ class mainframe {
                         . " WHERE `tasks`.`id` = ".$item->id
                         . " LIMIT 1"
                     );
-            $this->_db->query();
+            //$this->_db->query();
         }
         
-    }
+    }*/
     
     public function redisConnect(){
         $this->_redis = new Redis();

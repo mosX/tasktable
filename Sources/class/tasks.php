@@ -19,12 +19,12 @@ class Tasks{
             $this->m->monday = date("Y-m-d 00:00:00",strtotime($this->m->date));
         }
         
-        if(date("N",strtotime($date)) != 5){
-            $this->m->saturday = date('Y-m-d',strtotime( "next saturday" ,strtotime($this->m->date)));
+        if(date("N",strtotime($date)) != 7){
+            $this->m->saturday = date('Y-m-d 23:59:59',strtotime( "next sunday" ,strtotime($this->m->date)));
         }else{
             $this->m->saturday = date("Y-m-d 23:59:59",strtotime($this->m->date));
         }
-                
+        
         //получаем для начала не перманентные
         $this->m->_db->setQuery(
                     "SELECT `tasks`.* "
@@ -41,7 +41,7 @@ class Tasks{
         $data = $this->m->_db->loadObjectList();
         
         foreach($data as $item){
-            $package[date("N",strtotime($item->start))][] = $item;
+            $package[date("N",strtotime($item->start))][strtotime($item->start)] = $item;
         }
         
         //получаем перманентные которые были апдечены до
@@ -76,7 +76,7 @@ class Tasks{
                 continue;
             }
             
-            if(date("N",strtotime($item->start)) == date("N",strtotime($item->permanent_update))){                 
+            if(date("N",strtotime($item->start)) == date("N",strtotime($item->permanent_update))){
                 $current_date = strtotime($this->m->monday) + (date("N",strtotime($item->start))-1) * 60*60*24;
                 $date = date('Y',$current_date).'-'.date('m',$current_date).'-'.date('d',$current_date);
                 
@@ -86,11 +86,13 @@ class Tasks{
             }
             
             if(!$exceptions[date("Y-m-d",strtotime($item->start))][$item->id]){
-                $package[date("N",strtotime($item->start))][] = $item;
+                $package[date("N",strtotime($item->start))][strtotime($item->start)] = $item;
+                ksort($package[date("N",strtotime($item->start))]);
             }
         }
         
         ksort($package);   
+        
         return $package;
     }
     
@@ -439,6 +441,7 @@ class Tasks{
         $row->start = $start_date;
         $row->end = $end_date;
         $row->permanent = $_POST['permanent'] ? 1:0;
+        
         if(strtotime($row->start) > time()){
             $row->permanent_update = $row->start;
         }
@@ -458,7 +461,7 @@ class Tasks{
             $students = array_unique($students);
             foreach($students as $item)$class->addStudent($item,$row->id);
             
-            redirect('/tasks/edit/'.$id);
+            //redirect('/tasks/edit/'.$id);
             //redirect('/?date='.date("Y-m-d",strtotime($start)));
         }
     }
