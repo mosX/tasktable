@@ -13,11 +13,12 @@ class Tasks{
             $this->m->date = date("Y-m-d",strtotime($date));
         }
         
-        if(date("N",strtotime($this->m->date)) != 1){        
+        if(date("N",strtotime($this->m->date)) != 1){
             $this->m->monday = date('Y-m-d',strtotime( "previous monday" ,strtotime($this->m->date)));
         }else{
             $this->m->monday = date("Y-m-d 00:00:00",strtotime($this->m->date));
         }
+        //p($this->monday);
         
         if(date("N",strtotime($date)) != 7){
             $this->m->saturday = date('Y-m-d 23:59:59',strtotime( "next sunday" ,strtotime($this->m->date)));
@@ -72,17 +73,20 @@ class Tasks{
         }
 
         foreach($permanents as $item){
-            if(date("N",strtotime($item->start)) < date("N",strtotime($item->permanent_update))){                
-                continue;
+            if(!$_GET['date']){
+                if(date("N",strtotime($item->start)) < date("N",strtotime($item->permanent_update))){                
+                    continue;
+                }
             }
             
             if(date("N",strtotime($item->start)) == date("N",strtotime($item->permanent_update))){
                 $current_date = strtotime($this->m->monday) + (date("N",strtotime($item->start))-1) * 60*60*24;
                 $date = date('Y',$current_date).'-'.date('m',$current_date).'-'.date('d',$current_date);
-                
-                if(strtotime(date($date." H:i:s",strtotime($item->start))) < strtotime(date($date." H:i:s",strtotime($item->permanent_update)))){
-                    continue;    
-                }                
+                if(!$_GET['date']){
+                    if(strtotime(date($date." H:i:s",strtotime($item->start))) < strtotime(date($date." H:i:s",strtotime($item->permanent_update)))){
+                        continue;    
+                    }
+                }
             }
             
             if(!$exceptions[date("Y-m-d",strtotime($item->start))][$item->id]){
